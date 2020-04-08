@@ -1,10 +1,10 @@
 \documentclass[10pt,a4paper,oneside]{scrartcl}
 
-%\usepackage[ngerman]{babel}   % Deutsches Proposal
+% \usepackage[ngerman]{babel}   % Deutsches Proposal
 \usepackage[USenglish]{babel} % English proposal
 
 \usepackage[utf8]{inputenc}
-\usepackage{hyperref,xcolor,microtype,ifthen}
+\usepackage{hyperref,xcolor,microtype,ifthen,csquotes}
 
 \setkomafont{disposition}{}
 \setkomafont{descriptionlabel}{\bfseries}
@@ -32,9 +32,9 @@
 }
 
 %Title of the proposal
-\title{Thesis Title}
+\title{Something Something CouchEdit DSL}
 %bachelor or master?
-\subtitle{(Bachelor Thesis Proposal}
+\subtitle{(Bachelor Thesis Proposal)}
 %first and then last name
 \author{Florian Lappe}
 
@@ -56,7 +56,10 @@
 		\item Reach out to a specific audience 
 		\end{itemize}
 		}}
-\dots
+
+    Modeling languages have long been an important part in software engineering and business planning. They are used to to express complex processes in a, comprehensive and easy to understand, way. Extensive research in the field of model driven engineering (MDE) \dots
+
+    Relaxed conformance modelling approaches intend to ease use of graphical modelling tools by allowing the user to create  
 
 
 \section{\iflanguage{ngerman}
@@ -77,12 +80,15 @@
 		\end{itemize}
 		
 		Effective problem statements answer the question: Why does this research need to be conducted? If the writer is unable to answer this question clearly and succinctly, the statement of the problem will be perceived as vague and diffuse.}}
-\dots
+
+    The CouchEdit Framework is designed to translate concrete syntax into abstract syntax, using a syntax meta model.
 
 
 \section{Purpose of the study}
 
 \hint{(0,25 pages)}{The purpose statement should provide a specific and accurate summary of the overall purpose of the study. Briefly define and delimit the specific area of the research. Incorporate the rationale for the study. A commonly used sentence starts with: ''The purpose of this study is \ldots''. The purpose should clarify who is anticipated to benefit from the results of your study and how the results may be used.}
+
+The purpose of this study is to develop a domain specific language, which can be utilised to define new syntax processors for the CouchEdit framework. This DSL aims to allow users to configure the CouchEdit framework so that it can comprehend and process any specified concrete model syntax to an abstract syntax model representation. 
 
 \section{\iflanguage{ngerman}
 	{Verwandte Forschung}
