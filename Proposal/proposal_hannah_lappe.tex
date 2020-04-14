@@ -46,22 +46,28 @@
 
 \maketitle
 
-\section{Einführung und Motivation}{Introduction and Motivation}
+\section{Introduction and Motivation}
 \label{sec:motivation}
 
-\hint{(this page)}{
-		An introduction provides readers with the background information for the research proposed (or reported in the paper), with the purpose to provide an understanding of how the research is related to other research \cite{Wilkinson1991}. In an introduction, the writer should \cite{Creswell2008}:
-		\begin{itemize}
-		\item Create reader interest in the topic
-		\item Lay the broad foundation for the problem that leads to the study
-		\item Place the study within the larger context of the scholarly literature
-		\item Reach out to a specific audience 
-		\end{itemize}
-		}
+% \hint{(this page)}{
+% 		An introduction provides readers with the background information for the research proposed (or reported in the paper), with the purpose to provide an understanding of how the research is related to other research \cite{Wilkinson1991}. In an introduction, the writer should \cite{Creswell2008}:
+% 		\begin{itemize}
+% 		\item Create reader interest in the topic
+% 		\item Lay the broad foundation for the problem that leads to the study
+% 		\item Place the study within the larger context of the scholarly literature
+% 		\item Reach out to a specific audience 
+% 		\end{itemize}
+% 		}
 
-    Modelling languages have long played an important role in software engineering and business planning. Well designed models, can describe    complex systems in a human comprehensible way. Furthermore in form of the Business Process Model Notation (BPMN) they aye used to define and automate processes. Today research in the area of Model Driven Engineering (MDE), has elevated their importance even more. The MDE paradigms intent is to utilise domain models \comment{todo: explain} to automate generation of software code or even whole systems.
+    Modeling languages have long played an important role in software engineering. Well designed models, can abstract complex systems and provide visual aid in understanding them. Furthermore in form of the Business Process Model Notation (BPMN) they are used to define and automate processes. Today, research in the area of Model Driven Engineering (MDE), a paradigm centered around models, with the intent to generate code bases and whole systems from them, the importance of models is rising even more.
 
-    \comment{todo: Erklärung, dass MDE modelle natürlich syntaktisch korrekt sein müssen. übergang In grafische moddeling tools und ihre UX voes, weshalb das CouchEdit projekt erschaffen wurde. Grundlegende idee con Couchedit: framework für beliebige model syntax, problem aber: implementation neuer syntax momentan nur direkt im code möglich und relativ unverständlich. Idee: Entwickeln einer externen DSL zum erstellen neuer Sytanx.}
+    As these tasks require syntactic correctness of used models, modeling tools become an essential part of an engineers workflow. Especially visual modeling tools provide -in theory- an intuitive and user friendly way to design models. But, current graphical modeling tools, tend to constraint users in unintuitive ways and deliver sub par user experience (UX). This usually arises from a tight coupling between a modeling tools User interface (UI) and the underlying model. As the models syntax is usually unflexible, the UI has to make amends to adhere to this syntax. this often creates problems for the user like, connections can only be drawn between two existing states, or deleting a node will result in all its children being deleted as well.
+
+    To amend these usability woes, L. Nachreiner proposed a novel modeling framework, called CouchEdit \cite{nachreiner_couchedit_2020}. This framework decouples user interface and model syntax by introducing different models for both. Instead of relying directly on the syntax of the model that is being designed, in the CouchEdit architecture, the user interface is using a render model, that only consists of of nodes that are rendered in the Modeling tool, called concrete syntax. On the other hand, the actual models syntax now stands on its own, called abstract syntax. To translate between concrete and abstract syntax, a syntax meta model is utilized. CouchEdit in its core was designed, to be general purpose, meaning it can be rewritten to adhere to any model syntax. But to realize this in the current implementation, the source code has to be rewritten directly, which is error prone, convoluted and requires some understanding of the CouchEdit architectures internal architecture.
+    
+    To create a more developer friendly and flexible way of adapting CouchEdit to different modeling syntaxes, this design research aims to propose a new 
+    domain specific language (DSL), that can be used to configure CouchEdit for 
+    any Modeling syntax. Furthermore a conceptual parser is to be developed and implemented, that provides proof of concept how this newly developed DSL interacts with the CouchEdit architecture.
 
     \comment{questions: who is the audience? Larger context of scholarly litratur?}
 
@@ -86,9 +92,9 @@
 
 \hint{(0,25 pages)}{The purpose statement should provide a specific and accurate summary of the overall purpose of the study. Briefly define and delimit the specific area of the research. Incorporate the rationale for the study. A commonly used sentence starts with: ''The purpose of this study is \ldots''. The purpose should clarify who is anticipated to benefit from the results of your study and how the results may be used.}
 
-The purpose of this study is to develop a domain specific language, for the CouchEdit Framework. This DSL is supposed to provide a comprehensive and easy to use way for defining new modelling language syntaxes.Furthermore a prototypical parser is to be implemented, that can comprehend this newly designed DSL and translate it into a set of CouchEdit processors. An explanation about the CouchEdit frameworks processor architecture can be found in the related works section (\ref{CouchEdit}).
+The purpose of this study is to develop a domain specific language, for the CouchEdit Framework. This DSL is supposed to provide a comprehensive and easy to use way for defining new modeling language syntax.Furthermore a prototypical parser is to be implemented, that can comprehend this newly designed DSL and translate it into a set of CouchEdit processors. An explanation about the CouchEdit frameworks processor architecture can be found in the related works section (\ref{CouchEdit}).
 
-This extension of the CouchEdit framework is supposed to improve user accessibility and framework flexibility, as the implementation of an external DSL and its corresponding parser means, that the system does not have to be recompiled from source code every time a different modelling syntax is to be used. Furthermore in the current implementation, to support new modelling syntaxes, the user is forced to write processors on source code level, which is convoluted and requires understanding of most of the CouchEdit architecture. By designing a comprehensible DSL syntax, users will have an easier time defining new modelling syntaxes. 
+This extension of the CouchEdit framework is supposed to improve user accessibility and framework flexibility, as the implementation of an external DSL and its corresponding parser means, that the system does not have to be recompiled from source code every time a different modeling syntax is to be used. Furthermore in the current implementation, to support new modeling syntax, the user is forced to write processors on source code level, which is convoluted and requires understanding of most of the CouchEdit architecture. By designing a comprehensible DSL syntax, users will have an easier time defining new modeling syntax. 
 
 
 
@@ -157,6 +163,11 @@ This extension of the CouchEdit framework is supposed to improve user accessibil
 These questions should be written such that they can be answered within the thesis, and they should fully cover the research problem.
 }
 
+\begin{itemize}
+  \item How does a DSL, describing the whole CouchEdits feature set, look?
+  \item What could an implementation of this DSL in the current CouchEdit architecture look like?
+\end{itemize}
+
 \section{The Design - Methods and Procedures}
 \label{sec:approach}
 
@@ -172,7 +183,23 @@ These questions should be written such that they can be answered within the thes
 		For all studies, you need to have a systematic approach for data analysis. Specify the procedures you will use to analyze your data. If coding procedures are to be used, describe these in reasonable detail. For evaluations, describe the criteria to be used in reasonable detail.  
 		
 		
-		Describe the initial ideas for the thesis and the first steps to answer the research questions. Ideas can be pointers towards promising ideas in the literature (not necessarily read completely) or some sketch of how ideas from the literature may be developed. It does not need to be a concrete idea, but should indicate what will be done in the first weeks after the proposal is done.}
+    Describe the initial ideas for the thesis and the first steps to answer the research questions. Ideas can be pointers towards promising ideas in the literature (not necessarily read completely) or some sketch of how ideas from the literature may be developed. It does not need to be a concrete idea, but should indicate what will be done in the first weeks after the proposal is done.}
+    
+
+\begin{enumerate}
+  \item Analysis of CouchEdit framework
+      \begin{itemize}
+        \item needed modeling features
+        \item architectural requirements
+      \end{itemize}
+  \item Design of DSL
+  \item Implementation
+  \item Evaluation 
+      \begin{itemize}
+        \item does the developed DSL cover the whole feature set?
+        \item (performance vermutlich nicht relevant?)
+      \end{itemize}
+\end{enumerate}
 
 
 \section{Limitations and Delimitations}
