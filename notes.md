@@ -1,20 +1,11 @@
 
-### procedure
+fragen?
 
-1. evaluating grammar  
-
-2. evaluating CouchEdit API
-
-3. designing and Implementing internal Kotlin DLS
-
-4. Designing Parser for external DSL files.
+- sollte syntax correctness implementiert werden, bzw kann das system von diagen in dieser form auf CouchEdit übertragen werden?
 
 
+- DSL guidelines sinvoll für related work?
 
-### notes Leander
+- MID for visual specification?
 
-- abstract/concrete syntax: ref 18, 8, 15, 16, 20
-
-- hypergraphs?
-
-- ref 29 for overview of visual editor features\
+- us or uk spelling?
