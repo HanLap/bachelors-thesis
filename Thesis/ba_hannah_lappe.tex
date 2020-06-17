@@ -23,12 +23,14 @@ leqno					% equation numbers to the left
 \usepackage{blindtext}
 
 % für Texte in deutscher Sprache
-\usepackage[USenglish, ngerman]{babel}
+\usepackage[ngerman, USenglish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
 % enable HERE positioning %
 \usepackage{float}
+
+\usepackage{scrhack}
 
 % Helvetica als Standard-Dokumentschrift
 \usepackage[scaled]{helvet}
@@ -40,7 +42,7 @@ leqno					% equation numbers to the left
 % Literaturverzeichnis mit BibLaTeX // use Biber as Backend; dashed = false to repeat author names
 \usepackage[babel]{csquotes}
 \usepackage[backend=bibtex,style=ieee,dashed=false,hyperref,natbib]{biblatex}
-\bibliography{references}
+\addbibresource{BA.bib}
 
 % Für Tabellen mit fester Gesamtbreite und variabler Spaltenbreite
 \usepackage{tabularx} 
@@ -187,16 +189,16 @@ leqno					% equation numbers to the left
 % hier Namen etc. einsetzen
 \newcommand{\fullname}{Florian Lappe}
 \newcommand{\email}{florian.lappe@uni-ulm.de}
-\newcommand{\titel}{ARK-Reaktor}
-\newcommand{\untertitel}{Saubere Energiegewinnung durch Kernfusion zum Betrieb avionischer ein-personen Kampfanzüge}
+\newcommand{\titel}{}
+\newcommand{\untertitel}{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for CouchEdit}
 \newcommand{\jahr}{2020}
-\newcommand{\abgabedatum}{Mai 2014}
+\newcommand{\abgabedatum}{August 2020}
 %\newcommand{\abschlussarbeit}{Bachelorarbeit}
 \newcommand{\abschlussarbeit}{Bachelorarbeit}
 \newcommand{\matrikelnummer}{922114}
-\newcommand{\gutachterA}{Prof.\ Dr.\ Bruce Banner}
-\newcommand{\gutachterB}{Prof.\ Dr.\ Nick Fury}
-\newcommand{\betreuer}{Pepper Potts}
+\newcommand{\gutachterA}{Prof.\ Dr.\ Matthias\ Tichy}
+\newcommand{\gutachterB}{}
+\newcommand{\betreuer}{Dr.\ Alexander\ Raschke}
 
 % hier die Fakultät auswählen
 %\newcommand{\fakultaet}{---  Im Quellcode anpassen nicht vergessen! ---}
@@ -222,7 +224,7 @@ leqno					% equation numbers to the left
 \hypersetup{
 pdftitle=\titel,
 pdfauthor=\fullname,
-pdfsubject={Whatever you want},
+pdfsubject={metamodeling, metamodel},
 colorlinks=false,
 pdfborder=0 0 0	% keine Box um die Links!
 }
@@ -282,7 +284,7 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
+Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract \cite{baar_correctly_2008}.
 {
 	\null
 	\small
@@ -296,7 +298,7 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 		Fassung \today\\
 		  \copyright~\jahr~\fullname\\[0.5em]
 		% Wenn Sie Ihre Arbeit unter einer freien Lizenz bereitstellen möchten, können Sie die nächste Zeile in Ihren Code aufnehmen. Bitte beachten Sie, dass Sie hierfür an allen Inhalten, inklusive enthaltener Abbildungen, die notwendigen Rechte benötigen! Beim Veröffentlichungsexemplar Ihrer Dissertation achten Sie bitte darauf, dass der Lizenztext nicht den Angaben in den Metadaten der genutzten Publikationsplattform widerspricht. Nähere Information zu den Creative Commons Lizenzen erhalten Sie hier: https://creativecommons.org/licenses/
-		%This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA. \\
+		This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA. \\
 		
 		Satz: PDF-\LaTeXe
 	\end{center}
@@ -309,154 +311,39 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 \mainmatter % ab hier wieder normale Seitenzahlen
 
 
+
+
+
+
+
+
+
+
+
+
 % Inhalt (am besten mit \input in extra Dateien auslagern)
-\chapter{Kapitel}
-
-\section{Überschrift 1}
-
-\subsection{Überschrift 2}
-
-\subsubsection{Überschrift 3}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Ut laoreet velit vitae urna viverra id dignissim diam pulvinar.
-Nullam sit amet ipsum ut nibh iaculis rhoncus sollicitudin et sapien.
-Cras ultricies, nulla vel scelerisque venenatis, lectus justo tincidunt massa, a laoreet ante nulla quis dui.
-Morbi consequat aliquet lacinia.
-Quisque tellus sapien, bibendum non pharetra sit amet, aliquet vel nisl.
-Pellentesque risus risus, semper non laoreet quis, auctor a risus.
-Pellentesque consectetur molestie ante, ac viverra nulla aliquam vitae.
-Nulla quis nunc eget mi aliquet egestas vitae id mauris.
-Donec adipiscing hendrerit lacus, ac lobortis velit molestie sed.
-Nam consectetur, nibh at suscipit molestie, augue arcu luctus enim, ut ullamcorper odio magna congue metus.
-Quisque rhoncus mauris nisi.
-Praesent scelerisque leo eget odio tincidunt tincidunt.
-Donec id enim sit amet neque cursus sodales.
-Donec aliquam, tortor vel dignissim euismod, lacus sem commodo orci, quis mattis neque libero at massa.
-Donec tincidunt, ante ac mattis dapibus, nulla turpis bibendum nulla, et ornare purus diam et purus.
-Praesent venenatis imperdiet risus eget vestibulum.
-
-Etiam vestibulum auctor ipsum, at iaculis est mattis vitae.
-Curabitur sed fringilla risus.
-Sed consectetur pretium ligula in pharetra.
-Nullam auctor consequat aliquet.
-Ut nisi augue, consectetur vitae vehicula eget, fermentum sit amet risus.
-Donec placerat malesuada laoreet.
-Aliquam nec nibh quis lectus luctus semper semper eget elit.
-Proin vitae laoreet elit.
-
-\chapter{Beispiele}
-
-\section{TikZ}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\begin{figure}[th]
-	\begin{center}
-		\begin{tikzpicture}[thick]
-		\draw (0,0) grid (3,3);
-		\foreach \c in {(0,0), (1,0), (2,0), (2,1), (1,2)} \fill \c + (0.5,0.5) circle (0.42);
-		\end{tikzpicture}
-	\end{center}
-	\caption{Game of Life Glider}
-	\label{fig:glider}
-\end{figure}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\section{Quelltext}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\begin{figure}[th]
-\lstset{language=C}
-\begin{lstlisting}
-#include <stdio.h>
-	
-int main() {
-	printf("Hello World");
-	return 0;
-}		
-\end{lstlisting}
-\caption{Hello World Programm}
-\label{lst:hello_world}
-\end{figure}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\section{Pseudocode}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\begin{figure}[th]
-	\begin{algorithm}[H]
-		\Function{Max}{$\{a_1, a_2, \ldots, a_n\}$}{
-			$max \gets a_1$\;
-			\For{$i \gets 2$ \textbf{to} $n$} {
-				\If{$a_i > max$} {
-					$max \gets a_i$\;
-				}
-			}
-			\Return{$max$}\;
-		}
-	\end{algorithm}
-	\caption{Max Algorithmus}
-	\label{alg:max}
-\end{figure}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\section{Tabellen}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\begin{table}[th]
-	\begin{center}
-		\begin{tabular}{cc|c|c|c|c|l}
-			\cline{3-6}
-			&                           & \multicolumn{4}{c|}{Primes} \\
-			\cline{3-6}
-			&                           & 2 & 3 & 5 & 7       \\
-			\cline{1-6}
-			\multicolumn{1}{|c}{\multirow{2}{*}{Powers}} & \multicolumn{1}{|c|}{504} & 3 & 2 & 0 & 1 &     \\
-			\cline{2-6}
-			\multicolumn{1}{|c}{}                        & \multicolumn{1}{|c|}{540} & 2 & 3 & 1 & 0 &     \\
-			\cline{1-6}
-			\multicolumn{1}{|c}{\multirow{2}{*}{Powers}} & \multicolumn{1}{|c|}{gcd} & 2 & 2 & 0 & 0 & min \\
-			\cline{2-6}
-			\multicolumn{1}{|c}{}                        & \multicolumn{1}{|c|}{lcm} & 3 & 3 & 1 & 1 & max \\
-			\cline{1-6}
-		\end{tabular}
-	\end{center}
-	\caption{Langweilige Tabelle}
-	\label{tbl:langweilig}
-\end{table}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+\input{chapters/introduction.tex}
+\input{chapters/problem_statement.tex}
+\input{chapters/evaluation.tex}
+\input{chapters/conclusion.tex}
 
 
-% Anhang
-\appendix
 
-\chapter{Inhalt der CD}
 
-\renewcommand{\labelitemi}{\tikz {\draw [line width=0.5pt] (0,0)--(0.25,0)--(0.25,0.15)--(0,0.15)--(0,0)--(0.25,0); \draw [line width=0.5pt] (0,0.15)--(0.05,0.2)--(0.15,0.2)--(0.2,0.15);}}
-\renewcommand{\labelitemii}{\tikz {\draw [line width=0.5pt] (0,0)--(0.2,0)--(0.2,0.15)--(0.1,0.25)--(0,0.25)--(0,0)--(0.2,0); \draw [line width=0.5pt] (0.1,0.25)--(0.1,0.15)--(0.2,0.15);}}
 
-\begin{itemize}
-	\addtolength{\itemsep}{0.5\baselineskip}
-	\item	\textbf{\texttt{Verzeichnis}}
-	\begin{itemize}
-		\addtolength{\itemsep}{-0.3\baselineskip}
-		\item \textbf{\texttt{a}}
-		\item \textbf{\texttt{b}}
-		\item \textbf{\texttt{c}}
-	\end{itemize}
-\end{itemize}
 
-\chapter{Sonstiges}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+
+
+
+
+
+
+
+
+
+
 
 
 % Abbildungsverzeichnis
@@ -477,546 +364,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 \cleardoublepage % sonst stimmt die seitennummer im TOC nicht
 \phantomsection
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
-\begin{thebibliography}{123}
-	\bibitem[1]{WIL97}
-	{\sc R. Wilhelm, D. Maurer},
-	{\itshape Übersetzerbau - Theorie, Konstruktion, Generierung},
-	2. Auflage, Springer 1997, ISBN 3-540-61692-6
-	\bibitem[2]{N1124}
-	{\itshape ISO C Standard 1999, ISO/IEC 9899:1999 draft},
-	WG14 N1124, International Organization for Standardization, 1999,
-	\url{http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1124.pdf} (27. Juni 2011).
-	\bibitem[3]{HUGS}
-	{\itshape Hugs 98},
-	\url{http://www.haskell.org/hugs/} (27. Juni 2011).
-\end{thebibliography}
-
-% Declaration of Independance
-\clearpage
-\thispagestyle{empty}
-
-\noindent Name: \fullname \hfill Matrikelnummer: \matrikelnummer \vspace{2cm}
-
-\minisec{Erklärung}
-
-Ich erkläre, dass ich die Arbeit selbständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel verwendet habe.\vspace{2cm}
-
-\noindent Ulm, den \dotfill
-
-\hspace{10cm} {\footnotesize \fullname}
-
-
-
-
-
-\end{document}
-\NeedsTeXFormat{LaTeX2e}
-
-% Font size = 10, DIV = 11 to reduce waste of space %
-\documentclass[a4paper,10pt
-headsepline,           % Linie zw. Kopfzeile und Text
-doubleside,               % einseitig
-pointlessnumbers,      % keine Punkte nach den letzten Ziffern in Überschriften
-bibtotoc,              % LV im IV
-%DIV=15,               % Satzspiegel auf 15er Raster, schmalere Ränder   
-BCOR15mm,               % Bindekorrektur
-leqno					% equation numbers to the left
-% fleqn
-%,draft
-]{scrbook}
-\KOMAoptions{DIV=11} % Neuberechnung Satzspiegel nach Laden von Paket helvet
-
-% be able to include real vector graphics in thesis. You need inkscape installed and your pdflatex command must be called with --shell-escape for this to work.
-% TeXstudio: Options → Configure → Commands → pdflatex = pdflatex -synctex=1 -interaction=nonstopmode --shell-escape %.tex
-% inkscape=newer to avoid re-export if nothing has changed in the svg. inkscapelatex=false for not using latex to render text (which in turn messes up all text in image). inkscapearea = page so that the SVG size is respected and borders in the SVG are not cut off
-%\usepackage[inkscape=newer, inkscapelatex=false, inkscapearea=page]{svg} 
-
-\pagestyle{headings}
-\usepackage{blindtext}
-
-% für Texte in deutscher Sprache
-\usepackage[USenglish, ngerman]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-
-% enable HERE positioning %
-\usepackage{float}
-
-% Helvetica als Standard-Dokumentschrift
-\usepackage[scaled]{helvet}
-\renewcommand{\familydefault}{\sfdefault} 
-
-
-\usepackage{graphicx}
-
-% Literaturverzeichnis mit BibLaTeX // use Biber as Backend; dashed = false to repeat author names
-\usepackage[babel]{csquotes}
-\usepackage[backend=bibtex,style=ieee,dashed=false,hyperref,natbib]{biblatex}
-\bibliography{references}
-
-% Für Tabellen mit fester Gesamtbreite und variabler Spaltenbreite
-\usepackage{tabularx} 
-
-% multirow tables
-\usepackage{multirow}
-
-% arrows in normal text, not only math
-\newcommand*{\textrightarrow}{$ \rightarrow $}
-
-\newcommand*{\textdownarrow}{$ \downarrow $}
-
-
-% Besondere Schriftauszeichnungen
-\usepackage{url}              % \url{http://...} in Schreibmaschinenschrift
-\usepackage{color}            % zum Setzen farbigen Textes
-
-\usepackage{setspace}         % Paket für div. Abstände, z.B. ZA
-\setlength{\parindent}{0pt}   % kein linker Einzug der ersten Absatzzeile
-\setlength{\parskip}{1.4ex plus 0.35ex minus 0.3ex} % Absatzabstand, leicht variabel
-
-% Tiefe, bis zu der Überschriften in das Inhaltsverzeichnis kommen
-\setcounter{tocdepth}{2}      % 3 ist Standard
-\setcounter{secnumdepth}{3}   % 2 ist Standard
-
-% don't list subsections of appendices in TOC
-\usepackage{tocvsec2}
-
-
-% Mathe
-\usepackage{amsfonts}
-\usepackage{amssymb}
-%\usepackage{amsmath}
-% Multilined / aligned command %
-\usepackage{mathtools}
-
-% Plots - https://www.overleaf.com/learn/latex/Pgfplots_package
-\usepackage{pgfplots}
-
-\pgfkeys{/pgf/number format/.cd,1000 sep={}}
-\pgfplotsset{
-	compat=newest,
-	legend style={at={(0.5,-0.2)},anchor=north}, % legend to the bottom
-	legend cell align={left}, % left align legend text
-	ymajorgrids=true, 
-	grid style=dashed,
-	scaled ticks=false, % don't use 10^x notation
-	tick label style={/pgf/number format/fixed},
-	try min ticks=8,
-	tick pos=left % no ticks at the right / top borders
-}
-
-% Landscape pages
-\usepackage{pdflscape}
-
-% diagonal boxes in table
-\usepackage{diagbox}
-
-% resume enumerate https://tex.stackexchange.com/questions/210429/how-can-a-bring-a-middle-paragraph-out-of-the-enumerate-environment
-\usepackage{enumitem}
-
-\usepackage[utf8]{inputenc}
-
-% Pseudocode %
-\usepackage[lined, algochapter, resetcount, linesnumbered]{algorithm2e}
-\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
-\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
-\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
-\SetKw{Continue}{continue}
-\newcommand{\Function}[3]{
-	\SetKwBlock{FunctionBlock}{function \textnormal{\textsc{#1} (\emph{#2})}}{end function}
-	\FunctionBlock{#3}
-}
-
-
-\usepackage{hyperref, xcolor,microtype,ifthen}
-% Cleveref so we don't have to write "Section \ref" each time and nameinlink so that the word "Section" also belongs to the PDF link!
-\usepackage[nameinlink]{cleveref}
-\usepackage{graphicx}
-
-% used for subfigures
-\usepackage{subcaption}
-
-% used for multi-page graphics
-\usepackage{caption}
-\usepackage{zref-savepos}
-\usepackage{dpfloat}
-%\providecommand*{\zsaveposy}{\zsavepos}% support older zref-savepos
-
-% Don't abbreviate figure crefs. Also support algorithm2e listings %
-
-\crefname{figure}{figure}{figures}
-\crefname{equation}{formula}{formulas}
-\crefname{algorithm}{algorithm listing}{algorithm listings}
-
-\creflabelformat{equation}{#2#1#3}
-
-% Graphen und sonstige Zeichnungen
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric}
-\usetikzlibrary{shapes.misc}
-\usetikzlibrary{positioning}
-\usetikzlibrary{calc}
-
-% Layout
-\usepackage[scale=0.70, marginratio={4:5, 3:4}, ignoreall, headsep=8mm]{geometry}
-\setlength{\parskip}{1.4ex plus 0.35ex minus 0.3ex}
-\renewcommand\arraystretch{1.3} % höhere Zeilen in Tabellen
-\clubpenalty10000  % keine Schusterjungen
-\widowpenalty10000 % keine Hurenkinder
-\setcounter{tocdepth}{3} % Tiefe, bis zu der Überschriften in das Inhaltsverzeichnis kommen
-
-
-% Quelltexte
-\usepackage{listings}
-\lstset{xleftmargin=0.7cm}
-\lstset{xrightmargin=0.7cm}
-\lstset{captionpos=b}
-\lstset{frame=tb}
-\lstset{numbers=left}
-\lstset{basicstyle=\singlespacing\ttfamily}
-\lstset{numberstyle=\smaller\ttfamily}
-\lstset{tabsize=4}
-\lstset{showstringspaces=true}
-
-
-
-% vertical table headers https://tex.stackexchange.com/questions/98388/how-to-make-table-with-rotated-table-headers-in-latex
-\usepackage{adjustbox}
-\usepackage{array}
-\usepackage{booktabs}
-
-% partial function arrow https://tex.stackexchange.com/questions/47142/how-to-tex-an-arrow-with-vertical-stroke %
-\newcommand\pto{\mathrel{\ooalign{\hfil$\mapstochar\mkern5mu$\hfil\cr$\to$\cr}}}
-
-% autorefs %
-\def\sectionautorefname{section}
-
-% Beispiele für Quellcode
-\usepackage{listings}
-\lstset{language=Java,
-  showstringspaces=false,
-  frame=single,
-  numbers=left,
-  basicstyle=\ttfamily,
-  numberstyle=\tiny
-  captionpos=b,
-  numbers=left,
-  basicstyle=\singlespacing\ttfamily,
-  numberstyle=\smaller\ttfamily,
-  tabsize=4
-}
-
-\makeatletter
-\AtBeginDocument{\@ifpackageloaded{amsmath}{\@mathmargin\z@}{}}%
-\makeatother
-
-% hier Namen etc. einsetzen
-\newcommand{\fullname}{Tony Stark}
-\newcommand{\email}{tony.stark@uni-ulm.de}
-\newcommand{\titel}{ARK-Reaktor}
-\newcommand{\untertitel}{Saubere Energiegewinnung durch Kernfusion zum Betrieb avionischer ein-personen Kampfanzüge}
-\newcommand{\jahr}{2019}
-\newcommand{\abgabedatum}{Mai 2014}
-%\newcommand{\abschlussarbeit}{Bachelorarbeit}
-\newcommand{\abschlussarbeit}{Masterarbeit}
-\newcommand{\matrikelnummer}{12345678}
-\newcommand{\gutachterA}{Prof.\ Dr.\ Bruce Banner}
-\newcommand{\gutachterB}{Prof.\ Dr.\ Nick Fury}
-\newcommand{\betreuer}{Pepper Potts}
-
-% hier die Fakultät auswählen
-%\newcommand{\fakultaet}{---  Im Quellcode anpassen nicht vergessen! ---}
-\newcommand{\fakultaet}{Ingenieurwissenschaften, Informatik und\\Psychologie}
-%\newcommand{\fakultaet}{Mathematik und\\Wirtschafts-\\wissenschaften}
-%\newcommand{\fakultaet}{Medizin}
-%\newcommand{\fakultaet}{Naturwissenschaften}
-
-% hier das Institut einsetzen
-\newcommand{\institut}{Institut für Softwaretechnik und Programmiersprachen}
-
-% Informationen, die LaTeX in die PDF-Datei schreibt
-\pdfinfo{
-  /Author (\fullname)
-  /Title (\titel)
-  /Producer     (pdfeTex 3.14159-1.30.6-2.2)
-  /Keywords ()
-}
-
-\selectlanguage{ngerman}
-
-\usepackage{hyperref}
-\hypersetup{
-pdftitle=\titel,
-pdfauthor=\fullname,
-pdfsubject={Whatever you want},
-colorlinks=false,
-pdfborder=0 0 0	% keine Box um die Links!
-}
-
-% Trennungsregeln
-\hyphenation{Sil-ben-trenn-ung} 
-
-\begin{document}
-\frontmatter % ab hier römische Seitenzahlen
-
-
-% Titelseite
-\newgeometry{left=1.9cm, right=1.9cm, top=2.9cm, bottom=2.8cm}
-\begin{titlepage}
-	\fontfamily{phv}\selectfont % Helvetica als Schriftart
-	\hfill\includegraphics[height=2.0cm]{logo_100_sRGB}\\[3.5cm] % Uni Ulm Logo (uniulm.jpg)
-	\begin{flushright}
-		\Huge \textbf{\titel}\\[0.2cm]
-		\fontsize{19}{20}\selectfont \textbf{\untertitel}\\
-	\end{flushright}
-	
-	\vfill\hfill
-	\parbox[t]{4.6cm}{
-		\singlespacing
-		\large
-		\textbf{\fullname}\\
-		\\
-		Universität Ulm\\
-		\\
-		Fakultät für\\
-		Ingenieurwissenschaften\\
-		und Informatik\\
-		\\
-		Institut für\\
-		Programmiermethodik\\
-		und Compilerbau\\
-		\\
-		\abgabedatum\\
-		\\
-		{\abschlussarbeit} im\\
-		Studiengang Informatik
-	}
-\end{titlepage}
-\restoregeometry
-
-
-% Abstract
-\clearpage
-\thispagestyle{empty}
-\chapter*{Abstract}
-
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
-
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
-{
-	\null
-	\small
-	\vfill
-	\begin{center}
-		\begin{tabular}{l l}
-			Erstgutachter:  & \gutachterA \\
-			Zweitgutachter: & \gutachterB \\
-			Betreuer:       & \betreuer \\
-		\end{tabular}\\[1cm]
-		Fassung \today\\
-		  \copyright~\jahr~\fullname\\[0.5em]
-		% Wenn Sie Ihre Arbeit unter einer freien Lizenz bereitstellen möchten, können Sie die nächste Zeile in Ihren Code aufnehmen. Bitte beachten Sie, dass Sie hierfür an allen Inhalten, inklusive enthaltener Abbildungen, die notwendigen Rechte benötigen! Beim Veröffentlichungsexemplar Ihrer Dissertation achten Sie bitte darauf, dass der Lizenztext nicht den Angaben in den Metadaten der genutzten Publikationsplattform widerspricht. Nähere Information zu den Creative Commons Lizenzen erhalten Sie hier: https://creativecommons.org/licenses/
-		%This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA. \\
-		
-		Satz: PDF-\LaTeXe
-	\end{center}
-}
-
-
-% Inhaltsverzeichnis
-\tableofcontents
-
-\mainmatter % ab hier wieder normale Seitenzahlen
-
-
-% Inhalt (am besten mit \input in extra Dateien auslagern)
-\chapter{Kapitel}
-
-\section{Überschrift 1}
-
-\subsection{Überschrift 2}
-
-\subsubsection{Überschrift 3}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Ut laoreet velit vitae urna viverra id dignissim diam pulvinar.
-Nullam sit amet ipsum ut nibh iaculis rhoncus sollicitudin et sapien.
-Cras ultricies, nulla vel scelerisque venenatis, lectus justo tincidunt massa, a laoreet ante nulla quis dui.
-Morbi consequat aliquet lacinia.
-Quisque tellus sapien, bibendum non pharetra sit amet, aliquet vel nisl.
-Pellentesque risus risus, semper non laoreet quis, auctor a risus.
-Pellentesque consectetur molestie ante, ac viverra nulla aliquam vitae.
-Nulla quis nunc eget mi aliquet egestas vitae id mauris.
-Donec adipiscing hendrerit lacus, ac lobortis velit molestie sed.
-Nam consectetur, nibh at suscipit molestie, augue arcu luctus enim, ut ullamcorper odio magna congue metus.
-Quisque rhoncus mauris nisi.
-Praesent scelerisque leo eget odio tincidunt tincidunt.
-Donec id enim sit amet neque cursus sodales.
-Donec aliquam, tortor vel dignissim euismod, lacus sem commodo orci, quis mattis neque libero at massa.
-Donec tincidunt, ante ac mattis dapibus, nulla turpis bibendum nulla, et ornare purus diam et purus.
-Praesent venenatis imperdiet risus eget vestibulum.
-
-Etiam vestibulum auctor ipsum, at iaculis est mattis vitae.
-Curabitur sed fringilla risus.
-Sed consectetur pretium ligula in pharetra.
-Nullam auctor consequat aliquet.
-Ut nisi augue, consectetur vitae vehicula eget, fermentum sit amet risus.
-Donec placerat malesuada laoreet.
-Aliquam nec nibh quis lectus luctus semper semper eget elit.
-Proin vitae laoreet elit.
-
-\chapter{Beispiele}
-
-\section{TikZ}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\begin{figure}[th]
-	\begin{center}
-		\begin{tikzpicture}[thick]
-		\draw (0,0) grid (3,3);
-		\foreach \c in {(0,0), (1,0), (2,0), (2,1), (1,2)} \fill \c + (0.5,0.5) circle (0.42);
-		\end{tikzpicture}
-	\end{center}
-	\caption{Game of Life Glider}
-	\label{fig:glider}
-\end{figure}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\section{Quelltext}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\begin{figure}[th]
-\lstset{language=C}
-\begin{lstlisting}
-#include <stdio.h>
-	
-int main() {
-	printf("Hello World");
-	return 0;
-}		
-\end{lstlisting}
-\caption{Hello World Programm}
-\label{lst:hello_world}
-\end{figure}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\section{Pseudocode}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\begin{figure}[th]
-	\begin{algorithm}[H]
-		\Function{Max}{$\{a_1, a_2, \ldots, a_n\}$}{
-			$max \gets a_1$\;
-			\For{$i \gets 2$ \textbf{to} $n$} {
-				\If{$a_i > max$} {
-					$max \gets a_i$\;
-				}
-			}
-			\Return{$max$}\;
-		}
-	\end{algorithm}
-	\caption{Max Algorithmus}
-	\label{alg:max}
-\end{figure}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\section{Tabellen}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-\begin{table}[th]
-	\begin{center}
-		\begin{tabular}{cc|c|c|c|c|l}
-			\cline{3-6}
-			&                           & \multicolumn{4}{c|}{Primes} \\
-			\cline{3-6}
-			&                           & 2 & 3 & 5 & 7       \\
-			\cline{1-6}
-			\multicolumn{1}{|c}{\multirow{2}{*}{Powers}} & \multicolumn{1}{|c|}{504} & 3 & 2 & 0 & 1 &     \\
-			\cline{2-6}
-			\multicolumn{1}{|c}{}                        & \multicolumn{1}{|c|}{540} & 2 & 3 & 1 & 0 &     \\
-			\cline{1-6}
-			\multicolumn{1}{|c}{\multirow{2}{*}{Powers}} & \multicolumn{1}{|c|}{gcd} & 2 & 2 & 0 & 0 & min \\
-			\cline{2-6}
-			\multicolumn{1}{|c}{}                        & \multicolumn{1}{|c|}{lcm} & 3 & 3 & 1 & 1 & max \\
-			\cline{1-6}
-		\end{tabular}
-	\end{center}
-	\caption{Langweilige Tabelle}
-	\label{tbl:langweilig}
-\end{table}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-
-% Anhang
-\appendix
-
-\chapter{Inhalt der CD}
-
-\renewcommand{\labelitemi}{\tikz {\draw [line width=0.5pt] (0,0)--(0.25,0)--(0.25,0.15)--(0,0.15)--(0,0)--(0.25,0); \draw [line width=0.5pt] (0,0.15)--(0.05,0.2)--(0.15,0.2)--(0.2,0.15);}}
-\renewcommand{\labelitemii}{\tikz {\draw [line width=0.5pt] (0,0)--(0.2,0)--(0.2,0.15)--(0.1,0.25)--(0,0.25)--(0,0)--(0.2,0); \draw [line width=0.5pt] (0.1,0.25)--(0.1,0.15)--(0.2,0.15);}}
-
-\begin{itemize}
-	\addtolength{\itemsep}{0.5\baselineskip}
-	\item	\textbf{\texttt{Verzeichnis}}
-	\begin{itemize}
-		\addtolength{\itemsep}{-0.3\baselineskip}
-		\item \textbf{\texttt{a}}
-		\item \textbf{\texttt{b}}
-		\item \textbf{\texttt{c}}
-	\end{itemize}
-\end{itemize}
-
-\chapter{Sonstiges}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-
-% Abbildungsverzeichnis
-\cleardoublepage % sonst stimmt die seitennummer im TOC nicht
-\phantomsection
-\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
-\listoffigures
-
-
-% Tabellenverzeichnis
-\cleardoublepage % sonst stimmt die seitennummer im TOC nicht
-\phantomsection
-\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
-\listoftables
-
-
-% Bibliographie (am besten mit Bibtex oder Biber)
-\cleardoublepage % sonst stimmt die seitennummer im TOC nicht
-\phantomsection
-\addcontentsline{toc}{chapter}{Literaturverzeichnis}
-\begin{thebibliography}{123}
-	
-	\bibitem[1]{WIL97}
-	{\sc R. Wilhelm, D. Maurer},
-	{\itshape Übersetzerbau - Theorie, Konstruktion, Generierung},
-	2. Auflage, Springer 1997, ISBN 3-540-61692-6
-	\bibitem[2]{N1124}
-	{\itshape ISO C Standard 1999, ISO/IEC 9899:1999 draft},
-	WG14 N1124, International Organization for Standardization, 1999,
-	\url{http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1124.pdf} (27. Juni 2011).
-	\bibitem[3]{HUGS}
-	{\itshape Hugs 98},
-	\url{http://www.haskell.org/hugs/} (27. Juni 2011).
-\end{thebibliography}
+\printbibliography
 
 % Declaration of Independance
 \clearpage

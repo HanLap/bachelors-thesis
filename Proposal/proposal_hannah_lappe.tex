@@ -38,7 +38,7 @@
 % \renewcommand\comment[1]{}
 
 %Title of the proposal
-\title{Development and Evaluation of a DSL to define Modeling Syntaxes for CouchEdit}
+\title{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for CouchEdit}
 %bachelor or master?
 \subtitle{(Bachelor Thesis Proposal)}
 %first and then last name
@@ -65,9 +65,9 @@ Modeling languages have long played an important role in software engineering. W
 
 As these tasks require syntactic correctness of used models, modeling tools become an essential part of an engineer's workflow. Especially visual modeling tools provide in theory, an intuitive and user friendly way to design models. But current graphical modeling tools tend to constraint users in unintuitive ways and deliver sub par user experience (UX). this usually arises from a tight coupling between a modeling tools user interface (UI) and the underlying model. As the model's syntax is usually inflexible, the UI has to make restrictions to adhere to this syntax. this often creates problems for the user, for example connections can only be drawn between two existing states, or deleting a node will result in all its children being deleted as well.
 
-To amend these usability woes, L. Nachreiner proposed a novel modeling framework, called CouchEdit \cite{nachreiner_couchedit_2020}. This framework decouples user interface and model syntax by introducing different models for both. Instead of relying directly on the syntax of the model that is being designed, in the CouchEdit architecture the user interface is using a render model that only consists of nodes that are rendered in the Modeling tool, called concrete syntax. On the other hand, the actual models syntax now stands on its own, called abstract syntax. To translate between concrete and abstract syntax, a syntax meta model is utilized. CouchEdit at its core was designed to be general purpose, meaning it can be rewritten to adhere to any model syntax. But to realize this in the current implementation, the source code has to be changed directly, which is error prone, convoluted and requires some understanding of CouchEdits internal architecture.
+To amend these usability woes, L. Nachreiner proposed a novel modeling framework, called CouchEdit \cite{nachreiner_couchedit_2020}. This framework decouples user interface and model syntax by introducing different models for both. Instead of relying directly on the syntax of the model that is being designed, in the CouchEdit architecture the user interface is using a render model that only consists of nodes that are rendered in the Modeling tool, called concrete syntax. On the other hand, the actual models syntax now stands on its own, called abstract syntax. To translate between concrete and abstract syntax, a syntax metamodel is utilized. CouchEdit at its core was designed to be general purpose, meaning it can be rewritten to adhere to any model syntax. But to realize this in the current implementation, the source code has to be changed directly, which is error prone, convoluted and requires some understanding of CouchEdits internal architecture.
 
-To create a more developer friendly and flexible way of adapting CouchEdit to different modeling syntaxes, this design research aims to propose a new domain specific language (DSL), that can be used to configure CouchEdit for any Modeling syntax. Furthermore a conceptual parser is to be developed and implemented, that provides proof of concept on how this newly developed DSL interacts with the CouchEdit architecture.
+To create a more developer friendly and flexible way of adapting CouchEdit to different modeling syntaxes, this design research aims to propose a new metamodel, that can be used to create modeling syntax definitions which are usable by CouchEdit. Furthermore a conceptual parser is to be developed and implemented, that provides proof of concept on how this newly developed metamodel interacts with the CouchEdit architecture.
 
 \section{Problem Statement}
 \label{sec:problem_statement}
@@ -85,7 +85,7 @@ To create a more developer friendly and flexible way of adapting CouchEdit to di
 % Effective problem statements answer the question: Why does this research need to be conducted? If the writer is unable to answer this question clearly and succinctly, the statement of the problem will be perceived as vague and diffuse.}      
 
 
-A general purpose framework should be configurable for multiple use cases in its designated domain. CouchEdit as a general purpose graphical modeling framework thus should be configurable for multiple modeling syntaxes. Technically this is possible, as long as one has access to the source code. But this would mean, every time CouchEdit has to support a new modeling syntax, manual changes in the source code have to be made and the project has to be compiled from sources. The implementation of a DSL parser, that can interpret model syntax definitions at runtime would thus increase flexibility. Furthermore a well designed domain specific language could reduce the amount of knowledge that is needed about the CouchEdit framework.
+A general purpose framework should be configurable for multiple use cases in its designated domain. CouchEdit as a general purpose graphical modeling framework thus should be configurable for multiple modeling syntaxes. Technically this is possible, as long as one has access to the source code. But this would mean, every time CouchEdit has to support a new modeling syntax, manual changes in the source code have to be made and the project has to be compiled from sources. The implementation of a configuration parser, that can interpret modelling syntax definitions at runtime would thus increase flexibility. Furthermore a well designed metamodel could reduce the amount of knowledge that is needed about the CouchEdit framework.
 
 As a relaxed conformance editing framework, CouchEdit poses special architectural requirements. It has to allow for temporary inconsistencies between concrete syntax (what the user draws) and abstract syntax (what the underlying Model actually looks like). As the concrete syntax does not always have to map to a syntactic correct abstract model, this allows for more freedom in the modeling process (e.g. dangling transitions).
 
@@ -100,7 +100,7 @@ CouchEdit achieves this by building upon the architecture concept of clear separ
 
 Some of these processors are needed for every type of syntax model, for example the spatial processor, that processes how nodes in the concrete syntax are positioned to each other (above, besides, etc.). Other processors are specific to the given modeling syntax, for example a state chart syntax would require a state processor, that processes if a given graphical object represents a state (usually true if the given node is a rectangle with rounded edges).
 
-A modeling syntax parser for CouchEdit would have to generate these syntax specific processors, while considering multiple design constraints that result from this architecture. Thus a DSL is needed that defines the desired abstract modeling syntax and specifies how a concrete graphical syntax can be mapped to this abstract syntax. While there is ongoing research in the area of relaxed conformance editing and how to link concrete and abstract syntax, it does not immediately become clear what such a domain specific language would look like.
+A modeling syntax parser for CouchEdit would have to generate these syntax specific processors, while considering multiple design constraints that result from this architecture. Thus a metamodel is needed that can define the desired abstract modeling syntax and specify how a concrete graphical syntax can be mapped to this abstract syntax. While there is ongoing research in the area of relaxed conformance editing and how to link concrete and abstract syntax, it does not immediately become clear what such a metamodel would look like.
 
 
 % \begin{itemize}
@@ -127,9 +127,9 @@ A modeling syntax parser for CouchEdit would have to generate these syntax speci
 
 % \hint{(0,25 pages)}{The purpose statement should provide a specific and accurate summary of the overall purpose of the study. Briefly define and delimit the specific area of the research. Incorporate the rationale for the study. A commonly used sentence starts with: ''The purpose of this study is \ldots''. The purpose should clarify who is anticipated to benefit from the results of your study and how the results may be used.}
 
-The primary purpose of this study is to develop a domain specific language for the CouchEdit framework. This DSL is supposed to provide a comprehensive and easy to use way for defining new modeling languages. To evaluate the applicability of this DSL, furthermore a prototypical code generator is to be implemented, that can comprehend this newly designed DSL and translate it into a source code implementation.
+The primary purpose of this study is to develop a metamodel for the CouchEdit framework. This metamodel is supposed to provide a comprehensive and easy to use way for defining new modeling languages. To evaluate the applicability of this metamodel, furthermore a prototypical code generator is to be implemented, that can comprehend this newly designed metamodel and translate it into a source code implementation.
 
-This extension of the CouchEdit framework is supposed to improve developer accessibility and framework flexibility. While a code generator means that the system still has to be recompiled for every modeling syntax, it still becomes easier to support new modeling syntaxes as the DSL abstracts away from the actual source code implementation and thus requires less knowledge about the CouchEdit framework.
+This extension of the CouchEdit framework is supposed to improve developer accessibility and framework flexibility. While a code generator means that the system still has to be recompiled for every modeling syntax, it still becomes easier to support new modeling syntaxes as the metamodel abstracts away from the actual source code implementation and thus requires less knowledge about the CouchEdit framework.
 
 
 \section{Review of the literature}
@@ -159,15 +159,15 @@ This extension of the CouchEdit framework is supposed to improve developer acces
         \begin{description}
           \item[Authors:] L. Nachreiner
           \item[Summary:] In this work, the CouchEdit architecture is first proposed, an initial prototype is developed and the results are evaluated.
-          \item[Significance:] As CouchEdit builds the foundation of the proposed research, this work lays out most of the constraints and rules that the designed DSL has to adhere to. A thorough analysis of CouchEdits features and architecture will be integral to a successful DSL design. Furthermore the developed prototype will be used as the base for the DSL parser implementation.
+          \item[Significance:] As CouchEdit builds the foundation of the proposed research, this work lays out most of the constraints and rules that the designed metamodel has to adhere to. A thorough analysis of CouchEdits features and architecture will be integral to a successful metamodel design. Furthermore the developed prototype will be used as the base for the metamodel parser implementation.
 
         \end{description}
 
   \item[Specifying and Implementing Visual Process Modeling Languages with DiaGen] \cite{minas_specifying_2001}
         \begin{description}
           \item[Authors:] M. Minas, B. Hoffmann
-          \item[Summary:] DiaGen is a tool for automatic generation of visual modeling editors\footnote{DiaGen: \url{http://www2.cs.unibw.de/tools/DiaGen}}. A DSL is used to define properties of the editor as well as specification of how to process the model syntax. DiaGen builds a hypergraph structure from the model that is drawn in the editor. With the help of reduction rules and grammar definitions, this hypergraph is then transformed into an abstract syntax representation of the defined modeling language.
-          \item[Significance:]  DiaGen implements a domain specific language for transformation from concrete render syntax to abstract model syntax and thus provides a potential baseline that could be used in a similar DSL definition for the CouchEdit framework.
+          \item[Summary:] DiaGen is a tool for automatic generation of visual modeling editors\footnote{DiaGen: \url{http://www2.cs.unibw.de/tools/DiaGen}}. A domain specific language (DSL) is used to define properties of the editor as well as specification of how to process the model syntax. DiaGen builds a hypergraph structure from the model that is drawn in the editor. With the help of reduction rules and grammar definitions, this hypergraph is then transformed into an abstract syntax representation of the defined modeling language.
+          \item[Significance:]  DiaGen implements a domain specific language for transformation from concrete render syntax to abstract model syntax, which could be used to derive concepts that are needed in a metamodel for CouchEdit.
           \item[Delimitations:] DiaGens architecture follows a linear process of transforming its internal hypergraph into the corresponding abstract syntax. CouchEdit's publish and subscribe architecture is undirected and thus poses different challenges. On the other hand, DiaGen generates a fully functioning editor and thus has to generate implementations of UI components. CouchEdit intends to be editor agnostic and therefore only has to provide a definition of graphical objects that are used in the configured modeling syntax.
 
         \end{description}
@@ -175,8 +175,8 @@ This extension of the CouchEdit framework is supposed to improve developer acces
   \item[Making Metamodels Aware of Concrete Syntax] \cite{fondement_making_2005}
         \begin{description}
           \item[Authors:] F. Fondement, T. Baar
-          \item[Summary:] The authors propose an approach to the interpretation of concrete syntax. A set of graphical objects is summarized into a display class which is then mapped to a so called display manager which itself is mapped to an abstract syntax object. This display manager has the job of keeping display class an abstract syntax object in sync. For this to be possible, constraint rules are defined for display managers using the Object Constraint Language (OCL).
-          \item[Significance:] Similar to CouchEdit, the proposed concept works with a clear separation of concrete and abstract syntax. The approach of using OCL rules to keep abstract and concrete syntax in sync could potentially be applied to a CouchEdit DSL, as the internal diff based system often has to apply similar transformations.
+          \item[Summary:] The authors propose an approach to the interpretation of concrete syntax. A set of graphical objects is summarized into a display class which is then mapped to a so called display manager which itself is mapped to an abstract syntax object. This display manager has the job of keeping display class and abstract syntax object in sync. For this to be possible, constraint rules are defined for the display managers using the Object Constraint Language (OCL).
+          \item[Significance:] Similar to CouchEdit, the proposed concept works with a clear separation of concrete and abstract syntax. The approach of using OCL rules to keep abstract and concrete syntax in sync could potentially be utilized in a CouchEdit metamodel, as the internal diff based system often has to apply similar transformations.
           \item[Delimitation:] The proposed design is wrapping graphical objects in display classes and thus can map one abstract object to exactly one Display object. In its current implementation CouchEdit in many cases maps one Abstract object to multiple graphical objects, which could limit the applicability of this work. It would have to be evaluated if the Display class grouping mechanism can be incorporated into the CouchEdit framework, but as implementation of that functionality was left open it is unclear how it would actually have to be defined.
         \end{description}
 
@@ -184,7 +184,7 @@ This extension of the CouchEdit framework is supposed to improve developer acces
         \begin{description}
           \item[Authors:] T. Baar
           \item[Summary:] The author proposes a way to formally define a models concrete syntax and how to link it to the abstract syntax. Similar to \cite{fondement_making_2005}, they use display managers that are defined using OCL. Furthermore an algorithm is given to check a concrete syntaxes correctness.
-          \item[Significance:] This work gives additional insight on using OCL as a language to define concrete syntax mappings. Furthermore it provides hints to what is needed for checking syntax correctness. While implementing syntax correctness checking is beyond the proposed researches scope, it will still be worthy to keep this in mind when designing a DSL applicable to CouchEdit.
+          \item[Significance:] This work gives additional insight on using OCL as a language to define concrete syntax mappings. Furthermore it provides hints to what is needed for checking syntax correctness. While implementing syntax correctness checking is beyond the proposed researches scope, it will still be worthy to keep this in mind when designing a metamodel applicable to CouchEdit.
         \end{description}
 
 
@@ -211,21 +211,21 @@ This extension of the CouchEdit framework is supposed to improve developer acces
 %   These questions should be written such that they can be answered within the thesis, and they should fully cover the research problem.
 % }
 
-The primary goal of this research will be the development of a domain specific language for the CouchEdit framework. This imposes multiple questions which are to be answered in order to design and evaluate the designated DSL.
+The primary goal of this research will be the development of a metamodel for the CouchEdit framework. This imposes multiple questions which are to be answered in order to design and evaluate the designated metamodel.
 
 \begin{description}
-  \item[RQ1:] Is it possible to define a concise domain specific Language that covers CouchEdits complete feature set?
+  \item[RQ1:] Is it possible to define a concise metamodel that covers CouchEdits complete feature set?
 
         If this is not possible, the following question has to be answered.
         \begin{description}
           \item[RQ1.1:] How could the feature set be narrowed down, without impacting the frameworks capabilities too much?
         \end{description}
 
-  \item[RQ2:] What requirements does the CouchEdit architecture impose onto a domain specific language?
+  \item[RQ2:] What requirements does the CouchEdit architecture impose onto a metamodel?
 
-        The architectures characteristics and quirks have to be considered when designing the language. For example, the publish and subscribe pattern, could make it easy to introduce nonterminating processing chains, which the DSL should prevent where possible.
+        The architectures characteristics and quirks have to be considered when designing the language. For example, the publish and subscribe pattern, could make it easy to introduce nonterminating processing chains, which the metamodel should prevent where possible.
 
-  \item[RQ3:] How applicable is the designed DSL for defining new modeling syntaxes?
+  \item[RQ3:] How applicable is the designed metamodel for defining new modeling syntaxes?
 
         \begin{description}
           \item[RQ3.1] Is it possible to express common modeling syntax concepts in a clear and concise way?
@@ -252,25 +252,28 @@ The primary goal of this research will be the development of a domain specific l
 
 
 
-As this research strives to develop a new domain specific language suitable for the CouchEdit framework, it will be conducted in accordance to the Design Science Research (DSR) approach. According to V. Vaishnavi et al. a design science research process consists of five steps \cite{Vaishnavi2004}.
+As this research strives to develop a new metamodel suitable for the CouchEdit framework, it will be conducted in accordance to the Design Science Research (DSR) approach. According to V. Vaishnavi et al. a design science research process consists of five steps \cite{Vaishnavi2004}.
 
 \subsection{Problem Awareness}
-The first step of a design science research is the identification of existing problems. As specified in section \ref{sec:problem_statement}, it was identified that the current CouchEdit implementation lacks an user friendly way of adapting it to different modeling syntaxes and that it is unclear how a DSL for this architecture would look like.
+The first step of a design science research is the identification of existing problems. As specified in section \ref{sec:problem_statement}, it was identified that the current CouchEdit implementation lacks an user friendly way of adapting it to different modeling syntaxes and that it is unclear how a metamodel for this architecture would look like.
 
 \subsection{Suggestion}
-With a clear definition of the problem, objectives can be proposed which have to be achieved in order to solve this problem. The first objective of this research is to develop a DSL for the CouchEdit architecture. To be more precise, a DSL is to be designed, that can be used to specify syntax metamodel definitions which map concrete graphical syntaxes to Abstract syntax models and is applicable to CouchEdit's architecture. The second objective is to implement a prototype that provides proof of concept for the applicability of the design DSL.
+With a clear definition of the problem, objectives can be proposed which have to be achieved in order to solve this problem. The first objective of this research is to develop a metamodel for the CouchEdit architecture. To be more precise, a metamodel is to be designed, that can be used to specify model syntax definitions which map concrete graphical syntaxes to Abstract syntax models and is applicable to CouchEdit's architecture. The second objective is to implement a prototype that provides proof of concept for the applicability of the design metamodel.
 
 
 \subsection{Development}
 The primary goal of a design science research is the development of artifacts.
-The first artifact to be developed in this research will be a domain specific language, that can be used to define new modeling syntaxes for a relaxed conformance editor and is applicable to CouchEdit's architecture. The second artifact that is to be developed, is a prototypical code generator that can translate the developed DSL into a CouchEdit implementation which will be able to process the defined modeling syntax.
+The first artifact to be developed in this research will be a metamodel, that can be used to define new modeling syntaxes for a relaxed conformance editor and is applicable to CouchEdit's architecture. The second artifact that is to be developed, is a prototypical code generator that can translate the developed metamodel into a CouchEdit implementation which will be able to process the defined modeling syntax.
 
-To this end, the first sub step of the development stage will be to do a comprehensive analysis of CouchEdits architecture. In his work L. Nachreiner describes in detail, which modeling features the framework covers and how they are implemented \cite{nachreiner_couchedit_2020}. For each of these features it has to be verified if they can be represented by the approaches of \cite{minas_specifying_2001} or \cite{fondement_making_2005} in a concise way (RQ1). Should this not be possible for all features, it would have to be evaluated if these approaches can be extended to cover these features. if this is not possible as well, it would have to be seen if the problematic features could be dropped or simplified to allow for a concise syntax definition (RQ1.1). This process should result in a basic version of an applicable DSL.
+To this end, the first sub step of the development stage will be to do a comprehensive analysis of CouchEdits architecture. In his work L. Nachreiner describes in detail, which modeling features the framework covers and how they are implemented \cite{nachreiner_couchedit_2020}. For each of these features, a sub metamodel has to be designed that can be used to define the given feature (RQ1). The approaches of \cite{minas_specifying_2001} and \cite{fondement_making_2005} provide a DSL implementation from which concepts for potential metamodels could be derived. If for one of the features, a suitable metamodel cannot be found, it would have to be evaluated if the feature could be simplified or even dropped (R1.1). After designing sub metamodels for all features, they then have to be composed together, which results in a first version of an applicable metamodel. 
 
-in the next sub step, the code generator will be implemented, this is an iterative step. first, an implementation will be developed on the basis of the designed DSL, this should reveal further requirements imposed by CouchEdits architecture (RQ2). The DSL then has to be adjusted to account for these requirements, which in turn requires changes of the implementation until no further requirements can be deduced. Because of time constraints it will not be possible to implement all of the DSL's features, instead the prototype will cover a minimal feature set that still suffices to demonstrate the DSL's applicability for selected modeling syntaxes.
+
+% For each of these features it has to be verified if they can be represented by the approaches of \cite{minas_specifying_2001} or \cite{fondement_making_2005} in a concise way (RQ1). Should this not be possible for all features, it would have to be evaluated if these approaches can be extended to cover these features. if this is not possible as well, it would have to be seen if the problematic features could be dropped or simplified to allow for a concise syntax definition (RQ1.1). This process should result in a basic version of an applicable DSL.
+
+in the next sub step, the code generator will be implemented, this is an iterative step. first, an implementation will be developed on the basis of the designed metamodel, this should reveal further requirements imposed by CouchEdits architecture (RQ2). The metamodel then has to be adjusted to account for these requirements, which in turn requires changes of the implementation until no further requirements can be deduced. Because of time constraints it will not be possible to implement all of the metamodel's features, instead the prototype will cover a minimal feature set that still suffices to demonstrate the metamodel's applicability for selected modeling syntaxes.
 
 \subsection{Evaluation}
-Now that the desired artifacts are fully developed it has to be evaluated how well they do their designated task. The DSL as the primary artifact of this research has to be evaluated in terms of its applicability to its designated domain. To this end, the DSL will be demonstrated on the basis of different modeling syntaxes, this should highlight areas in which the DSL design excels, as well as design flaws and limitations (RQ3). If time allows, potential flaws can be addressed by returning back to the development phase and revising the artifacts, otherwise flaws are to be highlighted so that future works can address them.
+Now that the desired artifacts are fully developed it has to be evaluated how well they do their designated task. The metamodel as the primary artifact of this research has to be evaluated in terms of its applicability to its designated domain. To this end, the metamodel will be demonstrated on the basis of different modeling syntaxes, this should highlight areas in which the metamodel's design excels, as well as design flaws and limitations (RQ3). If time allows, potential flaws can be addressed by returning back to the development phase and revising the artifacts, otherwise flaws are to be highlighted so that future works can address them.
 
 \subsection{Conclusion}
 The conclusion stage marks the end of a DSR and the results are written up. This works written part will be the resulting bachelor's thesis as well as all source code and documentation.
@@ -287,10 +290,11 @@ The conclusion stage marks the end of a DSR and the results are written up. This
 As this research faces tight time constraints, multiple trade offs have to be made:
 
 \begin{itemize}
-  \item The prototype will be implemented as a cross cut, thus not all features of the DSL will actually be implemented. This could result in some edge cases being missed, hence the resulting DSL will only be a first proposed version that future works can build upon.
+  \item The prototype will be implemented as a cross cut, thus not all features of the metamodel will actually be implemented. This could result in some edge cases being missed, hence the resulting metamodel will only be a first proposed version that future works can build upon.
   \item While concrete syntax correctness checking is an important part of a complete implementation, it would require too much extra time.
-  \item Static syntax analysis by the DSL parser would improve developer experience but is out of scope as well.
-  \item A runtime interpreter or compiler for the DSL could allow hot swapping the modeling syntax and therefore is advised for production implementations. Nonetheless this research will provide a code generator implementation, as this promises a faster way of prototyping in the CouchEdit architecture.
+  \item Static syntax analysis by the model parser would improve developer experience but is out of scope as well.
+  \item A runtime interpreter or compiler of the metamodel could allow hot swapping the modeling syntax and therefore is advised for production implementations. Nonetheless this research will provide a code generator implementation, as this promises a faster way of prototyping in the CouchEdit architecture.
+  \item A DSL implementation that utilizes the designed metamodel could further improve developer experience, but to avoid intricacies of language design, such an implementation is also not attempted. 
 \end{itemize}
 
 \section{Significance of the study}
@@ -298,9 +302,9 @@ As this research faces tight time constraints, multiple trade offs have to be ma
 
 %   Most studies have two potential audiences: practitioners and researchers. Think about implications: What implications may the results of the study have on research? What implications may the results of the study have on practice? }
 
-This work will extend and combine existing research in the field of syntax meta modeling. While many works formalize concrete syntax definition and a mapping to an existing abstract syntax, only few actually provided a working implementation.
+This work will extend and combine existing research in the field of metamodeling. While many works formalize concrete syntax definition and a mapping to an existing abstract syntax, only few actually provided a working implementation.
 
-This work will produce new knowledge on how to use syntax meta modeling to define modeling languages for relaxed conformance editing frameworks.
+This work will produce new knowledge on how to use metamodeling to define modeling languages for relaxed conformance editing frameworks.
 
 
 \section{Planning}
@@ -311,7 +315,7 @@ This work will produce new knowledge on how to use syntax meta modeling to defin
 
 % \hint{(0,25 Pages)}{Relevant background on methodologies and tools (e.g., process models, appropriate formal models, formal specifications languages, algorithms) from lectures, seminars and jobs. Also write down the necessary skills that need to be learned during the thesis.}
 
-I bring general experience in software engineering from previous projects in university and as a student assistant. I have prior experience with Kotlin, JavaFX and reactiveX, as well as dependency injection, which will be beneficial during the implementation phase. The most important new skill to acquire will be an understanding of DSL development as no prior experience is present. Furthermore knowledge about language parsers such as Xtext or ANTLR, as well as some understanding of GMF will be required for the implementation phase.
+I bring general experience in software engineering from previous projects in university and as a student assistant. I have prior experience with Kotlin, JavaFX and reactiveX, as well as dependency injection, which will be beneficial during the implementation phase. The most important new skill to acquire will be an understanding of metamodel development as no prior experience is present. Furthermore code generation approaches and model parsing, as well as some understanding of GMF will be required for the implementation phase.
 
 
 
@@ -323,20 +327,19 @@ I bring general experience in software engineering from previous projects in uni
 \begin{description}
   \item[W1-2:] Learning basics
         \begin{itemize}
-          \item Read into DSL design
-          \item Learn to create DSL parsers with xtext/ANTLR
+          \item Read into metamodel design
           \item How to generate source code
           \item How to generate abstract syntax models
         \end{itemize}
   \item[W3-4:] Design
         \begin{itemize}
-          \item Compare CouchEdit features against existing approaches
-          \item Design fitting DSL on the basis of this.
+          \item Analyse CouchEdits features
+          \item Design fitting metamodel on the basis of this.
         \end{itemize}
   \item[W5-6:] Implementation
         \begin{enumerate}
           \item Implement code generator for selected modeling syntaxes
-          \item Revise DSL if problems occur
+          \item Revise metamodel if problems occur
         \end{enumerate}
   \item[W7-8:] Evaluation
         \begin{enumerate}
@@ -354,7 +357,7 @@ I bring general experience in software engineering from previous projects in uni
 \begin{enumerate}
   \item \textbf{Risk} CouchEdit architecture too complex
 
-        \textbf{Contingency} If it is determined that CouchEdits features can't be satisfied using the existing approaches, it would have to be seen if the existing approaches can be extended or else some features could be cut out. Otherwise a new approach would be needed which could go beyond the defined time limit.
+        \textbf{Contingency} If it is determined that CouchEdits features cannot be modeled without causing to much convolution, it would have to be seen if features could be simplified or cut out. Otherwise it could result in failure of this research.
 \end{enumerate}
 
 \nocite{*}
