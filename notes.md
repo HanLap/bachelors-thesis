@@ -1,11 +1,41 @@
 
-fragen?
 
-- sollte syntax correctness implementiert werden, bzw kann das system von diagen in dieser form auf CouchEdit übertragen werden?
+- helper functions
+
+- custom relation Types
 
 
-- DSL guidelines sinvoll für related work?
+- how to handle consumes?
 
-- MID for visual specification?
 
-- us or uk spelling?
+- elemnt definition
+
+
+- custom processor
+
+
+
+
+- transformation 
+
+
+
+- labeling processor proximity problems
+
+- selection problem
+
+
+- ziel der arbeit: leicht zu lösende Probleme, schwere probleme, vergleichen, Vergleichen mit lösungen in anderen Usecases
+
+
+
+- look into creating complex GOs
+
+
+- type attributes dynamisch zuweisen
+
+
+- constraints definition physics of notations
+
+
+- keine ultimative lösung. wenn nicht sicher an user weitergeben. by design 
