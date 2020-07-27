@@ -210,6 +210,9 @@ leqno					% equation numbers to the left
 % hier das Institut einsetzen
 \newcommand{\institut}{Institut für Softwaretechnik und Programmiersprachen}
 
+
+\newcommand{\comment}[1]{\textcolor{red}{(#1)}}
+
 % Informationen, die LaTeX in die PDF-Datei schreibt
 \pdfinfo{
   /Author (\fullname)
@@ -284,7 +287,7 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract \cite{baar_correctly_2008}.
+Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
 {
 	\null
 	\small
@@ -317,7 +320,6 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 
 % Inhalt (am besten mit \input in extra Dateien auslagern)
 \input{chapters/introduction.tex}
-\input{chapters/problem_statement.tex}
 \input{chapters/related_work.tex}
 \input{chapters/fundamentals.tex}
 \input{chapters/design.tex}

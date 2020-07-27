@@ -1,4 +1,24 @@
 \chapter{CouchEdit Fundamentals}
+As noted in section \ref{sec:problem_statement}, the CouchEdit framework is based on the Ideas of Van Tendeloo, et al. \cite{van_tendeloo_concrete_2017}. In their paper, the authors criticize that classic approaches to modeling frontends usually create one monolithic construct, that handles both the graphical model display as well as the corresponding abstract syntax. This creates tight coupling between the two, which causes low flexibility of the UI and high effort, if new features are to be implemented. 
+
+They propose to solve this, by defining two metamodels, one describing the concrete syntax and one the abstract syntax. The concrete syntax metamodel specifies graphic primitives that are needed to compose a given modeling syntax. instances of this metamodel are managed by the frontend and a user can manipulate this concrete syntax directly by adding, deleting or modifying Elements in the UI (if the frontend allows changes). On The other side stands the abstract syntax metamodel, it describes the conceptual representation of a modeling syntax. Instances of this metamodel are managed by the backend. To then connect these two metamodels, a further metamodel can be defined, that specifies transformations to translate concrete model into abstract model and backwards. 
+
+Following this architecture, CouchEdit separates frontend from the abstract syntax model. Transformation between concrete and abstract syntax is handled by independent components. \comment{more}
+
+
+\section{Data Model}
+CouchEdit uses a Hypergraph of Elements and Relations to represent its data. Each transformation component has its own sub graph \comment{more}
+
+
+\subsection{Elements}
+Elements are the base type of CouchEdits hypergraph. Every type of node in this graph inherits from the Element type. Element types have a 
+
+\subsection{Relations}
+
+
+\section{Processors}
+
+
 
 
 \begin{itemize}
@@ -8,8 +28,6 @@
   \item publish/subscribe pattern
   \item attribute bags
 \end{itemize}
-
-\section{processors}
 
 \subsection{Spatial Abstractor}
 
