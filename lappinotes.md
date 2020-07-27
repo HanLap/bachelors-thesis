@@ -1,11 +1,3 @@
-
-
-
-
-- element type, take care, so they don't overwrite each other
-
-
-
 - assignment operations have special requirement of knowing the assigned object
 
 
@@ -20,3 +12,4 @@
 2. Fundamentals and Related work
 
 3. Design Concept
+
