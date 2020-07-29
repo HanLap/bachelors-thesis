@@ -3,28 +3,30 @@ As noted in section \ref{sec:problem_statement}, the CouchEdit framework is base
 
 They propose to solve this, by defining two metamodels, one describing the concrete syntax and one the abstract syntax. The concrete syntax metamodel specifies graphic primitives that are needed to compose a given modeling syntax. instances of this metamodel are managed by the frontend and a user can manipulate this concrete syntax directly by adding, deleting or modifying Elements in the UI (if the frontend allows changes). On The other side stands the abstract syntax metamodel, it describes the conceptual representation of a modeling syntax. Instances of this metamodel are managed by the backend. To then connect these two metamodels, a further metamodel can be defined, that specifies transformations to translate concrete model into abstract model and backwards. 
 
-Following this architecture, CouchEdit separates frontend from the abstract syntax model. Transformation between concrete and abstract syntax is handled by independent components. \comment{more}
+Following this architecture, CouchEdit separates frontend from the abstract syntax model. The frontend at its core is a simple vector drawing application, that implements further functionality for diagrams. The backend is then analyzing these vector graphics and translating it into a corresponding abstract syntax. For this, the backend utilizes a set of independent components, that each are responsible for detecting different aspects of the diagram. Each Component contains its own state, when a component detects changes and updates its state, it also publishes these changes for so that other components interested in these changes, can use them.  
+
+This architecture, has the advantage of being very detangled. this allows for components to be improved, in isolation from the rest of the system, and the clear separation of concerns, makes it easier to understand, which component is responsible for what task. Furthermore, components can be swapped out depending on what syntax transformations are needed for the configured modeling syntax.
 
 
 \section{Data Model}
-CouchEdit uses a Hypergraph of Elements and Relations to represent its data. Each transformation component has its own sub graph \comment{more}
+CouchEdit uses a Hypergraph of Elements and Relations to represent its data. Each component has its own instance of this graph that only contains the area of the graph, that is interesting to this component. A component can manipulate its personal graph and make these changes known to the system, so that other components can manipulate their personal graph.
 
 
 \subsection{Elements}
-Elements are the base type of CouchEdits hypergraph. Every type of node in this graph inherits from the Element type. Element types have a 
+Elements are the base type of CouchEdits hypergraph. Every type of node in this graph inherits from the Element type. Elements have a probability attribute, that denotes, how probable it is that this Element is the result of a correct interpretation of the given Hypergraph. This probability object can be set to Explicit, which means that, either this Element describes a factual truth or it was set by the User. Furthermore, an Element type can have attributes, that provide further information about this Element.
 
-\comment{probability, attributes}
+\comment {
+\begin{itemize}
+  \item id
+\end{itemize}
+}
+
+% \begin{lstlisting}
+%   val s: Int = 0
+% \end{lstlisting}
 
 \subsection{Relations}
-Relations represent Edges of the Hypergraph. They also inherit from the Element type and thus can recursively be connected with relations themselves. 
-
-
-\begin{itemize}
-  \item relation types
-  \item element references 
-\end{itemize}
-
-
+Relations represent Edges of the Hypergraph. They also inherit from the Element type and thus can recursively be connected with relations themselves. Each Relation connects a set of source Elements to a set of target Elements. instead of using their object pointer, elements are save using ElementReferences. These object contain an Elements unique id and its type, which can be used to find Elements in the hypergraph. Figure \ref{fig:relations} shows the implementation of Relations. 
 
 \begin{figure}
   \centering
@@ -33,8 +35,7 @@ Relations represent Edges of the Hypergraph. They also inherit from the Element 
   \label{fig:relations}
 \end{figure}
 
-\subsubsection{Relation Types}
-
+The most common type of Relation is the OneToOneRelation, it describes a connection between exactly one source and one target Element. The Relation type describes what the reason is, those Elements are connected. Two elements can have multiple Types of relations between them. Figure \ref{fig:relations_inheritance} shows common relations used in the processing of a graph.
 
 \begin{figure}
   \centering
@@ -45,24 +46,32 @@ Relations represent Edges of the Hypergraph. They also inherit from the Element 
 
 
 \subsection{Graphic Objects}
-Graphic objects are the basic Elements of the concrete syntax. 
+Graphic objects are the basic Elements, a user interacts with.
+
+\begin{itemize}
+  \item granularity
+  \item complex graphic objects
+\end{itemize}
 
 \subsection{ModelDiffs}
 
 
 \section{Processors}
 
+\subsection{Core Processors}
+
+\subsubsection{Spatial Abstractor}
+
+\subsubsection{ConnectionEnd Processor}
+
+\section{Services}
 
 
 
 \begin{itemize}
-  \item hypergraph
-  \item relations
-  \item processors
   \item publish/subscribe pattern
   \item attribute bags
+  \item model repository
+  \item suggestions
 \end{itemize}
 
-\subsection{Spatial Abstractor}
-
-\subsection{Connection end Processor}

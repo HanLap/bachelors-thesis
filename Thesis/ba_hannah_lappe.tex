@@ -1,13 +1,17 @@
+% !ignore-section
 \NeedsTeXFormat{LaTeX2e}
 
+
 % Font size = 10, DIV = 11 to reduce waste of space %
-\documentclass[a4paper,10pt
-headsepline,           % Linie zw. Kopfzeile und Text
-doubleside,            % doppelseitig
-pointlessnumbers,      % keine Punkte nach den letzten Ziffern in Überschriften
+\documentclass[
+a4paper,
+% 10pt,
+% headsepline,           % Linie zw. Kopfzeile und Text
+% doubleside,            % doppelseitig
+numbers=noenddot,      % keine Punkte nach den letzten Ziffern in Überschriften
 bibliography=totoc,              % LV im IV
 %DIV=15,               % Satzspiegel auf 15er Raster, schmalere Ränder   
-BCOR15mm,               % Bindekorrektur
+BCOR=15mm,               % Bindekorrektur
 leqno					% equation numbers to the left
 % fleqn
 %,draft
@@ -18,6 +22,7 @@ leqno					% equation numbers to the left
 % TeXstudio: Options → Configure → Commands → pdflatex = pdflatex -synctex=1 -interaction=nonstopmode --shell-escape %.tex
 % inkscape=newer to avoid re-export if nothing has changed in the svg. inkscapelatex=false for not using latex to render text (which in turn messes up all text in image). inkscapearea = page so that the SVG size is respected and borders in the SVG are not cut off
 %\usepackage[inkscape=newer, inkscapelatex=false, inkscapearea=page]{svg} 
+
 
 \pagestyle{headings}
 \usepackage{blindtext}
@@ -38,10 +43,11 @@ leqno					% equation numbers to the left
 
 
 \usepackage{graphicx}
+\hbadness=10000
 
 % Literaturverzeichnis mit BibLaTeX // use Biber as Backend; dashed = false to repeat author names
 \usepackage[babel]{csquotes}
-\usepackage[backend=bibtex,style=ieee,dashed=false,hyperref,natbib]{biblatex}
+\usepackage[backend=biber,style=ieee,dashed=false,hyperref,natbib]{biblatex}
 \addbibresource{BA.bib}
 
 % Für Tabellen mit fester Gesamtbreite und variabler Spaltenbreite
@@ -118,7 +124,9 @@ leqno					% equation numbers to the left
 }
 
 
-\usepackage{hyperref, xcolor,microtype,ifthen}
+\usepackage{hyperref,microtype,ifthen} 
+
+\usepackage{xcolor}
 % Cleveref so we don't have to write "Section \ref" each time and nameinlink so that the word "Section" also belongs to the PDF link!
 \usepackage[nameinlink]{cleveref}
 \usepackage{graphicx}
@@ -169,7 +177,27 @@ leqno					% equation numbers to the left
 
 % Beispiele für Quellcode
 \usepackage{listings}
-\lstset{language=Java,
+
+\lstdefinelanguage{Kotlin}{
+  comment=[l]{//},
+  commentstyle={\color{gray}\ttfamily},
+  emph={delegate, filter, first, firstOrNull, forEach, lazy, map, mapNotNull, println, return@},
+  emphstyle={\color{OrangeRed}},
+  identifierstyle=\color{black},
+  keywords={abstract, actual, as, as?, break, by, class, companion, continue, data, do, dynamic, else, enum, expect, false, final, for, fun, get, if, import, in, interface, internal, is, null, object, override, package, private, public, return, set, super, suspend, this, throw, true, try, typealias, val, var, vararg, when, where, while},
+  keywordstyle={\color{NavyBlue}\bfseries},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[s]{"""*}{*"""},
+  ndkeywords={@Deprecated, @JvmField, @JvmName, @JvmOverloads, @JvmStatic, @JvmSynthetic, Array, Byte, Double, Float, Int, Integer, Iterable, Long, Runnable, Short, String},
+  ndkeywordstyle={\color{BurntOrange}\bfseries},
+  sensitive=true,
+  stringstyle={\color{ForestGreen}\ttfamily},
+}
+
+
+
+\lstset{language=Kotlin,
   showstringspaces=false,
   frame=single,
   numbers=left,
@@ -211,7 +239,7 @@ leqno					% equation numbers to the left
 \newcommand{\institut}{Institut für Softwaretechnik und Programmiersprachen}
 
 
-\newcommand{\comment}[1]{\textcolor{red}{(#1)}}
+\newcommand{\comment}[1]{\textcolor{red}{#1}}
 
 % Informationen, die LaTeX in die PDF-Datei schreibt
 \pdfinfo{
@@ -242,7 +270,7 @@ pdfborder=0 0 0	% keine Box um die Links!
 % Titelseite
 \newgeometry{left=1.9cm, right=1.9cm, top=2.9cm, bottom=2.8cm}
 \begin{titlepage}
-	\fontfamily{phv}\selectfont % Helvetica als Schriftart
+  \fontfamily{phv}\selectfont % Helvetica als Schriftart
 	\hfill\includegraphics[height=2.0cm]{images/logo_100_sRGB}\\[3.5cm] % Uni Ulm Logo 
 	\begin{flushright}
 		\Huge \textbf{\titel}\\[0.2cm]
@@ -279,6 +307,8 @@ pdfborder=0 0 0	% keine Box um die Links!
 \thispagestyle{empty}
 \chapter*{Abstract}
 
+% !/ignore-section
+
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
@@ -288,6 +318,8 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
+
+% !ignore-section
 {
 	\null
 	\small
@@ -371,3 +403,5 @@ Ich erkläre, dass ich die Arbeit selbständig verfasst und keine anderen als di
 
 
 \end{document}
+
+% !/ignore-section
