@@ -16,7 +16,38 @@ Elements are the base type of CouchEdits hypergraph. Every type of node in this 
 \comment{probability, attributes}
 
 \subsection{Relations}
-Relations represent Edges of the Hypergraph. Relations also inherit from the Element type and thus can also have relations between them, as well. 
+Relations represent Edges of the Hypergraph. They also inherit from the Element type and thus can recursively be connected with relations themselves. 
+
+
+\begin{itemize}
+  \item relation types
+  \item element references 
+\end{itemize}
+
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\linewidth]{images/"csd - relation"}
+  \caption{Class diagram of Relations}
+  \label{fig:relations}
+\end{figure}
+
+\subsubsection{Relation Types}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\linewidth]{images/"csd - relation-inheritance"}
+  \caption{Class diagram of CouchEdits most common Relation types}
+  \label{fig:relations_inheritance}
+\end{figure}
+
+
+\subsection{Graphic Objects}
+Graphic objects are the basic Elements of the concrete syntax. 
+
+\subsection{ModelDiffs}
 
 
 \section{Processors}
