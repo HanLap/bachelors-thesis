@@ -53,12 +53,12 @@
 
 
 
-### Gliederung
+### ToDo
 
+- black circles
 
-1. Motivation
+- compartment plugin
 
+- statechart config
 
-2. Fundamentals and Related work
-
-3. Design Concept
+- abstract syntax composition and inheritance

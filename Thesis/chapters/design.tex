@@ -3,16 +3,41 @@
 
 
 \section{Petri Nets Syntax}
+In the following, design considerations are explained using a simple petri net syntax. Figure \ref{fig:petrinets_metamodel} shows the abstract syntax metamodel of the used Petri nets syntax. The Petri nets conceptual representation consists of transitions that have a name, places that also have a token count. each Place can have a variable amount of incoming and outgoing Transitions, while Transitions can have any amount of incoming and outgoing Places. 
 
-
-\begin{figure}
+\begin{figure}[ht]
   \centering
   \includegraphics[width=.7\linewidth]{images/"csd - petrinet-metamodel"}
   \caption{Metamodel for a simple petri net abstract syntax}
   \label{fig:petrinets_metamodel}
 \end{figure}
 
-\begin{figure}[h!]
+The graphic representation of Petri nets is described in table \ref{tab:petri-primitives}. Places are usually represented as Circles, while Transitions are depicted as slender rectangles. The number of small back circles inside a Place represent this places token count. Furthermore Places and Transitions possess a label close to their bounding box, that determines their name. Lastly places and Transitions have directed connections lines between then. Each connection starts at an element and end at an element of the opposite type, represents marks an outgoing connection for the source element and an incoming connection for the target element. A simple concrete instantiation and its corresponding abstract representation is shown in figure \ref{fig:petrinets_example}.
+
+\begin{table}[ht]
+  \centering
+\begin{tabular}[width=.2\linewidth]{| Sc | Sc | Sc | Sc | Sc |}
+  \hline
+  Place & Transition & Token & Label & Connection 
+  \\
+  \hline
+  \includegraphics[width=.15\linewidth]{images/"petrinet - place"} 
+  & 
+  \includegraphics[width=.15\linewidth]{images/"petrinet - transition"} 
+  & 
+  \includegraphics[width=.15\linewidth]{images/"petrinet - token"}
+  & 
+  \includegraphics[width=.15\linewidth]{images/"petrinet - label"}
+  & 
+  \includegraphics[width=.15\linewidth]{images/"petrinet - connection"} 
+  \\
+  \hline
+\end{tabular}
+\caption{graphic primitives used to describe petri nets}
+\label{tab:petri-primitives}
+\end{table}
+
+\begin{figure}[ht!]
   \centering
   \begin{subfigure}[t]{.4\textwidth}
     \centering
@@ -27,22 +52,17 @@
     \label{subfig:petriabstract}    
   \end{subfigure}
   \caption{concrete and abstract representation for a simple Petri net example}
-  \label{fig:petrinets_metamodel}
-\end{figure}
+  \label{fig:petrinets_example}
+\end{figure} 
 
-   
-
-
-\begin{itemize}
-  \item abstraction
-  \item ocl like syntax to navigate tree
-  \item Graph Transformations 
-  \item forcing the user to draw clear graphs
-\end{itemize}
 
 
 \section{Displaymanagers}
 A primary concern that arises when designing a metamodel for CouchEdit, is the question of how to dynamically create abstract syntax elements when a pattern in the concrete syntax is detected that has an abstract representation. For this, the designed architecture draws inspiration from F. Fondement and T. Baar \cite{fondement_making_2005}. As described in section \ref{sec:fondement} the Authors propose to link concrete and abstract syntax with DisplayManagers. This idea can be implemented in CouchEdit.
+\begin{itemize}
+  \item display manager for each abstract syntax element
+  \item display manager syncs abstract syntax to concrete
+\end{itemize}
 
 
 \section{Abstract Syntax}
@@ -68,3 +88,19 @@ Transformations
 
 
 \section{Graphic Object Definitions}
+
+
+
+
+
+
+
+   
+
+
+\begin{itemize}
+  \item abstraction
+  \item OCL like syntax to navigate tree
+  \item Graph Transformations 
+  \item forcing the user to draw clear graphs
+\end{itemize}
