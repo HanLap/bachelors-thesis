@@ -1,9 +1,25 @@
 \chapter{Related Work}
+\label{sec:related_work}
+
+\comment{intro}
 
 
 \section{Making Metamodels Aware of Concrete Syntax}
 \label{sec:fondement}
-F. Fondement and T. Baar propose an approach to the interpretation of concrete syntax \cite{fondement_making_2005}. 
+in their work, Making Metamodels Aware of Concrete Syntax \cite{fondement_making_2005}, F. Fondement and T. Baar argue that, while abstract syntax definitions are standardized, most language specifications keep the concrete syntax informal. To solve this problem, they propose an approach to defining the concrete syntax and how to link it to the abstract representation.
+
+For this, the authors complement every class of the abstract syntax with a corresponding display scheme. This display scheme is compose of two parts, an iconic and a constraining part. The iconic part defines a set of DisplayClasses, these DisplayClasses group Graphical Objects together into visual representation object. On the other hand, the constraining part links these DisplayClasses to an abstract syntax element. This link is realized using DisplayManagers. A DisplayManager serves as connection between exactly one model element of the abstract syntax and one display object and has the task of syncing the abstract to the concrete representation. This architecture is depicted in figure \ref{fig:fondement_dm}.
+
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=.9\linewidth]{images/"csd - fondement-dm"}
+  \caption{Proposed Architecture \comment{pls}}
+  \label{fig:fondement_dm}
+\end{figure}
+
+
+
 
 
 \cite{baar_correctly_2008}

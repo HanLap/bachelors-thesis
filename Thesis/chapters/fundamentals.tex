@@ -1,4 +1,8 @@
-\chapter{CouchEdit Fundamentals}
+\chapter{Related Work and Fundamentals}
+
+\comment{Intro}
+
+\section{CouchEdit}
 As noted in section \ref{sec:problem_statement}, the CouchEdit framework is based on the Ideas of Van Tendeloo, et al. \cite{van_tendeloo_concrete_2017}. In their paper, the authors criticize that classic approaches to modeling frontends usually create one monolithic construct, that handles both the graphical model display as well as the corresponding abstract syntax. This creates tight coupling between the two, which causes low flexibility of the UI and high effort, if new features are to be implemented. 
 
 They propose to solve this, by defining two metamodels, one describing the concrete syntax and one the abstract syntax. The concrete syntax metamodel specifies graphic primitives that are needed to compose a given modeling syntax. instances of this metamodel are managed by the frontend and a user can manipulate this concrete syntax directly by adding, deleting or modifying Elements in the UI (if the frontend allows changes). On The other side stands the abstract syntax metamodel, it describes the conceptual representation of a modeling syntax. Instances of this metamodel are managed by the backend. To then connect these two metamodels, a further metamodel can be defined, that specifies transformations to translate concrete model into abstract model and backwards. 
@@ -8,11 +12,11 @@ Following this architecture, CouchEdit separates frontend from the abstract synt
 This architecture, has the advantage of being very detangled. this allows for components to be improved, in isolation from the rest of the system, and the clear separation of concerns, makes it easier to understand, which component is responsible for what task. Furthermore, components can be swapped out depending on what syntax transformations are needed for the configured modeling syntax.
 
 
-\section{Data Model}
+\subsection{Data Model}
 CouchEdit uses a Hypergraph of Elements and Relations to represent its data. Each component has its own instance of this graph that only contains the area of the graph, that is interesting to this component. A component can manipulate its personal graph and make these changes known to the system, so that other components can manipulate their personal graph.
 
 
-\subsection{Elements}
+\subsubsection{Elements}
 Elements are the base type of CouchEdits hypergraph. Every type of node in this graph inherits from the Element type. Elements have a probability attribute, that denotes, how probable it is that this Element is the result of a correct interpretation of the given Hypergraph. This probability object can be set to Explicit, which means that, either this Element describes a factual truth or it was set by the User. Furthermore, an Element type can have attributes, that provide further information about this Element.
 
 \comment {
@@ -25,7 +29,7 @@ Elements are the base type of CouchEdits hypergraph. Every type of node in this 
 %   val s: Int = 0
 % \end{lstlisting}
 
-\subsection{Relations}
+\subsubsection{Relations}
 Relations represent Edges of the Hypergraph. They also inherit from the Element type and thus can recursively be connected with relations themselves. Each Relation connects a set of source Elements to a set of target Elements. instead of using their object pointer, elements are save using ElementReferences. These object contain an Elements unique id and its type, which can be used to find Elements in the hypergraph. Figure \ref{fig:relations} shows the implementation of Relations. 
 
 \begin{figure}
@@ -45,7 +49,7 @@ The most common type of Relation is the OneToOneRelation, it describes a connect
 \end{figure}
 
 
-\subsection{Graphic Objects}
+\subsubsection{Graphic Objects}
 Graphic objects are the basic Elements, a user interacts with.
 
 \begin{itemize}
@@ -53,18 +57,18 @@ Graphic objects are the basic Elements, a user interacts with.
   \item complex graphic objects
 \end{itemize}
 
-\subsection{ModelDiffs}
+\subsubsection{ModelDiffs}
 
 
-\section{Processors}
+\subsection{Processors}
 
-\subsection{Core Processors}
+\subsubsection{Core Processors}
+\begin{itemize}
+  \item Spatial Abstractor 
+  \item ConnectionEnd Processor
+\end{itemize}
 
-\subsubsection{Spatial Abstractor}
-
-\subsubsection{ConnectionEnd Processor}
-
-\section{Services}
+\subsection{Services}
 
 
 
@@ -75,3 +79,60 @@ Graphic objects are the basic Elements, a user interacts with.
   \item suggestions
 \end{itemize}
 
+\section{Modeling Languages}
+\comment{\dots}
+\subsection{Petri Nets Syntax}
+In the following, design considerations are explained using a simple petri net syntax. Figure \ref{fig:petrinets_metamodel} shows the abstract syntax metamodel of the used Petri nets syntax. The Petri nets conceptual representation consists of transitions that have a name, places that also have a token count. each Place can have a variable amount of incoming and outgoing Transitions, while Transitions can have any amount of incoming and outgoing Places. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.7\linewidth]{images/"csd - petrinet-metamodel"}
+  \caption{Metamodel for a simple petri net abstract syntax}
+  \label{fig:petrinets_metamodel}
+\end{figure}
+
+The graphic representation of Petri nets is described in table \ref{tab:petri-primitives}. Places are usually represented as Circles, while Transitions are depicted as slender rectangles. The number of small back circles inside a Place represent this places token count. Furthermore Places and Transitions possess a label close to their bounding box, that determines their name. Lastly places and Transitions have directed connections lines between then. Each connection starts at an element and end at an element of the opposite type, represents marks an outgoing connection for the source element and an incoming connection for the target element. A simple concrete instantiation and its corresponding abstract representation is shown in figure \ref{fig:petrinets_example}.
+
+\begin{table}[ht]
+  \centering
+\begin{tabular}[width=.2\linewidth]{| Sc | Sc | Sc | Sc | Sc |}
+  \hline
+  Place & Transition & Token & Label & Connection 
+  \\
+  \hline
+  \includegraphics[width=.15\linewidth]{images/"petrinet - place"} 
+  & 
+  \includegraphics[width=.15\linewidth]{images/"petrinet - transition"} 
+  & 
+  \includegraphics[width=.15\linewidth]{images/"petrinet - token"}
+  & 
+  \includegraphics[width=.15\linewidth]{images/"petrinet - label"}
+  & 
+  \includegraphics[width=.15\linewidth]{images/"petrinet - connection"} 
+  \\
+  \hline
+\end{tabular}
+\caption{graphic primitives used to describe petri nets}
+\label{tab:petri-primitives}
+\end{table}
+
+\begin{figure}[ht!]
+  \centering
+  \begin{subfigure}[t]{.4\textwidth}
+    \centering
+    \includegraphics[width=.9\linewidth]{images/"petrinet - example"}
+    \caption{concrete syntax}
+    \label{subfig:petriconcrete}    
+  \end{subfigure}
+  \begin{subfigure}[t]{.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{images/"csd - petrinet-example"}
+    \caption{abstract syntax}
+    \label{subfig:petriabstract}    
+  \end{subfigure}
+  \caption{concrete and abstract representation for a simple Petri net example}
+  \label{fig:petrinets_example}
+\end{figure} 
+
+\subsection{Statechart Syntax}
+\comment{...}

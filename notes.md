@@ -8,7 +8,7 @@
 - how to handle consumes?
 
 
-- elemnt definition
+- element definition
 
 
 - custom processor
@@ -49,6 +49,10 @@
 
 
 - assignment operations have special requirement of knowing the assigned object
+
+
+
+- fondement & baar go through related work
 
 
 
