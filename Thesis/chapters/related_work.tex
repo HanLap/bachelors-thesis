@@ -8,23 +8,26 @@
 \label{sec:fondement}
 in their work, Making Metamodels Aware of Concrete Syntax \cite{fondement_making_2005}, F. Fondement and T. Baar argue that, while abstract syntax definitions are standardized, most language specifications keep the concrete syntax informal. To solve this problem, they propose an approach to defining the concrete syntax and how to link it to the abstract representation.
 
-For this, the authors complement every class of the abstract syntax with a corresponding display scheme. This display scheme is compose of two parts, an iconic and a constraining part. The iconic part defines a set of DisplayClasses, these DisplayClasses group Graphical Objects together into visual representation object. On the other hand, the constraining part links these DisplayClasses to an abstract syntax element. This link is realized using DisplayManagers. A DisplayManager serves as connection between exactly one model element of the abstract syntax and one display object and has the task of syncing the abstract to the concrete representation. This architecture is depicted in figure \ref{fig:fondement_dm}.
+For this, the authors complement every class of the abstract syntax with a corresponding display scheme. This display scheme is compose of two parts, an iconic and a constraining part. The iconic part defines a set of DisplayClasses, these DisplayClasses group Graphical Objects together into visual representation object. On the other hand, the constraining part links these DisplayClasses to an abstract syntax element. This link is realized using DisplayManagers. A DisplayManager serves as connection between exactly one model element of the abstract syntax and one display object and has the task of syncing the abstract to the concrete representation. An example of this architecture is depicted in figure \ref{fig:fondement_dm}, for a petri net place element. The graphical primitives, a place is composed of, are mapped to a place DisplayClass, to build a places iconic part. This iconic representation is then attached to a place model element, using a place DisplayManager.
 
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=.9\linewidth]{images/"csd - fondement-dm"}
-  \caption{Proposed Architecture \comment{pls}}
+  \includegraphics[width=\linewidth]{images/"csd - fondement-example"}
+  \caption{Example representation of a petri net place element}
   \label{fig:fondement_dm}
 \end{figure}
 
+A DisplayManager has to keep abstract and concrete representation in sync, for this F. Fondement and T. Baar utilize OCL invariants, which are defined on the DisplayerManager. For example, an invariant to sync the name of place display schemes could look as following:
+
+\begin{lstlisting}[language=OCL]
+  context PlaceDM
+  inv: self.me.name = self.vo.name.text
+\end{lstlisting}
+
+\comment{kinda hard cut}
+
+The Authors keep open, how the mapping from graphical primitives to a display object could be implemented. while the metamodel proposed in this thesis does not introduce an extra layer of abstraction in form of these DisplayClasses, it still is inspired heavily by F. Fondement's and T. Baar's work. Especially the constraining part that utilizes DisplayManagers to sync abstract and concrete syntax, served as primary inspiration for the proposed architecture.
 
 
-
-
-\cite{baar_correctly_2008}
-\begin{itemize}
-  \item display class
-  \item display manager
-  \item model element
-\end{itemize}
+\comment{we need some more related work.}

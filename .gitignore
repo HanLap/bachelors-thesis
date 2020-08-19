@@ -13,8 +13,7 @@
 *.lof
 *.bcf
 
-
-
 Proposal/*.pdf
 Thesis/*.pdf
-.vscode
+
+.vscode/settings.json

@@ -1,15 +1,15 @@
 \chapter{Related Work and Fundamentals}
 
-\comment{Intro}
+this chapter lays out a knowledge foundation, required in later sections \comment{(*barf* horribly written)}. First an extensive introduction into the CouchEdit architecture is given, that will be needed later on to understand design decisions. Following that, the syntax of the petri net and statechart modeling languages are introduced, which are used in Chapter \ref{chap:design} to explain concepts of the proposed metamodel. Finally, related work is being explored \comment{(to short)}. 
 
 \section{CouchEdit}
 As noted in section \ref{sec:problem_statement}, the CouchEdit framework is based on the Ideas of Van Tendeloo, et al. \cite{van_tendeloo_concrete_2017}. In their paper, the authors criticize that classic approaches to modeling frontends usually create one monolithic construct, that handles both the graphical model display as well as the corresponding abstract syntax. This creates tight coupling between the two, which causes low flexibility of the UI and high effort, if new features are to be implemented. 
 
 They propose to solve this, by defining two metamodels, one describing the concrete syntax and one the abstract syntax. The concrete syntax metamodel specifies graphic primitives that are needed to compose a given modeling syntax. instances of this metamodel are managed by the frontend and a user can manipulate this concrete syntax directly by adding, deleting or modifying Elements in the UI (if the frontend allows changes). On The other side stands the abstract syntax metamodel, it describes the conceptual representation of a modeling syntax. Instances of this metamodel are managed by the backend. To then connect these two metamodels, a further metamodel can be defined, that specifies transformations to translate concrete model into abstract model and backwards. 
 
-Following this architecture, CouchEdit separates frontend from the abstract syntax model. The frontend at its core is a simple vector drawing application, that implements further functionality for diagrams. The backend is then analyzing these vector graphics and translating it into a corresponding abstract syntax. For this, the backend utilizes a set of independent components, that each are responsible for detecting different aspects of the diagram. Each Component contains its own state, when a component detects changes and updates its state, it also publishes these changes for so that other components interested in these changes, can use them.  
+Following this architecture, CouchEdit separates frontend from the abstract syntax model. The frontend at its core is a simple vector drawing application, that implements further functionality for diagrams. The backend is then analyzing these vector graphics and translating it into a corresponding abstract syntax. For this, the backend utilizes a set of independent components, that each are responsible for detecting different aspects of the diagram. Each Component contains its own state, when a component detects changes and updates its state, it also publishes these changes so that other components interested in these changes, can use them.  
 
-This architecture, has the advantage of being very detangled. this allows for components to be improved, in isolation from the rest of the system, and the clear separation of concerns, makes it easier to understand, which component is responsible for what task. Furthermore, components can be swapped out depending on what syntax transformations are needed for the configured modeling syntax.
+This architecture, has the advantage of being very detangled. this allows for components to be improved in isolation from the rest of the system and the clear separation of concerns makes it easier to understand, which component is responsible for what task. Furthermore, components can be swapped out depending on what syntax transformations are needed for the configured modeling syntax.
 
 
 \subsection{Data Model}
@@ -17,50 +17,37 @@ CouchEdit uses a Hypergraph of Elements and Relations to represent its data. Eac
 
 
 \subsubsection{Elements}
-Elements are the base type of CouchEdits hypergraph. Every type of node in this graph inherits from the Element type. Elements have a probability attribute, that denotes, how probable it is that this Element is the result of a correct interpretation of the given Hypergraph. This probability object can be set to Explicit, which means that, either this Element describes a factual truth or it was set by the User. Furthermore, an Element type can have attributes, that provide further information about this Element.
-
-\comment {
-\begin{itemize}
-  \item id
-\end{itemize}
-}
-
-% \begin{lstlisting}
-%   val s: Int = 0
-% \end{lstlisting}
+Elements are the base type of CouchEdits hypergraph. Every type of node in this graph inherits from the Element type. As all hypergraph instances should be independent from each other, it is not possible to access Elements via their object reference, thus every Element has an unique id, that kann be used to reliably identify an Element across multiple graphs. Elements also have a probability attribute, that denotes how probable it is that this Element is the result of a correct interpretation of the given Hypergraph. This probability object can be set to Explicit, which means that, either this Element describes a factual truth or it was set by the User. Furthermore, an Element subtypes can introduce further attributes, that contain important information for the given type.
 
 \subsubsection{Relations}
-Relations represent Edges of the Hypergraph. They also inherit from the Element type and thus can recursively be connected with relations themselves. Each Relation connects a set of source Elements to a set of target Elements. instead of using their object pointer, elements are save using ElementReferences. These object contain an Elements unique id and its type, which can be used to find Elements in the hypergraph. Figure \ref{fig:relations} shows the implementation of Relations. 
+Relations represent Edges of the Hypergraph. Each Relation connects a set of source Elements to a set of target Elements. They also inherit from the Element type and thus can recursively be connected with relations themselves. The connected vertices are referenced using the ElementReference class. This class holds an Elements unique id as well as its type, which then can be used to find a referenced Element in the hypergraph. Figure \ref{fig:relations} shows the implementation of Relations. 
 
-\begin{figure}
+\begin{figure}[h]
   \centering
-  \includegraphics[width=1\linewidth]{images/"csd - relation"}
+  \includegraphics[width=.8\linewidth]{images/"csd - relation"}
   \caption{Class diagram of Relations}
   \label{fig:relations}
 \end{figure}
 
-The most common type of Relation is the OneToOneRelation, it describes a connection between exactly one source and one target Element. The Relation type describes what the reason is, those Elements are connected. Two elements can have multiple Types of relations between them. Figure \ref{fig:relations_inheritance} shows common relations used in the processing of a graph.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=1\linewidth]{images/"csd - relation-inheritance"}
-  \caption{Class diagram of CouchEdits most common Relation types}
-  \label{fig:relations_inheritance}
-\end{figure}
+Via subtyping of relations, it is possible to have multiple different relations between the same two elements, that all describe different kinds of connections. While Relations can connect sets of source and target vertices, the most common relation sub type is the OneToOneRelation, it describes a connection between exactly one source and one target Element. 
 
 
 \subsubsection{Graphic Objects}
-Graphic objects are the basic Elements, a user interacts with.
+Granularity of graphic elements in a model editor plays an important role. On a basic level, each visual object consists of pixels, \comment{im struggling with this section}
+
+
+GraphicObjects are the building blocks of the concrete syntax, they 
 
 \begin{itemize}
-  \item granularity
+  \item granularity 
   \item complex graphic objects
+  \item attribute bag
 \end{itemize}
-
-\subsubsection{ModelDiffs}
 
 
 \subsection{Processors}
+In CouchEdit the mentioned independent components, are represented as 
+subscribe to element types, publish new diffs, connected to bus, model diffs
 
 \subsubsection{Core Processors}
 \begin{itemize}
@@ -80,7 +67,10 @@ Graphic objects are the basic Elements, a user interacts with.
 \end{itemize}
 
 \section{Modeling Languages}
+
 \comment{\dots}
+
+\subsection{Graphical Language Theory}
 \subsection{Petri Nets Syntax}
 In the following, design considerations are explained using a simple petri net syntax. Figure \ref{fig:petrinets_metamodel} shows the abstract syntax metamodel of the used Petri nets syntax. The Petri nets conceptual representation consists of transitions that have a name, places that also have a token count. each Place can have a variable amount of incoming and outgoing Transitions, while Transitions can have any amount of incoming and outgoing Places. 
 
@@ -95,20 +85,20 @@ The graphic representation of Petri nets is described in table \ref{tab:petri-pr
 
 \begin{table}[ht]
   \centering
-\begin{tabular}[width=.2\linewidth]{| Sc | Sc | Sc | Sc | Sc |}
+\begin{tabular}[width=.1\linewidth]{| Sc | Sc | Sc | Sc | Sc |}
   \hline
   Place & Transition & Token & Label & Connection 
   \\
   \hline
-  \includegraphics[width=.15\linewidth]{images/"petrinet - place"} 
+  \includegraphics[width=.1\linewidth]{images/"petrinet - place"} 
   & 
-  \includegraphics[width=.15\linewidth]{images/"petrinet - transition"} 
+  \includegraphics[width=.1\linewidth]{images/"petrinet - transition"} 
   & 
-  \includegraphics[width=.15\linewidth]{images/"petrinet - token"}
+  \includegraphics[width=.1\linewidth]{images/"petrinet - token"}
   & 
-  \includegraphics[width=.15\linewidth]{images/"petrinet - label"}
+  \includegraphics[width=.1\linewidth]{images/"petrinet - label"}
   & 
-  \includegraphics[width=.15\linewidth]{images/"petrinet - connection"} 
+  \includegraphics[width=.1\linewidth]{images/"petrinet - connection"} 
   \\
   \hline
 \end{tabular}

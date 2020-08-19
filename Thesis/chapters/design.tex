@@ -1,22 +1,36 @@
 \chapter{Design Concept}
+\label{chap:design}
+The proposed artifact effectively is a form of triple graph grammar, meaning it specifies a source model (concrete syntax), a target model (abstract syntax) and a third translation metamodel. The definition of abstract syntax metamodel has already standardized approaches (e.G. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a concrete syntax definition composed of graphic primitives, thus complex graphic structures would also have to be explored in follow up works. This work focuses on the translation metamodel, that connects concrete and abstract syntax and produces one approach to handling this connection.
+
+The primary goal of the proposed design is to reduce complexity of the CouchEdit framework. To this end, multiple strategies are employed, that either abstract away from CouchEdits implementation details, or introduce ways to streamline the translation from concrete to abstract syntax. Most of these strategies introduce performance overhead, but as this work focuses on the design aspect, performance analysis is subject to further research. 
+
+
+
+\section{Syntax Processors}
+The primary concern when defining a modeling language with clear separation between concrete and abstract syntax, is the question on how to connect these two distinct models. In this point, the designed architecture draws inspiration from Fondement and Baar \cite{fondement_making_2005}. The authors proposed idea of connecting abstract und concrete syntax, using DisplayManagers, serves as a basis that can be built upon. This approach consists of two parts, recognition and synchronization. 
+
+The recognition part is concerned with detecting patterns in the concrete syntax that have an abstract syntax representation. For this, fondement and baar proposed the introduction of a further abstraction layer in the form of DisplayClasses, that composes the graphic primitives and attributes, representing a model element, into display classes. But the Author's keep the possible implementation of this abstraction layer open. Furthermore it did not seem necessary to create further abstraction in the CouchEdit architecture \comment{why}. Instead the architecture proposed here, tries a different Approach. For each type of DisplayManager, a set of constraints can be defined on the hypergraph's graphic objects. Whenever a graphic object satisfies all constraints of a given display manager type it is deemed to be a concrete representation of this display manager type and an instances of this display manager class and corresponding model element type are created and connected to the graphic object. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.5\linewidth]{images/"visualization - place-recognition"}
+  \caption{PlaceRecognitionProcessor, adding PlaceDM to a GraphicObject that satisfies constraints}
+  \label{fig:place-recognition}
+\end{figure}
 
 
 
 
-
-
-
-\section{Displaymanagers}
-A primary concern that arises when designing a metamodel for CouchEdit, is the question of how to dynamically create abstract syntax elements when a pattern in the concrete syntax is detected that has an abstract representation. For this, the designed architecture draws inspiration from F. Fondement and T. Baar \cite{fondement_making_2005}. As described in section \ref{sec:fondement} the Authors propose to link concrete and abstract syntax with DisplayManagers. This idea can be implemented in CouchEdit.
 \begin{itemize}
-  \item display manager for each abstract syntax element
-  \item display manager syncs abstract syntax to concrete
+  \item recognition
+  \item syncing
 \end{itemize}
 
 
-\section{Abstract Syntax}
 
-\section{Type System}
+
+
+\section{Kind System}
 \begin{itemize}
   \item constraints
 \end{itemize}
@@ -34,9 +48,6 @@ Transformations
   \item can need specialized configuration
 \end{itemize}
 \subsection{Label Processor}
-
-
-\section{Graphic Object Definitions}
 
 
 

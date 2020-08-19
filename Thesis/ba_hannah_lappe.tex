@@ -183,37 +183,42 @@ leqno					% equation numbers to the left
 % Beispiele für Quellcode
 \usepackage{listings}
 
-\lstdefinelanguage{Kotlin}{
-  comment=[l]{//},
-  commentstyle={\color{gray}\ttfamily},
-  emph={delegate, filter, first, firstOrNull, forEach, lazy, map, mapNotNull, println, return@},
-  emphstyle={\color{OrangeRed}},
-  identifierstyle=\color{black},
-  keywords={abstract, actual, as, as?, break, by, class, companion, continue, data, do, dynamic, else, enum, expect, false, final, for, fun, get, if, import, in, interface, internal, is, null, object, override, package, private, public, return, set, super, suspend, this, throw, true, try, typealias, val, var, vararg, when, where, while},
-  keywordstyle={\color{NavyBlue}\bfseries},
-  morecomment=[s]{/*}{*/},
-  morestring=[b]",
-  morestring=[s]{"""*}{*"""},
-  ndkeywords={@Deprecated, @JvmField, @JvmName, @JvmOverloads, @JvmStatic, @JvmSynthetic, Array, Byte, Double, Float, Int, Integer, Iterable, Long, Runnable, Short, String},
-  ndkeywordstyle={\color{BurntOrange}\bfseries},
-  sensitive=true,
-  stringstyle={\color{ForestGreen}\ttfamily},
+% \lstdefinelanguage{Kotlin}{
+%   comment=[l]{//},
+%   commentstyle={\color{gray}\ttfamily},
+%   emph={delegate, filter, first, firstOrNull, forEach, lazy, map, mapNotNull, println, return@},
+%   emphstyle={\color{OrangeRed}},
+%   identifierstyle=\color{black},
+%   keywords={abstract, actual, as, as?, break, by, class, companion, continue, data, do, dynamic, else, enum, expect, false, final, for, fun, get, if, import, in, interface, internal, is, null, object, override, package, private, public, return, set, super, suspend, this, throw, true, try, typealias, val, var, vararg, when, where, while},
+%   keywordstyle={\color{NavyBlue}\bfseries},
+%   morecomment=[s]{/*}{*/},
+%   morestring=[b]",
+%   morestring=[s]{"""*}{*"""},
+%   ndkeywords={@Deprecated, @JvmField, @JvmName, @JvmOverloads, @JvmStatic, @JvmSynthetic, Array, Byte, Double, Float, Int, Integer, Iterable, Long, Runnable, Short, String},
+%   ndkeywordstyle={\color{BurntOrange}\bfseries},
+%   sensitive=true,
+%   stringstyle={\color{ForestGreen}\ttfamily},
+% }
+
+\lstdefinelanguage{OCL}{
+  emph={context, inv},
+  emphstyle={\color{Black}}
 }
 
 
 
-\lstset{language=Kotlin,
-  showstringspaces=false,
-  frame=single,
-  numbers=left,
-  basicstyle=\ttfamily,
-  numberstyle=\tiny
-  captionpos=b,
-  numbers=left,
-  basicstyle=\singlespacing\ttfamily,
-  numberstyle=\smaller\ttfamily,
-  tabsize=4
-}
+% \lstset{
+%   showstringspaces=false,
+%   frame=single,
+%   numbers=left,
+%   basicstyle=\ttfamily,
+%   numberstyle=\tiny
+%   captionpos=b,
+%   numbers=left,
+%   basicstyle=\singlespacing\ttfamily,
+%   numberstyle=\smaller\ttfamily,
+%   tabsize=4
+% }
 
 \makeatletter
 \AtBeginDocument{\@ifpackageloaded{amsmath}{\@mathmargin\z@}{}}%
