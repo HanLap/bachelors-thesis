@@ -1,6 +1,6 @@
 \chapter{Design Concept}
 \label{chap:design}
-The proposed artifact effectively is a form of triple graph grammar, meaning it specifies a source model (concrete syntax), a target model (abstract syntax) and a third translation metamodel. The definition of abstract syntax metamodel has already standardized approaches (e.G. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a concrete syntax definition composed of graphic primitives, thus complex graphic structures would also have to be explored in follow up works. This work focuses on the translation metamodel, that connects concrete and abstract syntax and produces one approach to handling this connection.
+The proposed artifact effectively is a form of triple graph grammar, meaning it specifies a source model (concrete syntax), a target model (abstract syntax) and a third translation metamodel. The definition of abstract syntax metamodel has already standardized approaches (e.g. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a concrete syntax definition composed of graphic primitives, thus complex graphic structures would also have to be explored in follow up works. This work focuses on the translation metamodel, that connects concrete and abstract syntax and produces one approach to handling this connection.
 
 The primary goal of the proposed design is to reduce complexity of the CouchEdit framework. To this end, multiple strategies are employed, that either abstract away from CouchEdits implementation details, or introduce ways to streamline the translation from concrete to abstract syntax. Most of these strategies introduce performance overhead, but as this work focuses on the design aspect, performance analysis is subject to further research. 
 
@@ -63,5 +63,5 @@ Transformations
   \item OCL like syntax to navigate tree
   \item Graph Transformations 
   \item forcing the user to draw clear graphs
-  \item tranformation precondition heavy, post condition easy
+  \item transformation precondition heavy, post condition easy
 \end{itemize}

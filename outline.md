@@ -44,6 +44,7 @@ h4:before {
 }
 </style>
 
+
 # Motivation
 
 ### Problem Statement
@@ -54,7 +55,7 @@ h4:before {
 
 ### Limitations
 
-
+----
 # Fundamentals
 ## Methodology
 
@@ -65,15 +66,14 @@ h4:before {
 
 ### Statecharts
 
-
+----
 # Related Workd
 ## Fondement & Baar
 
 ## ...
 
 
-
-
+----
 # Design Concept
 
 
@@ -92,18 +92,19 @@ h4:before {
 #### Abstract processor
 
 
+
 ## Kinds
 
 ## plugins
 
-
+----
 # Prototype
 
-
+----
 # Evaluation
 
-
-# Conclustion
+----
+# Conclusion
 
 
 
