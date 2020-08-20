@@ -62,33 +62,6 @@ The primary goal of this research will be the development of a metamodel for the
 \end{description}
 
 
-\section{Methodology}
-\comment{also only pasted right now}
-
-As this research strives to develop a new metamodel suitable for the CouchEdit framework, it will be conducted in accordance to the Design Science Research (DSR) approach. According to V. Vaishnavi et al. a design science research process consists of five steps \cite{Vaishnavi2004}.
-
-\subsection{Problem Awareness}
-The first step of a design science research is the identification of existing problems. As specified in section \ref{sec:problem_statement}, it was identified that the current CouchEdit implementation lacks an user friendly way of adapting it to different modeling syntaxes and that it is unclear how a metamodel for this architecture would look like.
-
-\subsection{Suggestion}
-With a clear definition of the problem, objectives can be proposed which have to be achieved in order to solve this problem. The first objective of this research is to develop a metamodel for the CouchEdit architecture. To be more precise, a metamodel is to be designed, that can be used to specify model syntax definitions which map concrete graphical syntaxes to Abstract syntax models and is applicable to CouchEdit's architecture. The second objective is to implement a prototype that provides proof of concept for the applicability of the design metamodel.
-
-
-\subsection{Development}
-The primary goal of a design science research is the development of artifacts.
-The first artifact to be developed in this research will be a metamodel, that can be used to define new modeling syntaxes for a relaxed conformance editor and is applicable to CouchEdit's architecture. The second artifact that is to be developed, is a prototypical code generator that can translate the developed metamodel into a CouchEdit implementation which will be able to process the defined modeling syntax.
-
-To this end, the first sub step of the development stage will be to do a comprehensive analysis of CouchEdits architecture. In his work L. Nachreiner describes in detail, which modeling features the framework covers and how they are implemented \cite{nachreiner_couchedit_2020}. For each of these features, a sub metamodel has to be designed that can be used to define the given feature (RQ1). The approaches of \cite{minas_specifying_2001} and \cite{fondement_making_2005} provide a DSL implementation from which concepts for potential metamodels could be derived. If for one of the features, a suitable metamodel cannot be found, it would have to be evaluated if the feature could be simplified or even dropped (R1.1). After designing sub metamodels for all features, they then have to be composed together, which results in a first version of an applicable metamodel. 
-
-in the next sub step, the code generator will be implemented, this is an iterative step. first, an implementation will be developed on the basis of the designed metamodel, this should reveal further requirements imposed by CouchEdits architecture (RQ2). The metamodel then has to be adjusted to account for these requirements, which in turn requires changes of the implementation until no further requirements can be deduced. Because of time constraints it will not be possible to implement all of the metamodel's features, instead the prototype will cover a minimal feature set that still suffices to demonstrate the metamodel's applicability for selected modeling syntaxes.
-
-\subsection{Evaluation}
-Now that the desired artifacts are fully developed it has to be evaluated how well they do their designated task. The metamodel as the primary artifact of this research has to be evaluated in terms of its applicability to its designated domain. To this end, the metamodel will be demonstrated on the basis of different modeling syntaxes, this should highlight areas in which the metamodel's design excels, as well as design flaws and limitations (RQ3). If time allows, potential flaws can be addressed by returning back to the development phase and revising the artifacts, otherwise flaws are to be highlighted so that future works can address them.
-
-\subsection{Conclusion}
-The conclusion stage marks the end of a DSR and the results are written up. This works written part will be the resulting bachelor's thesis as well as all source code and documentation.
-
-
 \section{Limitations}
 \comment{\dots}
 \begin{itemize}
