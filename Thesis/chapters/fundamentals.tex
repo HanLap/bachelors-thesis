@@ -6,7 +6,7 @@ this chapter lays out a knowledge foundation, required in later sections \commen
 \section{Methodology}
 \comment{also only pasted right now}
 
-As this research strives to develop a new metamodel suitable for the CouchEdit framework, it will be conducted in accordance to the Design Science Research (DSR) approach. According to V. Vaishnavi et al. a design science research process consists of five steps \cite{Vaishnavi2004}.
+As this research strives to develop a new metamodel suitable for the CouchEdit framework, it will be conducted in accordance to the Design Science Research (DSR) approach. According to V. Vaishnavi et al. a design science research process consists of five steps \cite{vaishnavi_design_2004}.
 
 \subsection{Problem Awareness}
 The first step of a design science research is the identification of existing problems. As specified in section \ref{sec:problem_statement}, it was identified that the current CouchEdit implementation lacks an user friendly way of adapting it to different modeling syntaxes and that it is unclear how a metamodel for this architecture would look like.
@@ -61,14 +61,17 @@ Via subtyping of relations, it is possible to have multiple different relations 
 
 
 \subsubsection{Graphic Objects}
-Granularity of graphic elements in a model editor plays an important role. On a basic level, each visual object consists of pixels, \comment{im struggling with this section}
+graphic objects represent atomic elements, that the user interacts with, via the Frontend. An important decision, when designing an Editor is the question on how granular singular graphic objects should be. 
+
+On a basic level, graphic objects can consists of either pixels or vectors. a pixel based Approach would require a visual recognition preprocessor, that composes the state of pixels in to comprehensible graphic primitives. While such form of image recognition is outside the scope of the CouchEdit project, similar projects such as FlexiSketch \cite{wuest_flexisketch_2015} show the possibilities this approach enables.
+
+Most modeling approaches with some form of abstract syntax processing capabilities, build graphic elements with the purpose of representing a specific element of the abstract syntax. As a result these graphic elements are very strict in their graphical representation. 
+
+CouchEdit Follows the Classification of Costagliola, et al. \cite{costagliola_classification_2002}. This classification defines a graphic element on its lowest level as a primitive graphic shape (e.g circle, line) \comment{(read up if thats actually what costagliola are doing)}. Via sub-classing, a single graphic object can increase in complexity. Such complex graphic object can have  
 
 
-GraphicObjects are the building blocks of the concrete syntax, they 
 
 \begin{itemize}
-  \item granularity 
-  \item complex graphic objects
   \item attribute bag
 \end{itemize}
 

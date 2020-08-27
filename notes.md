@@ -56,6 +56,9 @@
 
 
 
+- Explain that color is treated as Secondary attribute
+
+
 
 ### ToDo
 
