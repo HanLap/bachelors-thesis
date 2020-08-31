@@ -5,12 +5,6 @@
 - custom relation Types
 
 
-- how to handle consumes?
-
-
-- element definition
-
-
 - custom processor
 
 
@@ -59,13 +53,13 @@
 - Explain that color is treated as Secondary attribute
 
 
+### Frage
+- kann ich ecore überhaupt verwenden, da teilweise custom koncepte wie elementreference und 
+
+
 
 ### ToDo
 
 - black circles
 
-- compartment plugin
-
-- statechart config
-
-- abstract syntax composition and inheritance
+- abstract syntax composition

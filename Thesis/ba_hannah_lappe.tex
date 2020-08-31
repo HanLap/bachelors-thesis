@@ -80,6 +80,8 @@ leqno					% equation numbers to the left
 % don't list subsections of appendices in TOC
 \usepackage{tocvsec2}
 
+\usepackage[toc,page]{appendix}
+
 
 % Mathe
 \usepackage{amsfonts}
@@ -134,6 +136,7 @@ leqno					% equation numbers to the left
 \usepackage[nameinlink]{cleveref}
 \usepackage{graphicx}
 
+\usepackage[figuresleft]{rotating}
 
 \usepackage{cellspace}
 \setlength\cellspacetoplimit{4pt}
@@ -208,20 +211,25 @@ leqno					% equation numbers to the left
   emphstyle={\color{Black}}
 }
 
+\lstdefinelanguage{customLang}{
+  emph={context, inv},
+  emphstyle={\color{Black}}
+}
 
 
-% \lstset{
-%   showstringspaces=false,
-%   frame=single,
-%   numbers=left,
-%   basicstyle=\ttfamily,
-%   numberstyle=\tiny
-%   captionpos=b,
-%   numbers=left,
-%   basicstyle=\singlespacing\ttfamily,
-%   numberstyle=\smaller\ttfamily,
-%   tabsize=4
-% }
+
+\lstset{
+  showstringspaces=false,
+  frame=single,
+  numbers=left,
+  basicstyle=\ttfamily,
+  numberstyle=\tiny
+  captionpos=b,
+  numbers=left,
+  basicstyle=\singlespacing\ttfamily,
+  numberstyle=\smaller\ttfamily,
+  tabsize=4
+}
 
 \makeatletter
 \AtBeginDocument{\@ifpackageloaded{amsmath}{\@mathmargin\z@}{}}%
@@ -233,7 +241,7 @@ leqno					% equation numbers to the left
 \newcommand{\titel}{}
 \newcommand{\untertitel}{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for CouchEdit}
 \newcommand{\jahr}{2020}
-\newcommand{\abgabedatum}{August 2020}
+\newcommand{\abgabedatum}{September 2020}
 %\newcommand{\abschlussarbeit}{Bachelorarbeit}
 \newcommand{\abschlussarbeit}{Bachelorarbeit}
 \newcommand{\matrikelnummer}{922114}
@@ -339,8 +347,7 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 	\vfill
 	\begin{center}
 		\begin{tabular}{l l}
-			Erstgutachter:  & \gutachterA \\
-			Zweitgutachter: & \gutachterB \\
+			Gutachter:  & \gutachterA \\
 			Betreuer:       & \betreuer \\
 		\end{tabular}\\[1cm]
 		Fassung \today\\
@@ -359,10 +366,6 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 \mainmatter % ab hier wieder normale Seitenzahlen
 
 
-
-
-
-
 % Inhalt (am besten mit \input in extra Dateien auslagern)
 \input{chapters/introduction.tex}
 \input{chapters/fundamentals.tex}
@@ -374,27 +377,32 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 
 
 
+\cleardoublepage % sonst stimmt die seitennummer im TOC nicht
+\phantomsection
+% \addcontentsline{toc}{chapter}{Appendix}
+\appendix
+\input{chapters/appendix.tex}
 
 
 
 % Abbildungsverzeichnis
 \cleardoublepage % sonst stimmt die seitennummer im TOC nicht
 \phantomsection
-\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\addcontentsline{toc}{chapter}{List of Figures}
 \listoffigures
 
 
 % Tabellenverzeichnis
 \cleardoublepage % sonst stimmt die seitennummer im TOC nicht
 \phantomsection
-\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\addcontentsline{toc}{chapter}{List of Tables}
 \listoftables
 
 
 % Bibliographie (am besten mit Bibtex oder Biber)
 \cleardoublepage % sonst stimmt die seitennummer im TOC nicht
 \phantomsection
-\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+% \addcontentsline{toc}{chapter}{Literaturverzeichnis}
 \printbibliography
 
 % Declaration of Independance

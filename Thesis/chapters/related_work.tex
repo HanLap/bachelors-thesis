@@ -21,8 +21,9 @@ For this, the authors complement every class of the abstract syntax with a corre
 A DisplayManager has to keep abstract and concrete representation in sync, for this F. Fondement and T. Baar utilize OCL invariants, which are defined on the DisplayerManager. For example, an invariant to sync the name of place display schemes could look as following:
 
 \begin{lstlisting}[language=OCL]
-  context PlaceDM
-  inv: self.me.name = self.vo.name.text
+context PlaceDM
+inv: self.me.name->exists() implies
+        self.me.name = self.vo.name.text
 \end{lstlisting}
 
 \comment{kinda hard cut}
