@@ -12,8 +12,13 @@
 *.lot
 *.lof
 *.bcf
+*.snm
+*.nav
 
 Proposal/*.pdf
 Thesis/*.pdf
 
 .vscode/settings.json
+zwischen_presentation/.vscode/settings.json
+zwischen_presentation/intermediate.pdf
+zwischen_presentation/.DS_Store

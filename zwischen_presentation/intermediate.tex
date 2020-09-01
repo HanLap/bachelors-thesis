@@ -1,0 +1,56 @@
+\documentclass{beamer}
+\mode<presentation>
+{
+  \usetheme{myulm}
+  \setbeamercovered{transparent}
+  \setbeamertemplate{navigation symbols}{} % no navigation bar
+  \setbeamersize{sidebar width left=1.17cm}
+}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{array}
+\usepackage{colortbl} % ING INF PSY
+
+% Anfang der Titelfolie
+% Anpassung von: Titel, Untertitel, Autor, Datum und Institut
+
+\title{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for CouchEdit}
+% \subtitle{Manchmal wird ein Untertitel ben\"{o}tigt, der ebenfalls einzeilig oder mehrzeilig sein kann}
+\author{Hannah Lappe}
+\newcommand{\presdatum}{\today} % alternativ zu \today: Eingabe eines festen Datums
+\institute
+{Institut für Softwaretechnik und Programmiersprachen\\}
+%Ende der Titelfolie
+
+
+% Anfang der Kopfzeile der Folien
+% Anpassung von: Zwischentitel, Leitthema oder Name
+% Das Datum wird oben geändert: unter \presdatum{}!
+
+\newcommand{\zwischentitel}{\insertsection}
+\newcommand{\leitthema}{CouchEdit Metamodel}
+% Ende der Kopfzeile
+
+% Anfang der Folien
+\begin{document}
+
+\hspace*{-1.49cm}
+\frame[plain]{\titlepage}
+
+% Das Inhaltsverzeichnis
+\hspace*{-0.7cm}
+\section*{Contents} % diese Section erscheint nicht im Inhaltsverzeichnis
+\begin{frame}
+  \frametitle{Table of Contents}
+  \tableofcontents
+\end{frame}
+
+
+\input{sections/probelm.tex}
+
+\end{document}
