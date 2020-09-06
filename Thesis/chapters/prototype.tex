@@ -1,16 +1,12 @@
 \chapter{Prototype}
-The developed prototype, is an Extension of CouchEdit's current running example, which is a Kotlin application, running on the JVM. It uses TornadoFX\footnote{\url{https://tornadofx.io/}}, a JavaFX wrapper, as well as GMF\footnote{\url{https://www.eclipse.org/gmf-tooling/}} as UI tools.
+CouchEdit's current running example is completely written in Kotlin\footnote{\url{https://kotlinlang.org/}}, a programing language with the ability to compile to the Java virtual machine platform. Thus, Kotlin enables access to the Java ecosystem of libraries and Frameworks. TornadoFX\footnote{\url{https://tornadofx.io/}}, a JavaFX wrapper, is used as UI Framework. As a modeling tool, GMF\footnote{\url{https://www.eclipse.org/gmf-tooling/}} was integrated. Dependencies are handled using the Dependency Injection framework Guice\footnote{\url{https://github.com/google/guice}}, which integrates perfectly with CouchEdit's modular architecture. More information about to current prototype and it's features can be found in \cite{nachreiner_couchedit_2020}.
 
+In theory, integrating CouchEdit with a parser that can evaluate language configurations at runtime would be preferable. This would make it possible to hot swap configurations while the software is running. Instead, the prototype was extended by a code generator. This has multiple reasons. The current implementation is relying on the existence of class definitions. Meaning, at certain points in the code types of Elements are checked (e.g. \texttt{elem is PlaceDM}). A runtime parser would have to either create workarounds for these type checks or compile the needed classes at runtime, using byte code manipulation. A code generator can generate all class definitions directly and thus solves this problem without any extra effort. Furthermore a code generator can work with a metamodel that is not fully defined. As noted in Chapter \ref{chap:design}, low level languages concepts were not fully defined, as they depend on the actual language implementation. To circumvent the problem of defining an actual language implementation for these low level concepts, the implemented parser opts to simple replace these parts with strings. Statements and expressions, can simply be written directly into these Strings, which are then placed into the generated code, without any further analysis of their correctness. This means, that these strings have to contain Kotlin code and needed language concepts, have to be provided by the Kotlin implementation itself.
 
-\begin{itemize}
-  \item kotlin
-  \item guice
-  \item free maker
-  \item internal kotlin dsl
-\end{itemize}
+The Code Generator was implemented as a separate sub module of the existing prototype. It contains its own runnable method that, when executed, will generate a new module. This module contains the language configuration, which is loaded by the model application when started and automatically configured the editor modeling language. For code generation purposes FreeMarker\footnote{\url{https://freemarker.apache.org/}} is used. FreeMarker is a language agnostic template engine, and therefore allows for the generation of kotlin code out of the box. 
 
+To ease the effort of defining language configurations, it was also decided to implement an internal DSL, using Kotlin's integrated capabilities\footnote{\url{https://kotlinlang.org/docs/reference/type-safe-builders.html}}.
 
-standard language concepts not implemented 
 
 \section{Example 1: Petri Nets}
 

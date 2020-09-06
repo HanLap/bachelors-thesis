@@ -15,6 +15,8 @@
 \usepackage{fancyvrb}
 \usepackage{array}
 \usepackage{colortbl} % ING INF PSY
+\usepackage{arydshln}
+\usepackage{listings}
 
 % Anfang der Titelfolie
 % Anpassung von: Titel, Untertitel, Autor, Datum und Institut
@@ -22,7 +24,7 @@
 \title{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for CouchEdit}
 % \subtitle{Manchmal wird ein Untertitel ben\"{o}tigt, der ebenfalls einzeilig oder mehrzeilig sein kann}
 \author{Hannah Lappe}
-\newcommand{\presdatum}{\today} % alternativ zu \today: Eingabe eines festen Datums
+\newcommand{\presdatum}{September 10, 2020} % alternativ zu \today: Eingabe eines festen Datums
 \institute
 {Institut für Softwaretechnik und Programmiersprachen\\}
 %Ende der Titelfolie
@@ -35,6 +37,8 @@
 \newcommand{\zwischentitel}{\insertsection}
 \newcommand{\leitthema}{CouchEdit Metamodel}
 % Ende der Kopfzeile
+
+\newcommand{\red}[1]{\textcolor{farbwert-inwiin}{#1}}
 
 % Anfang der Folien
 \begin{document}
@@ -50,7 +54,10 @@
   \tableofcontents
 \end{frame}
 
-
-\input{sections/probelm.tex}
+\input{sections/what.tex}
+\input{sections/problem.tex}
+\input{sections/architecture.tex}
+\input{sections/design.tex}
+\input{sections/perspectives.tex}
 
 \end{document}

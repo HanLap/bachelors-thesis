@@ -1,0 +1,251 @@
+\section{Petri Nets}
+\begin{frame}
+  \frametitle{Petri Nets}
+
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=5cm]{images/"petrinet - example"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Petri Nets}
+  \hspace*{-.5cm}\makebox[\linewidth][c]{%
+  \begin{columns}
+    \begin{column}{0.6\linewidth}
+      \includegraphics[width=5cm]{images/"petrinet - graphic-primitives"}
+    \end{column}
+    \begin{column}{0.6\linewidth}
+      \includegraphics[width=6cm]{images/"csd - petrinet-metamodel"}
+    \end{column}
+  \end{columns}
+  }
+\end{frame}
+
+
+\section{Approach}
+
+\section{DisplayManagers}
+\begin{frame}
+  \hspace{-1cm}
+  \large
+  \red{\textbf{Making Metamodels Aware of Concrete Syntax}} \\
+  \hspace{-1cm}
+  \small
+  F. Fondement, T. Baar (2005)
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{DisplayManagers (1/x)}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"csd - fondement-dm"}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{DisplayManagers (2/x)}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"csd - fondement-example"}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{DisplayManagers (x/x)}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - my-fondement"}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Recognition}
+  \vspace{-1cm}
+  % \hspace{-1cm}  
+  \texttt{self.shape is Circle}
+  % \hspace{-1cm}
+  \texttt{self.allRelatedTo(Contains).isEmpty()}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Recognition}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - recognition-1"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Recognition}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - recognition-2"}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Syncing}
+  \vspace*{-2cm}
+  \begin{lstlisting}
+  self.me.tokens = 
+        self.go
+            .allRelatedFrom(Contains)
+            .count()
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Syncing}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - syncing-1"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Syncing}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - syncing-2"}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Syncing}
+
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=3cm]{images/"petrinet - outgoing-example-1"}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Syncing outgoing Transitions}
+  \vspace*{-1cm}
+  \begin{lstlisting}
+self.me.outgoing = 
+self.go
+    .allToRelations(ConnectionEnd)
+    .filter { rel -> !rel.isEndConnection }
+    .map { rel -> rel.getA() }
+    .flatMap { line -> line
+      .allFromRelations(ConnectionEnd)
+      .filter { rel -> rel.isEndConnection }
+      .getBSet() }
+    .map { go -> go.dm.me }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Syncing}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - syncing-3"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Syncing}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - syncing-4"}
+\end{frame}
+
+
+\section{Annotation System}
+\begin{frame}
+  \centering
+  \hspace{-1cm}
+  \huge
+  \red{Annotation System}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Annotation System}
+  \vspace*{-1cm}
+  \begin{lstlisting}
+annotation Transition {
+  constraint {
+    self.shape is Rectangle
+  }
+}
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Annotation Processor}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - kind-1"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Transition Recognition Processor}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - kind-2"}
+\end{frame}
+
+
+\section{Plugins}
+\begin{frame}[fragile]
+  \frametitle{Syncing outgoing Transitions}
+  \vspace*{-1cm}
+  \begin{lstlisting}
+self.me.outgoing = 
+self.go
+    .allToRelations(ConnectionEnd)
+    .filter { rel -> !rel.isEndConnection }
+    .map { rel -> rel.getA() }
+    .flatMap { line -> line
+      .allFromRelations(ConnectionEnd)
+      .filter { rel -> rel.isEndConnection }
+      .getBSet() }
+    .filterAnnotation(Transition)
+    .map { go -> go.dm.me }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Syncing outgoing Transitions}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - syncing-3"}
+\end{frame}
+
+\begin{frame}
+  \centering
+  \hspace{-1cm}
+  \huge
+  \red{Plugins}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Connection Plugin}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - plugin-1"}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Syncing outgoing Transitions}
+\vspace*{-1cm}
+  \begin{lstlisting}
+self.me.outgoing = 
+self.go
+    .allFromRelations(ConnectionTo)
+    .filterAnnotation(Transition)
+    .map { go -> go.dm.me }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}
+  \frametitle{}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - my-fondement"}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{}
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=5cm]{images/"petrinet - label-check"}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Label Plugin}
+  \vspace*{-1cm}
+  \begin{lstlisting}[escapechar=\%]
+LabelPlugin {
+  (surroundingLabel(Transition) %\textbf{and}%
+    surroundingLabel) %\textbf{ifAmbiguous}% %\textbf{nothing}%
+}
+  \end{lstlisting}  
+\end{frame}

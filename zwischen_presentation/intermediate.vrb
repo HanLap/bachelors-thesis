@@ -1,0 +1,8 @@
+\frametitle{Label Plugin}
+  \vspace*{-1cm}
+  \begin{lstlisting}[escapechar=\%]
+LabelPlugin {
+  (surroundingLabel(Transition) %\textbf{and}%
+    surroundingLabel) %\textbf{ifAmbiguous}% %\textbf{nothing}%
+}
+  \end{lstlisting}

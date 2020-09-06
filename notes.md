@@ -54,11 +54,14 @@
 
 
 ### Frage
-- kann ich ecore überhaupt verwenden, da teilweise custom koncepte wie elementreference und 
+- ist CouchEdit momentan Bidirectional?
 
 
 
 ### ToDo
+- kinda didnt explain how DM architecture is applied to my concept -> explain go, me
+
+
 
 - black circles
 
