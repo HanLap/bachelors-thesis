@@ -2,7 +2,8 @@
   \vspace*{-1cm}
   \begin{lstlisting}[escapechar=\%]
 LabelPlugin {
-  (surroundingLabel(Transition) %\textbf{and}%
-    surroundingLabel) %\textbf{ifAmbiguous}% %\textbf{nothing}%
+  (surroundingLabel(Place)
+    %\textbf{and}% surroundingLabel(Transition))
+    %\textbf{ifAmbiguous}% nothing
 }
   \end{lstlisting}

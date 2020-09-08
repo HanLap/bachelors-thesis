@@ -23,6 +23,22 @@
 
 
 \section{Approach}
+\begin{frame}
+  \centering
+  \hspace{-1cm}
+  \huge
+  \red{Approach}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Metamodel}
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=7cm]{images/"csd - metamodel-base"}
+  
+
+\end{frame}
 
 \section*{DisplayManagers}
 \begin{frame}
@@ -36,110 +52,126 @@
 
 
 \begin{frame}
-  \frametitle{DisplayManagers (1/x)}
+  \frametitle{DisplayManagers}
   \hspace{-1cm}
   \includegraphics[width=10cm]{images/"csd - fondement-dm"}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{DisplayManagers (2/x)}
+  \frametitle{Place DisplayManager}
   \hspace{-1cm}
   \includegraphics[width=10cm]{images/"csd - fondement-example"}
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{DisplayManagers (x/x)}
+  \frametitle{Place DisplayManager in CouchEdit}
   \hspace{-1cm}
   \includegraphics[width=10cm]{images/"presentation - my-fondement"}
 \end{frame}
 
 
 \begin{frame}[fragile]
-  \frametitle{Recognition}
+  \frametitle{Recognition of Place}
   \vspace{-1cm}
-  % \hspace{-1cm}  
-  \texttt{self.shape is Circle}
-  % \hspace{-1cm}
-  \texttt{self.allRelatedTo(Contains).isEmpty()}
+  \begin{lstlisting}
+go.shape is Circle
+
+go.allRelatedTo(Contains).isEmpty()
+  \end{lstlisting}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Recognition}
+  \frametitle{Recognition of Place}
   \hspace{-1cm}
   \includegraphics[width=10cm]{images/"presentation - recognition-1"}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Recognition}
+  \frametitle{Recognition of Place}
   \hspace{-1cm}
   \includegraphics[width=10cm]{images/"presentation - recognition-2"}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Syncing Token Count}
+  \centering
+  \hspace{-1cm}  
+  \includegraphics[width=3cm]{images/"petrinet - token-check"}
+\end{frame}
+
 \begin{frame}[fragile]
-  \frametitle{Syncing}
+  \frametitle{Syncing Token count}
   \vspace*{-2cm}
   \begin{lstlisting}
-  self.me.tokens = 
-        self.go
-            .allRelatedFrom(Contains)
-            .count()
+dm.me.tokens = 
+  dm.go
+    .allRelatedFrom(Contains)
+    .count()
   \end{lstlisting}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Syncing}
+  \frametitle{Syncing Token count}
   \hspace{-1cm}
   \includegraphics[width=10cm]{images/"presentation - syncing-1"}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Syncing}
+  \frametitle{Syncing Token count}
   \hspace{-1cm}
   \includegraphics[width=10cm]{images/"presentation - syncing-2"}
 \end{frame}
 
 
-\begin{frame}
-  \frametitle{Syncing}
+% \begin{frame}
+%   \frametitle{Syncing outgoing Transitions}
 
+%   \centering
+%   \hspace{-1cm}
+%   \includegraphics[width=3cm]{images/"petrinet - outgoing-example-1"}
+% \end{frame}
+
+
+% \begin{frame}
+%   \frametitle{Syncing outgoing Transitions}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - syncing-3"}
+% \end{frame}
+
+
+% \begin{frame}[fragile]
+%   \frametitle{Syncing outgoing Transitions}
+%   \vspace*{-1cm}
+%   \begin{lstlisting}
+% dm.me.outgoing = 
+%   dm.go
+%     .allToRelations(ConnectionEnd)
+%     .filter { rel -> !rel.isEndConnection }
+%     .map { rel -> rel.getA() }
+%     .flatMap { line -> line
+%       .allFromRelations(ConnectionEnd) }
+%     .filter { rel -> rel.isEndConnection }
+%     .map { rel -> rel.getB() } 
+%     .map { go -> go.dm.me }
+%   \end{lstlisting}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{Syncing outgoing Transitions}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - syncing-4"}
+% \end{frame}
+
+
+\begin{frame}
+  \frametitle{DisplayManager Metamodel}
   \centering
   \hspace{-1cm}
-  \includegraphics[width=3cm]{images/"petrinet - outgoing-example-1"}
+  \includegraphics[width=7cm]{images/"csd - page 15"}
 
 \end{frame}
-
-
-\begin{frame}[fragile]
-  \frametitle{Syncing outgoing Transitions}
-  \vspace*{-1cm}
-  \begin{lstlisting}
-self.me.outgoing = 
-self.go
-    .allToRelations(ConnectionEnd)
-    .filter { rel -> !rel.isEndConnection }
-    .map { rel -> rel.getA() }
-    .flatMap { line -> line
-      .allFromRelations(ConnectionEnd)
-      .filter { rel -> rel.isEndConnection }
-      .getBSet() }
-    .map { go -> go.dm.me }
-  \end{lstlisting}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Syncing}
-  \hspace{-1cm}
-  \includegraphics[width=10cm]{images/"presentation - syncing-3"}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Syncing}
-  \hspace{-1cm}
-  \includegraphics[width=10cm]{images/"presentation - syncing-4"}
-\end{frame}
-
 
 \section*{Annotation System}
 \begin{frame}
@@ -150,14 +182,12 @@ self.go
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Annotation System}
+  \frametitle{Token Annotation}
   \vspace*{-1cm}
   \begin{lstlisting}
-annotation Transition {
-  constraint {
-    self.shape is Rectangle
-  }
-}
+    go.shape is Circle
+
+    go.attributes.fillColor = black
   \end{lstlisting}
 \end{frame}
 
@@ -165,13 +195,13 @@ annotation Transition {
 \begin{frame}
   \frametitle{Annotation Processor}
   \hspace{-1cm}
-  \includegraphics[width=10cm]{images/"presentation - kind-1"}
+  \includegraphics[width=10cm]{images/"presentation - kind-0"}
 \end{frame}
 
 \begin{frame}
   \frametitle{Transition Recognition Processor}
   \hspace{-1cm}
-  \includegraphics[width=10cm]{images/"presentation - kind-2"}
+  \includegraphics[width=10cm]{images/"presentation - kind-1"}
 \end{frame}
 
 
@@ -180,17 +210,11 @@ annotation Transition {
   \frametitle{Syncing outgoing Transitions}
   \vspace*{-1cm}
   \begin{lstlisting}
-self.me.outgoing = 
-self.go
-    .allToRelations(ConnectionEnd)
-    .filter { rel -> !rel.isEndConnection }
-    .map { rel -> rel.getA() }
-    .flatMap { line -> line
-      .allFromRelations(ConnectionEnd)
-      .filter { rel -> rel.isEndConnection }
-      .getBSet() }
-    .filterAnnotation(Transition)
-    .map { go -> go.dm.me }
+dm.me.tokens = 
+  dm.go
+    .allRelatedFrom(Contains)
+    .filterAnnotation(Token)
+    .count()
   \end{lstlisting}
 \end{frame}
 
@@ -217,10 +241,9 @@ self.go
   \frametitle{Syncing outgoing Transitions}
 \vspace*{-1cm}
   \begin{lstlisting}
-self.me.outgoing = 
-self.go
+dm.me.outgoing = 
+  dm.go
     .allFromRelations(ConnectionTo)
-    .filterAnnotation(Transition)
     .map { go -> go.dm.me }
   \end{lstlisting}
 \end{frame}
@@ -244,8 +267,9 @@ self.go
   \vspace*{-1cm}
   \begin{lstlisting}[escapechar=\%]
 LabelPlugin {
-  (surroundingLabel(Transition) %\textbf{and}%
-    surroundingLabel) %\textbf{ifAmbiguous}% %\textbf{nothing}%
+  (surroundingLabel(Place)
+    %\textbf{and}% surroundingLabel(Transition)) 
+    %\textbf{ifAmbiguous}% nothing
 }
   \end{lstlisting}  
 \end{frame}
