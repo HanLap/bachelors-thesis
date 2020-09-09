@@ -1,9 +1,13 @@
-\frametitle{Label Plugin}
-  \vspace*{-1cm}
-  \begin{lstlisting}[escapechar=\%]
-LabelPlugin {
-  (surroundingLabel(Place)
-    %\textbf{and}% surroundingLabel(Transition))
-    %\textbf{ifAmbiguous}% nothing
-}
-  \end{lstlisting}
+\frametitle{Place Annotation}
+  \vspace{-1cm}
+  % \begin{lstlisting}
+%   go.shape is Circle
+
+% go.allRelatedTo(Contains).isEmpty()
+  % \end{lstlisting}
+  \begin{itemize}
+    \setlength\itemsep{1cm}
+    \item GO has shape Circle
+    \item GO fillColor is not black
+    \item GO is not Contained by another GO
+  \end{itemize}

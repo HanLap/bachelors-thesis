@@ -17,16 +17,23 @@
 \usepackage{colortbl} % ING INF PSY
 \usepackage{arydshln}
 \usepackage{listings}
+\usepackage{url}
+\usepackage{hyperref}
+
+% Literaturverzeichnis mit BibLaTeX // use Biber as Backend; dashed = false to repeat author names
+\usepackage[babel]{csquotes}
+\usepackage[backend=biber,style=ieee,dashed=false,hyperref,natbib]{biblatex}
+\addbibresource{BA.bib}
 
 % Anfang der Titelfolie
 % Anpassung von: Titel, Untertitel, Autor, Datum und Institut
 
-\title{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for CouchEdit}
-% \subtitle{Manchmal wird ein Untertitel ben\"{o}tigt, der ebenfalls einzeilig oder mehrzeilig sein kann}
+\title{BA Zwischenvortrag}
+\subtitle{Development and Evaluation of a\\ Metamodel to Define Modeling \\ Syntaxes for CouchEdit}
 \author{Hannah Lappe}
 \newcommand{\presdatum}{September 10, 2020} % alternativ zu \today: Eingabe eines festen Datums
 \institute
-{Institut für Softwaretechnik und Programmiersprachen\\}
+{\\Institut für Softwaretechnik und \\ Programmiersprachen}
 %Ende der Titelfolie
 
 
