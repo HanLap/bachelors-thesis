@@ -31,13 +31,22 @@ The conclusion stage marks the end of a DSR and the results are written up. This
 
 
 \section{CouchEdit}
-As noted in section \ref{sec:problem_statement}, the CouchEdit framework is based on the Ideas of Van Tendeloo, et al. \cite{van_tendeloo_concrete_2017}. In their paper, the authors criticize that classic approaches to modeling frontends usually create one monolithic construct, that handles both the graphical model display as well as the corresponding abstract syntax. This creates tight coupling between the two, which causes low flexibility of the UI and high effort, if new features are to be implemented. 
+\label{sec:CouchEdit}
+As noted in section \ref{sec:problem_statement}, the CouchEdit framework is based on the Ideas of Van Tendeloo, et al. \cite{van_tendeloo_concrete_2017}. In their paper, the authors criticize that classic approaches to modeling frontends usually create one monolithic construct, which handles both the graphical model display as well as the corresponding abstract syntax. This creates tight coupling between the two, which causes low flexibility of the UI and requires high effort, if new features are to be implemented. 
 
-They propose to solve this, by defining two metamodels, one describing the concrete syntax and one the abstract syntax. The concrete syntax metamodel specifies graphic primitives that are needed to compose a given modeling syntax. instances of this metamodel are managed by the frontend and a user can manipulate this concrete syntax directly by adding, deleting or modifying Elements in the UI (if the frontend allows changes). On The other side stands the abstract syntax metamodel, it describes the conceptual representation of a modeling syntax. Instances of this metamodel are managed by the backend. To then connect these two metamodels, a further metamodel can be defined, that specifies transformations to translate concrete model into abstract model and backwards. 
+They propose to solve this, by defining two metamodels, one describing the graphical syntax and one the abstract syntax. The render syntax metamodel specifies graphic primitives that are needed to compose a given modeling syntax. instances of this metamodel are managed by the frontend and a user can manipulate this concrete syntax directly by adding, deleting or modifying Elements in the UI (if the frontend allows changes). On The other side stands the abstract syntax metamodel, it describes the conceptual representation of a modeling syntax. Instances of this metamodel are managed by the backend. To then connect these two metamodels, a further metamodel, called concrete syntax metamodel, can be defined. This concrete syntax metamodel specifies transformations to translate concrete representation into an abstract model and backwards (Figure \ref{fig:transmm}). 
 
-Following this architecture, CouchEdit separates frontend from the abstract syntax model. The frontend at its core is a simple vector drawing application, that implements further functionality for diagrams. The backend is then analyzing these vector graphics and translating it into a corresponding abstract syntax. For this, the backend utilizes a set of independent components, that each are responsible for detecting different aspects of the diagram. Each Component contains its own state, when a component detects changes and updates its state, it also publishes these changes so that other components interested in these changes, can use them.  
+\begin{figure}
+  \centering
+  \includegraphics[width=.7\linewidth]{images/"presentation - transfere-metamodel"}
+  \caption{Depiction of CouchEdit's approach to separating graphical and abstract representation}
+  \label{fig:transmm}
+  \end{figure}
+
+Following this architecture, CouchEdit separates frontend from the abstract syntax model. The frontend at its core is a simple vector drawing application, that implements further functionality for diagrams. The backend is then analyzing these vector graphics and translating it into a corresponding abstract syntax. For this, the backend utilizes a set of independent components, that each are responsible for detecting different aspects of the diagram. Each Component contains its own state, when a component detects changes and updates its state, it also publishes these changes so that other components, interested in these changes, can use them.  
 
 This architecture, has the advantage of being very detangled. this allows for components to be improved in isolation from the rest of the system and the clear separation of concerns makes it easier to understand, which component is responsible for what task. Furthermore, components can be swapped out depending on what syntax transformations are needed for the configured modeling syntax.
+
 
 
 \subsection{Data Model}
@@ -91,6 +100,7 @@ subscribe to element types, publish new diffs, connected to bus, model diffs
 
 
 \begin{itemize}
+  \item renderMM - ConcreteMM - AbstractMM
   \item publish/subscribe pattern
   \item attribute bags
   \item model repository
@@ -101,9 +111,9 @@ subscribe to element types, publish new diffs, connected to bus, model diffs
 
 \comment{\dots}
 
-\subsection{Graphical Language Theory}
+% \subsection{Graphical Language Theory}
 \subsection{Petri Nets Syntax}
-In the following, design considerations are explained using a simple petri net syntax. Figure \ref{fig:petrinets_metamodel} shows the abstract syntax metamodel of the used Petri nets syntax. The Petri nets conceptual representation consists of transitions that have a name, places that also have a token count. each Place can have a variable amount of incoming and outgoing Transitions, while Transitions can have any amount of incoming and outgoing Places. 
+In the following, design considerations are explained using a simple petri net syntax. Figure \ref{fig:petrinets_metamodel} shows the abstract syntax metamodel of the used Petri nets syntax. The Petri nets conceptual representation consists of places and transitions. Places also have a token count. each place can have a variable amount of incoming and outgoing transitions, while transitions can have any amount of incoming and outgoing places. 
 
 \begin{figure}[H]
   \centering
@@ -112,7 +122,7 @@ In the following, design considerations are explained using a simple petri net s
   \label{fig:petrinets_metamodel}
 \end{figure}
 
-The graphic representation of Petri nets is described in table \ref{tab:petri-primitives}. Places are usually represented as Circles, while Transitions are depicted as slender rectangles. The number of small back circles inside a Place represent this places token count. Furthermore Places and Transitions possess a label close to their bounding box, that determines their name. Lastly places and Transitions have directed connections lines between then. Each connection starts at an element and end at an element of the opposite type, represents marks an outgoing connection for the source element and an incoming connection for the target element. A simple concrete instantiation and its corresponding abstract representation is shown in figure \ref{fig:petrinets_example}.
+The graphic representation of Petri nets is described in table \ref{tab:petri-primitives}. Places are usually represented as circles, while Transitions are depicted as slender rectangles. The number of small black circles inside a place represent this places token count. Furthermore places and transitions possess a label close to their bounding box, that determines their name. Lastly places and transitions have directed connection lines between then. Each connection points from a place or transition towards an element of the opposite type and represents man outgoing connection for the source element and an incoming connection for the target element. A simple concrete instantiation and its corresponding abstract representation is shown in figure \ref{fig:petrinets_example}.
 
 \begin{table}[ht]
   \centering
@@ -156,4 +166,17 @@ The graphic representation of Petri nets is described in table \ref{tab:petri-pr
 \end{figure} 
 
 \subsection{Statechart Syntax}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=.7\linewidth]{images/"csd - new-statechart-metamodel"}
+\caption{Abstract Metamodel of Statecharts}
+\label{fig:statechartmm}
+\end{figure}
+
+
+
+
+
 \comment{...}

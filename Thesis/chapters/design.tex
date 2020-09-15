@@ -1,11 +1,13 @@
 \chapter{Design Concept}
 \label{chap:design}
-The proposed artifact effectively is a form of triple graph grammar, meaning it specifies a source model (concrete syntax), a target model (abstract syntax) and a third translation metamodel. The definition of abstract syntax metamodels has already standardized approaches (e.g. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a concrete syntax definition composed of graphic primitives. Complex graphic structures would have to be explored in follow up works. This work focuses on the translation metamodel, that connects concrete and abstract syntax and proposes an approach to formalize this connection.
+In Section \ref{sec:CouchEdit} it was established that CouchEdit is composed of three distinct metamodels as depicted in Figure \ref{fig:transmm}. Thus is seems apparent that the proposed concept should also be composed of these three metamodels. The definition of abstract syntax metamodels has already standardized approaches (e.g. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a render metamodel definition composed of graphic primitives. Complex graphic structures would have to be explored in follow up works. This work focuses on the concrete syntax metamodel, that connects render and abstract syntax and proposes an approach to formalize this connection.
 
-The primary goal of the proposed design is to hide CouchEdits complexity behind a more accessible MetaModel. To this end, multiple concepts are employed, that either abstract away from CouchEdits implementation details, or introduce ways to streamline the translation from concrete to abstract syntax. Most of these concepts introduce performance overhead, but as this work focuses on the design aspect, performance analysis and optimization is also subsidiary and subject to further research.
+The primary goal of the proposed design is to hide CouchEdit's complexity behind more accessible metamodel definitions. To this end, multiple concepts are employed, that either abstract away from CouchEdit's implementation details, or introduce ways to streamline the translation from concrete to abstract representation. Most of these concepts introduce performance overhead, but as this work focuses on the design aspect, performance analysis and optimization is subsidiary and subject to further research.
 
 
-A triple graph grammar is composed of three distinct metamodels, thus the root definition of the CouchEdit configuration is composed of tree distinct areas, as can be seen in figure \ref{fig:metamodel-base}. throughout the chapter, this root model will gradually be extended with new concepts, until finally all utilized concepts were introduced (complete metamodel is depicted in \ref{fig:complete-metamodel}).
+
+\comment{how}
+A triple graph grammar is composed of three distinct metamodels, thus the root definition of the CouchEdit configuration is composed of tree distinct areas, as can be seen in figure \ref{fig:metamodel-base}. throughout the chapter, this root model is gradually being extended with new concepts, until finally all utilized concepts have been introduced (complete metamodel is depicted in \ref{fig:complete-metamodel}).
 
 \begin{figure}
   \centering
@@ -14,46 +16,56 @@ A triple graph grammar is composed of three distinct metamodels, thus the root d
   \label{fig:metamodel-base}
 \end{figure}
 
-\section{Concrete Syntax}
-CouchEdit's concrete syntax is realized as a set of graphic objects. The framework in its current form primarily focuses on primitive graphic objects, with its class structure being derived \cite[p.39]{nachreiner_couchedit_2020} from Bottoni and Grau's work, "A Suite of Metamodels as a Basis for a Classification of Visual Languages"  \cite{bottoni_suite_2004}. While the notion of complex graphic objects has been introduced in CouchEdit's implementation formal definition, the concept for now only exists in theory. This thesis, because of time constraints, does not explore definition of the concrete syntax all to much and instead focuses only on graphic primitives. The employed concrete syntax metamodel is describe in figure \ref{fig:concretesyntax}. As shown, it facilitates a basic structure to define graphic primitives needed for the described visual language. Future works would have to explore, how graphic objects could be customized, by integrating attribute bag definitions as well as graphic complex object definitions, to create custom symbols, better suited for certain modeling languages.
+\section{Render Metamodel}
+CouchEdit's render syntax is realized as a set of graphic objects. The framework in its current form primarily focuses on primitive graphic objects, with its class structure being derived \cite[p.39]{nachreiner_couchedit_2020} from Bottoni and Grau's work, "A Suite of Metamodels as a Basis for a Classification of Visual Languages" \cite{bottoni_suite_2004}. While the notion of complex graphic objects has been introduced in CouchEdit's formal definition, the concept for now only exists in theory. This thesis, because of time constraints, does not explore definition of the concrete syntax all to much and instead focuses only on graphic primitives. The employed render syntax metamodel is describe in figure \ref{fig:concretesyntax}. As shown, it facilitates a basic structure to define graphic primitives needed for the described visual language. Future works would have to explore, how graphic objects could be customized, by integrating attribute bag definitions as well as complex graphic object definitions, to create custom symbols, better suited for certain modeling languages.
 
 \begin{figure}
 \centering
-\includegraphics[width=.5\linewidth]{images/"csd - concretesyntax"}
+\includegraphics[width=.5\linewidth]{images/"csd - rendersyntax"}
 \caption{Concrete syntax metamodel used in this thesis}
 \label{fig:concretesyntax}
 \end{figure}
 
 
 \section{Abstract Syntax}
-As noted prior, the Abstract Syntax can be defined using existing standards. Nonetheless, the translation metamodel will need to reference the abstract syntax at certain points in this chapter. Therefore, a barebones implementation that is derived from Ecore's own metamodel\footnote{\url{https://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/package-summary.html}} definition is defined here (fig. \comment{(needs to be drawn after i find out how)}). Notable concepts needed in the definition of an abstract syntax, are foremost definition of Classes. This includes, definition of class attributes, as well as concepts such as inheritance and references to other classes. Furthermore definition of simple data types as well as enums are required . \comment{(maybe find source that lists requirements for an abstract syntax metamodel to support what ive written here)} 
+As noted before, the abstract syntax can be defined using existing standards. Nonetheless, the translation metamodel needs to reference the abstract syntax at certain points in this chapter. Therefore, a barebones implementation that is derived from Ecore's own metamodel\footnote{\url{https://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/package-summary.html}} definition is defined here (Figure \ref{fig:csd-abstractsyntax}). Notable concepts needed in the definition of an abstract syntax, are foremost definition of classes. This includes, definition of class attributes, as well as concepts such as inheritance and references to other classes. Furthermore definition of simple data types as well as enums is required. \comment{(maybe find source that lists requirements for an abstract syntax metamodel to support what ive written here)} 
+
+\begin{figure}
+\centering
+\includegraphics[width=.7\linewidth]{images/"csd - abstractsyntax"}
+\caption{Used subset implementation of Ecore}
+\label{fig:csd-abstractsyntax}
+\end{figure}
+
 
 \section{Language Concepts}
-The abstract syntax tree of a programming language usually differs between languages \comment{(another statement i should maybe cite?)}. Therefore, when regarding lower lever concepts, found in most programming languages, while the functionality stays the same, their metamodel representation will vary. For this reason, common language concepts will not be defined, as they depend on the actually language implementation. Instead at points where these language concepts would reside, it is only defined what the given metamodel expects from the implementation and example code snippets are given in an unspecified pseudo language. Despite this, there are certain concepts special to the CouchEdit metamodel, which a language implementation should realize that are elucidated in the following sub sections.
+the abstract syntax tree usually differs between programing languages \comment{(another statement i should maybe cite?)}. Therefore, when looking at lower level concepts, found in most programming languages (e.g.: arithmetic, branching), their metamodel representation varies, while the functionality stays the same. For this reason and because there is already enough documentation on how to specify abstract syntax trees, common language concepts will not be defined, as this depends on the actual language implementation. Instead at points where these language concepts would reside, it is only defined what the given metamodel expects from the implementation and example code snippets are given in an unspecified pseudo language. Despite this, there are certain concepts special to the CouchEdit metamodel, which a language implementation would have to realize. these concepts are presented in the following subsections.
 
 
 \subsection{Helper Functions}
-When defining a translation metamodel, it may become useful to relocate certain procedures or algorithms into separate functions. Reasons for this may be, to access it from multiple points in the definition, to implement a recursive structure or, simple to split up complex parts. Thus the metamodel should provide a facility for the definition of custom functions. That being said, an actual metamodel definition is not given, as details depend on the given implementation. In the architecture described here, these helper functions are defined on the highest level of the metamodel and thus available in all statement blocks, but it would also be feasible to move function definitions into sub scopes, should that provides advantages for certain implementations. 
+When defining a translation metamodel, it may become useful to relocate certain procedures or algorithms into separate functions. Reasons for this may be, to access it from multiple points in the definition, to implement a recursive structure or, simply to split up complex parts. Thus the metamodel should provide a facility for the definition of custom functions. That being said, the actual metamodel definition is kept ambiguous, as details depend on the given implementation. In the architecture described here, these helper functions are defined on the highest level of the metamodel and thus are available in all statement blocks, but it would also be feasible to move function definitions into sub scopes, should that provide advantages for certain implementations. 
 
 \subsection{Graph Navigation}
 \label{sec:abstraction}
-Something used a lot in the proposed architecture, is traversal through the hypergraph. It should be possible for the user, to easily get nodes that are adjacent to an given node. In CouchEdit's architecture, this is handled by separate services. This means, that the syntax for reaching a node related by a certain relation type looks something like this: 
-\begin{lstlisting}[language=customLang]
+Something used a lot in the proposed architecture, is traversal through the hypergraph. It should be possible for the user, to easily get nodes that are adjacent to any given node. In CouchEdit's architecture, this is handled by separate services. This means, that the syntax for reaching a node related by a certain relation type looks something like this: 
+
+\begin{lstlisting}[language=customLang, caption={Example on how to get all GOs contained by a given element \texttt{go}, in the CouchEdit architecture}, captionpos=b]
 val containedGOs = relationService
-      .getAllElementsRelatedFrom(self, Contains) 
+      .getAllElementsRelatedFrom(go, Contains) 
 \end{lstlisting} 
-The getAllElementsRelatedFrom function, takes a GraphicObject and a Relation type and returns all GOs that have a relation of the given type, that points from the given GO to themselves. This and similar helper functions are used repeatedly, thus DSL implementations of the here described architecture should provide some form of abstraction to this service call. In the following code snippets, it is assumed that these functions were masked by member function implementations similar to the following:
-\begin{lstlisting}
-self.getAllElementsRelatedFrom(Contains)
+
+The \texttt{getAllElementsRelatedFrom} function, takes a GO and a relation type and returns all GOs that have a relation of the given type, that points from the given GO to themselves. This and similar helper functions are used repeatedly, thus DSL implementations of the here described architecture should provide some form of abstraction to this service call. In the following code snippets, it is assumed that these functions were masked by member function implementations similar to the following:
+\begin{lstlisting}[caption={The \texttt{getAllElementsRelatedFrom} function, implemented as a member function eases navigation through the hypergraph}, captionpos=b]
+go.getAllElementsRelatedFrom(Contains)
 \end{lstlisting}
-Implementation in form of such extension functions allows for a more natural navigation trough the hypergraph, which is especially useful when traversing longer distances which will become apparent in the following sections. a list of these navigation functions can be found in appendix \comment{(here link to appendix entry that does not yet exist)}.
+Implementation in form of such extension functions allows for a more natural navigation trough the hypergraph, which is especially useful when traversing longer distances which will become apparent in the following sections. A list of these navigation functions can be found in Appendix \ref{app:navigationfunctions}.
 
 
 \section{Syntax Processors}
-The primary concern when defining a modeling language with clear separation between concrete and abstract syntax, is the question on how to connect these two distinct models. In this point, the designed architecture draws inspiration from Fondement and Baar \cite{fondement_making_2005}. The authors proposed idea of connecting abstract und concrete syntax, using DisplayManagers, serves as a basis that can be built upon. This approach consists of two parts, recognition and synchronization. 
+The primary concern when defining a modeling language with clear separation between concrete and abstract syntax, is the question on how to connect these two distinct models. In this point, the designed architecture draws inspiration from Fondement and Baar \cite{fondement_making_2005}. The author's proposed idea of connecting abstract und concrete syntax, using DisplayManagers, serves as a basis that can be built upon. This approach consists of two parts, recognition and synchronization. 
 
 \subsection{Recognition}
-The recognition part is concerned with detecting patterns in the concrete syntax that have an abstract syntax representation. For this, fondement and baar proposed the introduction of a further abstraction layer. This layer composes the graphic primitives and attributes, which represent a model element, into display classes. But the authors keep possible implementation of this abstraction layer open. Furthermore it did not seem suitable to introduce a further abstraction layer, as most processing in the CouchEdit architecture is applied directly to the concrete syntax hypergraph, thus mapping graphic objects to a new layer would introduce a set of new problems to be solved. Instead the architecture proposed here, tries a different approach. For each type of display manager, a set of constraints can be defined on the hypergraph's graphic objects. Whenever a graphic object satisfies all constraints of a given display manager type it is deemed to be the base element of a concrete representation of this display manager type and an instances of this display manager and corresponding model element are created and connected to the graphic object (fig. \ref{fig:place-recognition}). 
+The recognition part is concerned with detecting patterns in the graphical syntax that have an abstract syntax representation. For this, Fondement and Baar proposed the introduction of a further abstraction layer. This layer composes the graphic primitives and attributes, which represent a model element, into display classes. But the authors keep possible implementation of this abstraction layer open. Furthermore it did not seem suitable to introduce a further abstraction layer, as most processing in the CouchEdit architecture is applied directly to the concrete syntax hypergraph, thus mapping graphic objects to a new layer would introduce a set of new problems to be solved. Instead the architecture proposed here, tries a different approach. For each type of display manager, a set of constraints can be defined on the hypergraph's graphic objects. Whenever a graphic object satisfies all constraints of a given display manager type it is deemed to be the base element of a concrete representation of this display manager type and an instances of this display manager and corresponding model element are created and connected to the graphic object (Figure \ref{fig:place-recognition}). 
 
 \begin{figure}
   \centering
@@ -62,42 +74,44 @@ The recognition part is concerned with detecting patterns in the concrete syntax
   \label{fig:place-recognition}
 \end{figure}
 
-These constraints can be defined as simple Boolean expressions, that are applied to every graphic object in the graph. The constraints for a place element, could be defined as follows: 
+These constraints can be defined as simple boolean expressions, that each graphic object in the hypergraph, is checked against. The constraints for a place element, could be defined as follows: 
 
-\begin{lstlisting}[language=OCL]
-self.shape is Circle
-self.allRelatedTo(Contains).isEmpty()
+\begin{lstlisting}[language=OCL,caption={Possible constraints to detect GOs representing a place},captionpos=b]
+go.shape is Circle
+go.allRelatedTo(Contains).isEmpty()
 \end{lstlisting} 
 
-These constraints first check if the given GO has the shape of a circle. If that is true, it is also checked if the given GO has any contains relations pointing toward itself. If that is the case, the given circle is contained by another element and thus not clearly identifiable as a place, as it could also possibly represent a token. A corresponding definition for transitions could look as following: 
+These constraints first check if the given GO has the shape of a circle. If that is true, it is also checked if the given GO has any \texttt{Contains} relations pointing toward itself. If that is the case, the given circle is contained by another element and thus not clearly identifiable as a place, as it could also possibly represent a token. A corresponding definition for transitions could look as follows: 
 
-\begin{lstlisting}
-  self.shape is Rectangle
+\begin{lstlisting}[captionpos=b,caption={Simple constraint to check for transition representations},label={lst:transition-constraints}]
+go.shape is Rectangle
 \end{lstlisting}
 
-These are barebones requirements to identify concrete syntax representations and they could be extended by any amount of further constraints to increase the amount of specificity required from the concrete state.
+These are barebones requirements to identify graphical representations and they could be extended by any amount of further constraints to increase the amount of specificity required from the concrete instance.
 
 \subsection{Synchronization}
-The synchronization part is then responsible to make sure, the abstract syntax element's attributes align with the concrete state. This step was explained in detail in \cite{fondement_making_2005}. Fondement and baar propose the usage of OCL invariants as a mechanism for synchronization. But as the here defined approach does not implement the display class abstraction layer, the concrete representation has to be queried directly. Furthermore, implementing OCL invariants is not necessary and transformations could also be handled by assignment statements, which is done in the following. For a place element there are four aspects that have to be synced:
+With the recognition part in place, it is possible to detect graphical representations and attach corresponding abstract instances. Now the synchronization part is responsible to make sure, abstract and concrete representation reflect the same state. To this end, the metamodel allows for the definition of rules on a \texttt{DisplayManager}. This step was explained in detail in \cite{fondement_making_2005}. Fondement and Baar propose the usage of OCL invariants as a language for defining these rules. But as the here defined approach does not implement the display class abstraction layer, the concrete representation has to be queried directly. Furthermore, implementing OCL invariants is not necessary and synchronizations could also be handled by assignment statements, which is done in the following. For a place element there are four aspects that have to be synced:
+
 \begin{enumerate}
-  \item Name of the given Place
+  \item Name of the given place
   \item Number of Tokens this place has
   \item Incoming transitions
   \item Outgoing transitions
 \end{enumerate} 
 
-Reliably determining a places name poses some special challenges and requires further concepts, introduced later. Determining the token number, on the other hand is easily implemented using the given tools. A simple statement syncing this attribute could look something like this: \comment{(self kinda coming out of nowhere and should probably be explained or replaced)}
-\begin{lstlisting}[language=OCL]
-self.me.tokens = self.go
-                     .allRelatedFrom(Contains)
-                     .select(go -> go.shape is Circle)
-                     .count()
+Reliably determining a place's name poses some special challenges and requires further concepts, introduced later. Determining the token number, on the other hand is easily implemented using the given tools. A simple rule that syncs this attribute could look something like this:
+
+\begin{lstlisting}[captionpos=b,caption={Rule that syncs the token count of a place element}]
+dm.me.tokens = dm.go
+                  .allRelatedFrom(Contains)
+                  .select(go -> go.shape is Circle)
+                  .count()
 \end{lstlisting}
 
-This statement ensures that the token attribute of the model element is always equal to the number of all GOs with the shape Circle, that are contained by our base graphic object. In a similar fashion, incoming and outgoing transitions can be defined:
-\begin{lstlisting}[language=OCL]
-self.me.incoming = 
-      self.go
+This statement ensures that the token attribute of the model element is always equal to the number of all GOs with the shape Circle, that are contained by the base graphic object. In a similar fashion, incoming and outgoing transitions can be defined:
+\begin{lstlisting}[captionpos=b,caption={Rule that syncs incoming transitions of a place element},label={lst:incoming-transitions}]
+dm.me.incoming = 
+      dm.go
           .allRelatedTo(ConnectionEnd,
               rel -> rel.isEndConnection)
           .select(go -> go.shape is Line)
@@ -107,9 +121,9 @@ self.me.incoming =
           .collect(go -> go.dm.me.ref())
 \end{lstlisting}
 
-This statement ensures that all transitions, connected to the given DM's GO, by a line, are composed into the list of incoming transitions (fig. \ref{fig:incoming-sync}). This exhibits the usual approach to syncing concrete and abstract syntax. Starting from a DisplayManager, the statements query along a path of relations and elements, to determine the correct state of a model element.
+This statement ensures that all transitions, connected to the given DM's GO, by a line, are composed into the list of incoming transitions (Figure \ref{fig:incoming-sync}). This exhibits the usual approach to syncing concrete and abstract representation. 
 
-% What immediately becomes clear is, that the model element side of the invariant is always relatively simple, while querying the concrete syntax and the existing relations can grow in complexity fast. 
+% Starting from a \texttt{DisplayManager}, the statements query along a path of relations and elements, to determine the correct state of a model element.
 
 \begin{figure}
   \centering
@@ -119,41 +133,41 @@ This statement ensures that all transitions, connected to the given DM's GO, by 
 \end{figure}
 
 \subsection{metamodel}
-The resulting sub model for this area of the configuration would look as described in figure \ref{fig:initial-syntax-model}. a SyntaxProcessor definition, needs a reference to an element definition of the abstract syntax metamodel. The corresponding DisplayManager can then be inferred from this element. Furthermore, the SyntaxProcessor definition, needs constraint and transformation rules. The constraints, are then used by a SyntaxRecognitionProcessor, to add instances of the inferred DisplayManager. On the other hand transformations are then used by a SyntaxSyncProcessor, to keep model elements aligned. As stated, it would be possible to define constraints and transformations as OCL invariants, similar to what Fondement and Baar did. Another possible implementation would be as statement blocks, where constraints return Boolean values and Transformations utilize assignment statements, which would be similar to the here describe code snippets. This is not the final iteration of this metamodel as will be shown in the next section.
+The resulting sub model for this area of the configuration would look as described in Figure \ref{fig:initial-syntax-model}. The depicted Metamodel allows for the definition of \texttt{DisplayManagers}. A \texttt{DisplayManager} definition, needs a reference model element type from the abstract syntax metamodel. The corresponding DisplayManager can then be inferred from this element. Furthermore, the \texttt{DisplayManager} definition, needs \texttt{Constraints} and \texttt{Rules}. The \texttt{constraints}, are then used by a RecognitionProcessor, to add instances of the inferred \texttt{DisplayManager}. On the other hand \texttt{Rules} are then used by a DisplayManagerProcessor, to keep model elements aligned. As stated, it would be possible to define \texttt{Constraints} and \texttt{Rules} as OCL invariants, similar to what Fondement and Baar did. Another possible implementation would be as statement blocks, where \texttt{Constraints} return boolean values and \texttt{Rules} utilize assignment statements, which would be similar to the here described code snippets. This is not the final iteration of this metamodel as will be shown in the next section.
 
 \begin{figure}
 \centering
 \includegraphics[width=.7\linewidth]{images/"csd - initial-syntaxprocess-model"}
-\caption{First Design of the Syntax processor metamodel}
+\caption{First Design of the \texttt{DisplayManager} metamodel}
 \label{fig:initial-syntax-model}
 \end{figure}
 
 
-\section{Kind System}
-When assessing the incoming transition statement, defined in the last section, it becomes apparent that checking if the connected GO represents a transition has to be done manually. In the given example, checking if the GO represents a transitions is no big task as transition recognition is handled with only one constraint, but when regarding model elements with multiple constraints, this can become a repetitive and inefficient task. 
+\section{Annotations System}
+When assessing the incoming transition rule (Listing \ref{lst:incoming-transitions}), it becomes apparent that checking if the connected GO represents a transition has to be done manually. In the given example, checking if the GO represents a transitions is no big task as transition recognition is handled with only one constraint (Listing \ref{lst:transition-constraints}), but when regarding model elements with multiple constraints, this can become a repetitive and inefficient task. 
 
-To alleviate this problem, the proposed architecture introduces a kind system. A kind is a sort of meta type, that annotates Elements in the graph, to give further information about their purpose. A Kind is, similar to AttributeBags, a separate Element in the graph, that is Connected to the Element it annotates, with a relation. It has a single value attribute, that indicates its purpose. Identical to the syntax recognition part, the kind system takes a set of constraints for a given kind. Every Element in the graph is then checked against these constraints and if the Element satisfies all of them, the Kind is added to the given Element. This behavior is depicted in fig. \ref{fig:kind-recognition}.
+To alleviate this problem, the proposed architecture introduces an Annotation system. An Annotation can mark elements of the graph, as satisfying a certain defined pattern. An \texttt{Annotation} is, similar to \texttt{AttributeBags}, a separate element in the graph, that is connected to the element it annotates, with a relation. It has a single value attribute, that indicates its name. Identical to \texttt{DisplayManager} definitions, described in the last section, \texttt{Annotation} definitions take a set of \texttt{Constraints}. Every Element in the graph is then checked against these \texttt{Constraints} and if the Element satisfies all of them, the Annotation is added to the given Element. This behavior is depicted in fig. \ref{fig:kind-recognition} for an example transition \texttt{Annotation}.
 
 \begin{figure}
   \centering
   \includegraphics[height=7.5cm]{images/"visualization - kind-recognition"}
-  \caption{TransitionKindProcessor detects a GO that satisfies constraints and adds KindElement}
+  \caption{\texttt{TransitionAnnotationProcessor} detects a GO that satisfies constraints and adds \texttt{ElementAnnotation}}
   \label{fig:kind-recognition}
 \end{figure}
 
-The similarity To the syntax recognition part means that it can actually replace this part, which is done in this Concept. Instead of checking all constraints themselves, syntax recognition processors, only just check if a given GO has a certain Kind and if this is true, the corresponding DisplayManager is added. As shown in figure \ref{fig:Transition-Kind-Recognition}, when a GO, representing a transition is added, the TransitionKindProcessor, first adds a Kind of the type Transition. The TransitionRecognitionProcessor then finds the GO that now has a Transition Kind and adds the corresponding Transition DisplayManager.
+The similarity to the \texttt{DisplayManager} recognition part means that it can actually replace this part, which is done in this concept. Instead of checking \texttt{Constraints} themselves, syntax recognition processors, only just check if a given GO has a certain Kind and if this is true, the corresponding DisplayManager is added. As shown in figure \ref{fig:Transition-Kind-Recognition}, when a GO, representing a transition is added, the TransitionKindProcessor, first adds a Kind of the type Transition. The TransitionRecognitionProcessor then finds the GO that now has a Transition Kind and adds the corresponding Transition DisplayManager.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[height=11cm]{images/"visualization - Transition-Kind-Recognition"}
-\caption{TransitionRecognitionProcessor adds DM after the TransitionKindProcessor has added a Transition Kind}
+\caption{\texttt{TransitionRecognitionProcessor} adds DM after the \texttt{TransitionAnnotationProcessor} has added a transition \texttt{Annotation}}
 \label{fig:Transition-Kind-Recognition}
 \end{figure}
 
 With the definition of a convenience member function that checks if an Element has a given Kind, the Place incoming transition invariant can now be rewritten as follows: 
 \begin{lstlisting}[language=OCL]
-self.me.incoming = 
-    self.go
+dm.me.incoming = 
+    dm.go
         .allRelatedTo(ConnectionEnd, 
             rel -> rel.isEndConnection)
         .select(go -> go.shape is Line)
@@ -183,8 +197,8 @@ While the invariant for incoming transitions, is sufficient for an initial examp
 For this reason, a Plugin system is introduced. Plugins are predefined Processors that process specific parts of the hypergraph. These processing areas are not as integral as the ones solved by the core processors and thus are opt-in. Furthermore certain plugin processors can be configured which allows them to cover a wider field of use cases. One example of such a plugin would be the TransitionProcessor. It looks for line GraphicObjects and checks if they connect two other GOs. If that's the case, the processor adds either a TransitionTo relation or a TransitionBetween relation (fig. \ref{fig:transition-plugin}), depending on if the line's arrow ends indicate a directed or undirected transition. Adding this Plugin allows for a final rewrite of the incoming transitions statement:
 
 \begin{lstlisting}[language=OCL]
-self.me.incoming = 
-    self.go
+dm.me.incoming = 
+    dm.go
         .allRelatedTo(TransitionTo)
         .select(go -> go.hasKind(Transition))
         .collect(go -> go.dm.me.ref())

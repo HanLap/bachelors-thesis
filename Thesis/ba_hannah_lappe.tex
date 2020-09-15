@@ -398,6 +398,12 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 \addcontentsline{toc}{chapter}{List of Tables}
 \listoftables
 
+\renewcommand\lstlistlistingname{List of Listings}
+\cleardoublepage % sonst stimmt die seitennummer im TOC nicht
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Listings}
+\lstlistoflistings
+
 
 % Bibliographie (am besten mit Bibtex oder Biber)
 \cleardoublepage % sonst stimmt die seitennummer im TOC nicht

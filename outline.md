@@ -99,6 +99,31 @@ h4:before {
 
 ----
 # Prototype
+- existing prototype
+
+## additions
+- freemarker
+
+### kotlin dsl
+ - kts
+ - 3 metamodel files
+
+ #### render
+
+ #### abstract
+ - class
+ - attr
+ - ref
+ - comp
+
+ #### concrete
+ - helper functions
+ - annotations
+ - plugins
+ - display managers
+
+## example petri nets
+## example state charts
 
 ----
 # Evaluation

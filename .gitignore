@@ -14,9 +14,11 @@
 *.bcf
 *.snm
 *.nav
+*.lol
 
 Proposal/*.pdf
 Thesis/*.pdf
+Thesis/code/configs
 
 .vscode/settings.json
 zwischen_presentation/.vscode/settings.json

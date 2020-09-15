@@ -66,3 +66,12 @@
 - black circles
 
 - abstract syntax composition
+
+
+## time management
+
+- tue 15.09: finish design revision (p. 158), prototype
+- wed 16.09: fundamentals CouchEdit, StateCharts
+- thu 17.09: Evaluation
+- fri 18.09: related work, introduction clean up
+- sat 19.09: perspectives 
