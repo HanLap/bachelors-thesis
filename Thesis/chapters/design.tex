@@ -1,4 +1,5 @@
 \chapter{Design Concept}
+% \raggedbottom
 \label{chap:design}
 In Section \ref{sec:CouchEdit} it was established that CouchEdit is composed of three distinct metamodels as depicted in Figure \ref{fig:transmm}. Thus is seems apparent that the proposed concept should also be composed of these three metamodels. The definition of abstract syntax metamodels has already standardized approaches (e.g. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a render metamodel definition composed of graphic primitives. Complex graphic structures would have to be explored in follow up works. This work focuses on the concrete syntax metamodel, that connects render and abstract syntax and proposes an approach to formalize this connection.
 
@@ -155,7 +156,7 @@ To alleviate this problem, the proposed architecture introduces an Annotation sy
   \label{fig:kind-recognition}
 \end{figure}
 
-The similarity to the \texttt{DisplayManager} recognition part means that it can actually replace this part, which is done in this concept. Instead of checking \texttt{Constraints} themselves, syntax recognition processors, only just check if a given GO has a certain Kind and if this is true, the corresponding DisplayManager is added. As shown in figure \ref{fig:Transition-Kind-Recognition}, when a GO, representing a transition is added, the TransitionKindProcessor, first adds a Kind of the type Transition. The TransitionRecognitionProcessor then finds the GO that now has a Transition Kind and adds the corresponding Transition DisplayManager.
+The similarity to the \texttt{DisplayManager} recognition part means that it can actually replace this part, which is done in this concept. Instead of checking \texttt{Constraints} themselves, \texttt{DisplayManager} recognition processors just check if a given GO has a certain annotation attached and if this is true, the corresponding \texttt{DisplayManager} is added. As shown in Figure \ref{fig:Transition-Kind-Recognition}, when a GO, representing a transition is added, the \texttt{TransitionAnnotationProcessor}, first adds an \texttt{ElementAnnotation} with the value \texttt{Transition}. The \texttt{TransitionRecognitionProcessor} then finds the GO which now is annotated with the value \texttt{Transition} and adds a \texttt{TransitionDM}.
 
 \begin{figure}[ht]
 \centering
@@ -164,23 +165,23 @@ The similarity to the \texttt{DisplayManager} recognition part means that it can
 \label{fig:Transition-Kind-Recognition}
 \end{figure}
 
-With the definition of a convenience member function that checks if an Element has a given Kind, the Place incoming transition invariant can now be rewritten as follows: 
-\begin{lstlisting}[language=OCL]
+With the definition of a convenience member function that checks if an element has a given Annotation, the place incoming transition rule can now be rewritten as follows: 
+\begin{lstlisting}[captionpos=b,caption={Improved incoming transition \texttt{Rule}, that also filters for elements with a \texttt{Transition} annotation}]
 dm.me.incoming = 
     dm.go
-        .allRelatedTo(ConnectionEnd, 
+        .allRelatedTo(ConnectionEnd,
             rel -> rel.isEndConnection)
         .select(go -> go.shape is Line)
         .collect(go -> go.relatedFrom(ConnectionEnd))
-        .select(go -> go.hasKind(Transition))
+        .select(go -> go.hasAnnotation(Transition))
         .collect(go -> go.dm.me.ref())
 \end{lstlisting}
 
 
-It is important to note that the Kind system isn't exclusive to GOs that have an abstract representation. For GO's with a corresponding DisplayManager, the DM type can just be checked to find out if it connects a model element of a certain type. But the Kind system can also be used to recognize all sorts of patterns in the graph, that would otherwise have to be checked repeatedly.
+It is important to note that the \texttt{Annotation} system isn't exclusive to GOs that have an abstract representation. For GO's with a corresponding \texttt{DisplayManager}, the \texttt{DM} type can just be checked to find out if it connects a model elements of a certain type. Rather, the \texttt{Annotation} system can also be used to recognize all sorts of patterns in the graph, that would otherwise have to be checked repeatedly. For example. it could be used to define a stricter check, on what element in a petri net Graph represents a token.
 
 \subsection{Metamodel}
-As mentioned in the last section, because of the introduction of the kind system, the SyntaxProcessor model has to be revised. SyntaxProcessor definitions do not implement constraints themselves anymore. Instead they have a reference to a Kind definition and Kind definitions now implement constraints \ref{fig:revised-syntax-model}. 
+As mentioned in the last section, because of the introduction of the \texttt{Annotation} system, the \texttt{DisplayManager} definition model has to be revised. Instead of possessing a set of constraints, \texttt{DisplayManager} definitions, they have a reference to an \texttt{ElementAnnotation} (Figure \ref{fig:revised-syntax-model}).
 
 \begin{figure}
 \centering
@@ -254,4 +255,4 @@ This causes the LabelProcessor to calculate outer proximity LabelFor relations f
 This LabelProcessor plugin is by no means a perfect implementation of the given problem, rather it gives a general idea of the purpose and applicability for the plugin system, as well as an idea of how specialized the definition of plugin configurations can become. The requirements of plugin configurations, forces DSL implementations of this metamodel to potentially be updated every time a new plugin with custom configuration is added to the system. Alternatively an approach for more general plugin configuration has to be explored
 
 
-\comment{abschluss section wäre ganz cool, aber mir fällt momentan kein guter weg ein alles sauber zusammen zu führen}
+In this chapter, the developed metamodel was introduced step by step. The base idea for this metamodel was derived from Fondement and Baar \cite{fondement_making_2005}, but was partially modified and extended to serve requirements posed by the CouchEdit architecture. The complete metamodel is depicted in Figure \ref{fig:complete-metamodel}. 

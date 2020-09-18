@@ -22,3 +22,6 @@ Costagliola
 enums
 Guice
 boolean
+enum
+elem
+attr

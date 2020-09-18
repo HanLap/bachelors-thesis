@@ -23,6 +23,10 @@ leqno					% equation numbers to the left
 % inkscape=newer to avoid re-export if nothing has changed in the svg. inkscapelatex=false for not using latex to render text (which in turn messes up all text in image). inkscapearea = page so that the SVG size is respected and borders in the SVG are not cut off
 %\usepackage[inkscape=newer, inkscapelatex=false, inkscapearea=page]{svg} 
 
+\usepackage{silence}
+\WarningFilter{hyphenat}{***}
+\WarningFilter{latexfont}{Font}
+\WarningFilter{latexfont}{Some}
 
 \pagestyle{headings}
 \usepackage{blindtext}
@@ -31,6 +35,9 @@ leqno					% equation numbers to the left
 \usepackage[ngerman, USenglish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+
+
+\usepackage[htt]{hyphenat}
 
 % enable HERE positioning %
 \usepackage{float}
@@ -50,7 +57,14 @@ leqno					% equation numbers to the left
 
 % Literaturverzeichnis mit BibLaTeX // use Biber as Backend; dashed = false to repeat author names
 \usepackage[babel]{csquotes}
-\usepackage[backend=biber,style=ieee,dashed=false,hyperref,natbib]{biblatex}
+\usepackage[
+  backend=biber,
+  style=ieee,
+  dashed=false,
+  hyperref,
+  natbib,
+  % block=ragged
+  ]{biblatex}
 \addbibresource{BA.bib}
 
 % Für Tabellen mit fester Gesamtbreite und variabler Spaltenbreite
@@ -292,33 +306,33 @@ pdfborder=0 0 0	% keine Box um die Links!
 \newgeometry{left=1.9cm, right=1.9cm, top=2.9cm, bottom=2.8cm}
 \begin{titlepage}
   \fontfamily{phv}\selectfont % Helvetica als Schriftart
-	\hfill\includegraphics[height=2.0cm]{images/logo_100_sRGB}\\[3.5cm] % Uni Ulm Logo 
-	\begin{flushright}
-		\Huge \textbf{\titel}\\[0.2cm]
-		\fontsize{19}{20}\selectfont \textbf{\untertitel}\\
-	\end{flushright}
-	
-	\vfill\hfill
-	\parbox[t]{4.6cm}{
-		\singlespacing
-		\large
-		\textbf{\fullname}\\
-		\\
-		Universität Ulm\\
-		\\
-		Fakultät für\\
-		Ingenieurwissenschaften\\
-		und Informatik\\
-		\\
-		Institut für\\
-		Programmiermethodik\\
-		und Compilerbau\\
-		\\
-		\abgabedatum\\
-		\\
-		{\abschlussarbeit} im\\
-		Studiengang Informatik
-	}
+  \hfill\includegraphics[height=2.0cm]{images/logo_100_sRGB}\\[3.5cm] % Uni Ulm Logo 
+  \begin{flushright}
+    \Huge \textbf{\titel}\\[0.2cm]
+    \fontsize{19}{20}\selectfont \textbf{\untertitel}\\
+  \end{flushright}
+
+  \vfill\hfill
+  \parbox[t]{4.6cm}{
+  \singlespacing
+  \large
+  \textbf{\fullname}\\
+  \\
+  Universität Ulm\\
+  \\
+  Fakultät für\\
+  Ingenieurwissenschaften\\
+  und Informatik\\
+  \\
+  Institut für\\
+  Programmiermethodik\\
+  und Compilerbau\\
+  \\
+  \abgabedatum\\
+  \\
+  {\abschlussarbeit} im\\
+  Studiengang Informatik
+  }
 \end{titlepage}
 \restoregeometry
 
@@ -340,24 +354,24 @@ Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
 Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
 
-% !ignore-section
-{
-	\null
-	\small
-	\vfill
-	\begin{center}
-		\begin{tabular}{l l}
-			Gutachter:  & \gutachterA \\
-			Betreuer:       & \betreuer \\
-		\end{tabular}\\[1cm]
-		Fassung \today\\
-		  \copyright~\jahr~\fullname\\[0.5em]
-		% Wenn Sie Ihre Arbeit unter einer freien Lizenz bereitstellen möchten, können Sie die nächste Zeile in Ihren Code aufnehmen. Bitte beachten Sie, dass Sie hierfür an allen Inhalten, inklusive enthaltener Abbildungen, die notwendigen Rechte benötigen! Beim Veröffentlichungsexemplar Ihrer Dissertation achten Sie bitte darauf, dass der Lizenztext nicht den Angaben in den Metadaten der genutzten Publikationsplattform widerspricht. Nähere Information zu den Creative Commons Lizenzen erhalten Sie hier: https://creativecommons.org/licenses/
-		This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA. \\
-		
-		Satz: PDF-\LaTeXe
-	\end{center}
-}
+  % !ignore-section
+  {
+    \null
+    \small
+    \vfill
+    \begin{center}
+      \begin{tabular}{l l}
+        Gutachter: & \gutachterA \\
+        Betreuer:  & \betreuer   \\
+      \end{tabular}\\[1cm]
+      Fassung \today\\
+      \copyright~\jahr~\fullname\\[0.5em]
+      % Wenn Sie Ihre Arbeit unter einer freien Lizenz bereitstellen möchten, können Sie die nächste Zeile in Ihren Code aufnehmen. Bitte beachten Sie, dass Sie hierfür an allen Inhalten, inklusive enthaltener Abbildungen, die notwendigen Rechte benötigen! Beim Veröffentlichungsexemplar Ihrer Dissertation achten Sie bitte darauf, dass der Lizenztext nicht den Angaben in den Metadaten der genutzten Publikationsplattform widerspricht. Nähere Information zu den Creative Commons Lizenzen erhalten Sie hier: https://creativecommons.org/licenses/
+      This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA. \\
+
+      Satz: PDF-\LaTeXe
+    \end{center}
+  }
 
 
 % Inhaltsverzeichnis
