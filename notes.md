@@ -68,6 +68,9 @@
 - abstract syntax composition
 
 
+- abstract display manager
+
+
 ## time management
 
 - tue 15.09: finish design revision (p. 158), prototype

@@ -29,6 +29,7 @@ CouchEdit's render syntax is realized as a set of graphic objects. The framework
 
 
 \section{Abstract Syntax}
+\label{sec:abstract-syntax}
 As noted before, the abstract syntax can be defined using existing standards. Nonetheless, the translation metamodel needs to reference the abstract syntax at certain points in this chapter. Therefore, a barebones implementation that is derived from Ecore's own metamodel\footnote{\url{https://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/package-summary.html}} definition is defined here (Figure \ref{fig:csd-abstractsyntax}). Notable concepts needed in the definition of an abstract syntax, are foremost definition of classes. This includes, definition of class attributes, as well as concepts such as inheritance and references to other classes. Furthermore definition of simple data types as well as enums is required. \comment{(maybe find source that lists requirements for an abstract syntax metamodel to support what ive written here)} 
 
 \begin{figure}
