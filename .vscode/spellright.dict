@@ -26,3 +26,6 @@ enum
 elem
 attr
 param
+Statecharts
+Petrinet
+Petrinets

@@ -1,15 +1,13 @@
-\chapter{Related Work and Fundamentals}
+\chapter{Fundamentals}
+\label{chap:fundamentals}
 
-this chapter lays out a knowledge foundation, required in later sections \comment{(*barf* horribly written)}. First an extensive introduction into the CouchEdit architecture is given, that will be needed later on to understand design decisions. Following that, the syntax of the petri net and statechart modeling languages are introduced, which are used in Chapter \ref{chap:design} to explain concepts of the proposed metamodel. Finally, related work is being explored \comment{(to short)}. 
-
+this chapter lays out the knowledge foundation, required in later sections \comment{(*barf* horribly written)}. First an outline of the applied research process is given. following that, a comprehensive view of the CouchEdit architecture is given. This will be needed later on to understand certain design decisions. Thereafter, a foundation of modeling languages is laid out, as well as some modeling syntaxes. Finally, a summary of related work is and their impact on this thesis will be presented. 
 
 \section{Methodology}
-\comment{also only pasted right now}
-
-As this research strives to develop a new metamodel suitable for the CouchEdit framework, it will be conducted in accordance to the Design Science Research (DSR) approach. According to V. Vaishnavi et al. a design science research process consists of five steps \cite{vaishnavi_design_2004}.
+As this research strived to develop a new metamodel suitable for the CouchEdit framework, it was conducted in accordance to the Design Science Research (DSR) approach. According to V. Vaishnavi et al. a design science research process consists of five steps \cite{vaishnavi_design_2004}.
 
 \subsection{Problem Awareness}
-The first step of a design science research is the identification of existing problems. As specified in section \ref{sec:problem_statement}, it was identified that the current CouchEdit implementation lacks an user friendly way of adapting it to different modeling syntaxes and that it is unclear how a metamodel for this architecture would look like.
+The first step of a design science research is the identification of existing problems. As specified in section \ref{sec:problem_statement}, it was identified that the current CouchEdit implementation lacks a developer friendly way to configure it for different modeling syntaxes and that it is unclear how a metamodel for this architecture would look like.
 
 \subsection{Suggestion}
 With a clear definition of the problem, objectives can be proposed which have to be achieved in order to solve this problem. The first objective of this research is to develop a metamodel for the CouchEdit architecture. To be more precise, a metamodel is to be designed, that can be used to specify model syntax definitions which map concrete graphical syntaxes to Abstract syntax models and is applicable to CouchEdit's architecture. The second objective is to implement a prototype that provides proof of concept for the applicability of the design metamodel.
@@ -17,9 +15,13 @@ With a clear definition of the problem, objectives can be proposed which have to
 
 \subsection{Development}
 The primary goal of a design science research is the development of artifacts.
-The first artifact to be developed in this research will be a metamodel, that can be used to define new modeling syntaxes for a relaxed conformance editor and is applicable to CouchEdit's architecture. The second artifact that is to be developed, is a prototypical code generator that can translate the developed metamodel into a CouchEdit implementation which will be able to process the defined modeling syntax.
+The first artifact to be developed in this research will be a metamodel, that can be used to define new modeling syntaxes for a relaxed conformance editor and is applicable to CouchEdit's architecture. The second artifact that is to be developed, is a prototypical code generator that can translate the developed metamodel into a CouchEdit implementation which will be able to process the defined modeling syntax. Furthermore it was decided to implement a simple DSL that eases the process of defining an instance of the given metamodel.
 
-To this end, the first sub step of the development stage will be to do a comprehensive analysis of CouchEdits architecture. In his work L. Nachreiner describes in detail, which modeling features the framework covers and how they are implemented \cite{nachreiner_couchedit_2020}. For each of these features, a sub metamodel has to be designed that can be used to define the given feature (RQ1). The approaches of \cite{minas_specifying_2001} and \cite{fondement_making_2005} provide a DSL implementation from which concepts for potential metamodels could be derived. If for one of the features, a suitable metamodel cannot be found, it would have to be evaluated if the feature could be simplified or even dropped (R1.1). After designing sub metamodels for all features, they then have to be composed together, which results in a first version of an applicable metamodel. 
+To this end, the first sub step of the development stage is a comprehensive analysis of CouchEdit's architecture. In his work L. Nachreiner describes in detail, which modeling features the framework covers and how they are implemented \cite{nachreiner_couchedit_2020}. The goal is to develop an approach that can streamline the process of defining modeling syntaxes while adhering to CouchEdit's specification. 
+
+\comment{ich hab mich echt kein bischen an meinen definierten prozess gehalten. todo}
+
+For each of these features, a sub metamodel has to be designed that can be used to define the given feature (RQ1). The approaches of \cite{minas_specifying_2001} and \cite{fondement_making_2005} provide a DSL implementation from which concepts for potential metamodels could be derived. If for one of the features, a suitable metamodel cannot be found, it would have to be evaluated if the feature could be simplified or even dropped (R1.1). After designing sub metamodels for all features, they then have to be composed together, which results in a first version of an applicable metamodel. 
 
 in the next sub step, the code generator will be implemented, this is an iterative step. first, an implementation will be developed on the basis of the designed metamodel, this should reveal further requirements imposed by CouchEdits architecture (RQ2). The metamodel then has to be adjusted to account for these requirements, which in turn requires changes of the implementation until no further requirements can be deduced. Because of time constraints it will not be possible to implement all of the metamodel's features, instead the prototype will cover a minimal feature set that still suffices to demonstrate the metamodel's applicability for selected modeling syntaxes.
 
@@ -27,14 +29,14 @@ in the next sub step, the code generator will be implemented, this is an iterati
 Now that the desired artifacts are fully developed it has to be evaluated how well they do their designated task. The metamodel as the primary artifact of this research has to be evaluated in terms of its applicability to its designated domain. To this end, the metamodel will be demonstrated on the basis of different modeling syntaxes, this should highlight areas in which the metamodel's design excels, as well as design flaws and limitations (RQ3). If time allows, potential flaws can be addressed by returning back to the development phase and revising the artifacts, otherwise flaws are to be highlighted so that future works can address them.
 
 \subsection{Conclusion}
-The conclusion stage marks the end of a DSR and the results are written up. This works written part will be the resulting bachelor's thesis as well as all source code and documentation.
+The conclusion stage marks the end of a DSR and the results are written up. This works written part is composed of this thesis as well as all written source code and documentation.
 
 
 \section{CouchEdit}
 \label{sec:CouchEdit}
-As noted in section \ref{sec:problem_statement}, the CouchEdit framework is based on the Ideas of Van Tendeloo, et al. \cite{van_tendeloo_concrete_2017}. In their paper, the authors criticize that classic approaches to modeling frontends usually create one monolithic construct, which handles both the graphical model display as well as the corresponding abstract syntax. This creates tight coupling between the two, which causes low flexibility of the UI and requires high effort, if new features are to be implemented. 
+As noted in section \ref{sec:problem_statement}, the CouchEdit framework is based on the ideas of Van Tendeloo, et al. \cite{van_tendeloo_concrete_2017}. In their paper, the authors criticize that classic approaches to modeling frontends usually create one monolithic construct, which handles both the graphical model display as well as the corresponding abstract syntax. This creates tight coupling between the two, which causes low flexibility of the UI and high effort requirements, to implement new features. 
 
-They propose to solve this, by defining two metamodels, one describing the graphical syntax and one the abstract syntax. The render syntax metamodel specifies graphic primitives that are needed to compose a given modeling syntax. instances of this metamodel are managed by the frontend and a user can manipulate this concrete syntax directly by adding, deleting or modifying Elements in the UI (if the frontend allows changes). On The other side stands the abstract syntax metamodel, it describes the conceptual representation of a modeling syntax. Instances of this metamodel are managed by the backend. To then connect these two metamodels, a further metamodel, called concrete syntax metamodel, can be defined. This concrete syntax metamodel specifies transformations to translate concrete representation into an abstract model and backwards (Figure \ref{fig:transmm}). 
+They propose to solve this, by defining two metamodels, one describing the graphical syntax and one the abstract syntax. The render syntax metamodel specifies graphic primitives that a given graphical modeling syntax is made of. instances of this metamodel are managed by the frontend and a user can manipulate this concrete representation directly by adding, deleting or modifying Elements in the UI (if the frontend allows changes). On The other side stands the abstract syntax metamodel, it describes the conceptual representation of a modeling syntax. Instances of this metamodel are managed by the backend. To then connect these two metamodels, a further metamodel, called concrete syntax metamodel, can be defined. This concrete syntax metamodel specifies a connection that maps the concrete graphical representation onto an abstract representation (Figure \ref{fig:transmm}). 
 
 \begin{figure}
   \centering
@@ -43,21 +45,21 @@ They propose to solve this, by defining two metamodels, one describing the graph
   \label{fig:transmm}
   \end{figure}
 
-Following this architecture, CouchEdit separates frontend from the abstract syntax model. The frontend at its core is a simple vector drawing application, that implements further functionality for diagrams. The backend is then analyzing these vector graphics and translating it into a corresponding abstract syntax. For this, the backend utilizes a set of independent components, that each are responsible for detecting different aspects of the diagram. Each Component contains its own state, when a component detects changes and updates its state, it also publishes these changes so that other components, interested in these changes, can use them.  
+Following this architecture, CouchEdit separates frontend and abstract syntax model. The frontend at its core is a simple vector drawing application that implements further functionality for diagrams. A Backend then has the responsibility to analyze these vector graphics and map them onto a corresponding abstract syntax representation. For this, the backend utilizes a set of independent components, that each are responsible for detecting different aspects of the diagram. Each Component contains its own state. When a component makes changes to its state, it also publishes these changes so that other components, interested in these changes, can use them to calculated follow up changes.  
 
-This architecture, has the advantage of being very detangled. this allows for components to be improved in isolation from the rest of the system and the clear separation of concerns makes it easier to understand, which component is responsible for what task. Furthermore, components can be swapped out depending on what syntax transformations are needed for the configured modeling syntax.
+This architecture, has the advantage of being very detangled. this allows for components to be improved in isolation from the rest of the system and the clear separation of concerns makes it easier to understand, which component is responsible for what task. Furthermore, components can be swapped out depending on what tasks are needed for the configured modeling syntax.
 
 
 
 \subsection{Data Model}
-CouchEdit uses a Hypergraph of Elements and Relations to represent its data. Each component has its own instance of this graph that only contains the area of the graph, that is interesting to this component. A component can manipulate its personal graph and make these changes known to the system, so that other components can manipulate their personal graph.
+CouchEdit uses a hypergraph of Elements and Relations to represent its data. Each component has its own instance of this graph that only contains the area of the graph, that is interesting to this component. A component can manipulate its personal graph and make these changes known to the system, so that other components can use them as well.
 
 
 \subsubsection{Elements}
-Elements are the base type of CouchEdits hypergraph. Every type of node in this graph inherits from the Element type. As all hypergraph instances should be independent from each other, it is not possible to access Elements via their object reference, thus every Element has an unique id, that kann be used to reliably identify an Element across multiple graphs. Elements also have a probability attribute, that denotes how probable it is that this Element is the result of a correct interpretation of the given Hypergraph. This probability object can be set to Explicit, which means that, either this Element describes a factual truth or it was set by the User. Furthermore, an Element subtypes can introduce further attributes, that contain important information for the given type.
+\texttt{Elements} are the base type of CouchEdit's hypergraph. Every type of node in this graph inherits from the \texttt{Element} type. As all hypergraph instances should be independent from each other, it is not possible to access \texttt{Elements} via their object reference. Thus every \texttt{Element} has an unique id that kann be used to reliably identify it across multiple graphs. \texttt{Elements} also have a \texttt{probability} attribute that denotes how probable it is that this \texttt{Element} is the result of a correct interpretation of the given hypergraph. This \texttt{probability} object can be set to \texttt{Explicit}, which means that, either this \texttt{Element} describes a factual truth or it was marked by the user as not to be changed. Furthermore,\texttt{Element} subtypes can introduce further attributes that contain important information for the given type.
 
 \subsubsection{Relations}
-Relations represent Edges of the Hypergraph. Each Relation connects a set of source Elements to a set of target Elements. They also inherit from the Element type and thus can recursively be connected with relations themselves. The connected vertices are referenced using the ElementReference class. This class holds an Elements unique id as well as its type, which then can be used to find a referenced Element in the hypergraph. Figure \ref{fig:relations} shows the implementation of Relations. 
+\texttt{Relations} represent edges of the hypergraph. Each \texttt{Relation} connects a set of source \texttt{Elements} to a set of target \texttt{Elements}. They also inherit from the \texttt{Element} type and thus can recursively be connected with relations themselves. The connected vertices are referenced using the \texttt{ElementReference} class. This class holds an \texttt{Elements} unique id as well as its type, which then can be used to find a referenced \texttt{Element} in the hypergraph. Figure \ref{fig:relations} shows the implementation of \texttt{Relations}. 
 
 \begin{figure}[ht]
   \centering
@@ -66,17 +68,22 @@ Relations represent Edges of the Hypergraph. Each Relation connects a set of sou
   \label{fig:relations}
 \end{figure}
 
-Via subtyping of relations, it is possible to have multiple different relations between the same two elements, that all describe different kinds of connections. While Relations can connect sets of source and target vertices, the most common relation sub type is the OneToOneRelation, it describes a connection between exactly one source and one target Element. 
+ While \texttt{Relations} can connect multiple source and target vertices, the most common \texttt{Relation} type is the \texttt{OneToOneRelation}, it describes a connection between exactly one source and one target \texttt{Element}. A common example, for such a \texttt{OneToOneRelation}, is the \texttt{Contains} relations, which defines that one \texttt{Element} encloses another.  
 
 
 \subsubsection{Graphic Objects}
-graphic objects represent atomic elements, that the user interacts with, via the Frontend. An important decision, when designing an Editor is the question on how granular singular graphic objects should be. 
+\comment{this chapter still is a mess}
+graphic objects (GO) represent atomic elements, that the user interacts with, via the Frontend. An important decision, when designing an Editor is the question on how granular singular graphic objects should be. 
 
-On a basic level, graphic objects can consists of either pixels or vectors. a pixel based Approach would require a visual recognition preprocessor, that composes the state of pixels in to comprehensible graphic primitives. While such form of image recognition is outside the scope of the CouchEdit project, similar projects such as FlexiSketch \cite{wuest_flexisketch_2015} show the possibilities this approach enables.
+On a basic level, GOs can consist of either pixels or vectors. a pixel based Approach would require a visual recognition preprocessor, that composes the state of pixels in to comprehensible graphic primitives. While such form of image recognition is outside the scope of the CouchEdit project, similar projects such as FlexiSketch \cite{wuest_flexisketch_2015} show the application of this approach.
 
-Most modeling approaches with some form of abstract syntax processing capabilities, build graphic elements with the purpose of representing a specific element of the abstract syntax. As a result these graphic elements are very strict in their graphical representation. 
+Most modeling approaches with some form of abstract syntax processing, build graphic elements with the purpose of representing a specific element of the abstract syntax. As a result these graphic elements are very strict in their graphical representation. 
 
 CouchEdit Follows the Classification of Costagliola, et al. \cite{costagliola_classification_2002}. This classification defines a graphic element on its lowest level as a primitive graphic shape (e.g circle, line) \comment{(read up if thats actually what costagliola are doing)}. Via sub-classing, a single graphic object can increase in complexity. Such complex graphic object can have  
+
+
+In his work, The “Physics” of Notations: Toward a Scientific Basis for Constructing Visual Notations in Software Engineering \cite{moody_physics_2009}, Moody specifies eight variables that can be applied to a single graphic primitive. These attributes are separated into factors that have direct influence on the relations between GOs and   Position
+(horizontal and vertical), shape, size, orientation, color, brightness and texture. While the 
 
 
 
@@ -84,46 +91,56 @@ CouchEdit Follows the Classification of Costagliola, et al. \cite{costagliola_cl
   \item attribute bag
 \end{itemize}
 
+\subsubsection{HotSpotDefinitions}
 
-\subsection{Processors}
-In CouchEdit the mentioned independent components, are represented as 
-subscribe to element types, publish new diffs, connected to bus, model diffs
+
+\subsection{Application Structure}
+CouchEdit builds around independent components, called \texttt{Processors} that can be enabled or disabled as needed in a given use case. To this end, the center piece of CouchEdit's architecture is the \texttt{ModificationBusManager}. Every \texttt{Processor} (including the frontend) can be connected to this bus manager (Figure \ref{fig:bus}). if one \texttt{Processor} publishes a change of the hypergraph, the \texttt{ModificationBusManager} propagates this change to all \texttt{Processors} connected. Each \texttt{Processor} can specify which \texttt{Element} types it is interested and will only receive updates for \texttt{Elements} that match one of those types. 
+
+\begin{figure}
+\centering
+\includegraphics[width=.7\linewidth]{images/"component - bus"}
+\caption{Component diagram describing the underlying \texttt{ModificationBusManager} that connects all processors in the system.}
+\label{fig:bus}
+\end{figure}
 
 \subsubsection{Core Processors}
-\begin{itemize}
-  \item Spatial Abstractor 
-  \item ConnectionEnd Processor
-\end{itemize}
+CouchEdit implements a set of \texttt{Processors} that are integral to most modeling syntaxes. These so called core \texttt{Processors} currently are: 
+\begin{description}
+  \item[SpatialAbstractor] This \texttt{Processor} has the responsibility to calculate how \texttt{GOs} are positioned to each other. Possible position \texttt{Relations} include: \texttt{RightOf}, \texttt{BottomOf}, \texttt{Intersect}, etc..
+  \item[ConnectionEndDetector] The \texttt{ConnectionEndDetector} finds line \texttt{GOs} that could represent a connection to another \texttt{GO}. it Then adds \texttt{ConnectionEnds} relations from the line to the other \texttt{GO}. Furthermore, the \texttt{ConnectionEnd} relation has the attribute \texttt{isEndConnection} that defines, if this relation origins from the ending point of the line.
+  \item[Containment] The \texttt{Containment processor}, checks if one \texttt{GO} is contained by another. Meaning, if one \texttt{GO} completely encompasses another \texttt{GO}, the \texttt{Processor} adds a \texttt{Contains} relation from the surrounding \texttt{GO} to the contained one.
+\end{description}
 
 \subsection{Services}
+\texttt{Processors} may sometimes require to gather additional information, such as. For example it is often needed to find all \texttt{Elements} that are connected to a given \texttt{Element} by a certain \texttt{Relation} type.
+To this End, CouchEdit provides \texttt{Services}. \texttt{Services} are separate objects that provide a set of functions. A \texttt{Service} can be required by multiple different \texttt{Processors} and thus must be effectively stateless.
 
 
+
+\subsection{Suggestions}
+\comment{todo}
 
 \begin{itemize}
-  \item renderMM - ConcreteMM - AbstractMM
-  \item publish/subscribe pattern
-  \item attribute bags
-  \item model repository
-  \item suggestions
+  \item compartmentHotSpotDefinition
 \end{itemize}
 
 \section{Modeling Languages}
-
-\comment{\dots}
+This thesis discusses modeling syntaxes and how they can be handled in the CouchEdit architecture. The following chapters will demonstrate the developed artifact with the help of modeling syntax examples. thus the two syntaxes that will be used in this thesis are defined here.
 
 % \subsection{Graphical Language Theory}
-\subsection{Petri Nets Syntax}
+\subsection{Petrinets Syntax}
 \label{sec:petrinets}
-In the following, design considerations are explained using a simple petri net syntax. Figure \ref{fig:petrinets_metamodel} shows the abstract syntax metamodel of the used Petri nets syntax. The Petri nets conceptual representation consists of places and transitions. Places also have a token count. each place can have a variable amount of incoming and outgoing transitions, while transitions can have any amount of incoming and outgoing places. 
+The first modeling syntax introduced are Petrinets. Petrinets are easy to understand and provide simple abstract and concrete syntax. Thus they serve as a suitable tool for explaining concepts in the following chapters. Figure \ref{fig:petrinets_metamodel} shows the abstract syntax metamodel of the used Petrinets syntax. The Petrinets conceptual representation consists of places and transitions. Places also have a token count. each place can have a variable amount of incoming and outgoing transitions, while transitions can have any amount of incoming and outgoing places. 
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=.7\linewidth]{images/"csd - petrinet-metamodel"}
-  \caption{Metamodel for a simple petri net abstract syntax}
+  \caption{Metamodel for a simple Petrinet abstract syntax}
   \label{fig:petrinets_metamodel}
 \end{figure}
 
-The graphic representation of Petri nets is described in table \ref{tab:petri-primitives}. Places are usually represented as circles, while Transitions are depicted as slender rectangles. The number of small black circles inside a place represent this places token count. Furthermore places and transitions possess a label close to their bounding box, that determines their name. Lastly places and transitions have directed connection lines between then. Each connection points from a place or transition towards an element of the opposite type and represents man outgoing connection for the source element and an incoming connection for the target element. A simple concrete instantiation and its corresponding abstract representation is shown in figure \ref{fig:petrinets_example}.
+The graphic primitives, a concrete representation of Petrinets is composed of are listed in table \ref{tab:petri-primitives}. places are usually represented as circles, while transitions are depicted as slender rectangles. The number of small black circles inside a place represent this places token count. Furthermore places and transitions possess a label close to their bounding box, that determines their name. Lastly places and transitions have directed connection lines between them. Each connection points from a place or transition towards an element of the opposite type and represents an outgoing connection for the source element and an incoming connection for the target element. A simple concrete instantiation and its corresponding abstract representation is shown in figure \ref{fig:petrinets_example}.
 
 \begin{table}[ht]
   \centering
@@ -144,7 +161,7 @@ The graphic representation of Petri nets is described in table \ref{tab:petri-pr
   \\
   \hline
 \end{tabular}
-\caption{graphic primitives used to describe petri nets}
+\caption{graphic primitives used to describe Petrinets}
 \label{tab:petri-primitives}
 \end{table}
 
@@ -162,22 +179,44 @@ The graphic representation of Petri nets is described in table \ref{tab:petri-pr
     \caption{abstract syntax}
     \label{subfig:petriabstract}    
   \end{subfigure}
-  \caption{concrete and abstract representation for a simple Petri net example}
+  \caption{concrete and abstract representation for a simple Petrinet example}
   \label{fig:petrinets_example}
 \end{figure} 
 
 \subsection{Statechart Syntax}
-\label{sec:Statecharts}
+\label{sec:statecharts}
+as a second example, Statecharts were chosen. Statecharts describe a state machine with the characteristic, that each state kann define its own sub state machines. Figure \ref{fig:statechartmm} describes the abstract syntax metamodel that is used. This does not describe the complete Statecharts syntax, rather a sub set which can be used to highlight certain areas of the implementation. Statecharts define a more complex syntax and thus will serve as an example for the applicability of the developed artifact.
 
 \begin{figure}
 \centering
 \includegraphics[width=.7\linewidth]{images/"csd - new-statechart-metamodel"}
-\caption{Abstract Metamodel of State charts}
+\caption{Abstract Metamodel of Statecharts}
 \label{fig:statechartmm}
 \end{figure}
 
+Statecharts are primarily composed of \texttt{stateElements} and \texttt{Transitions}.
+
+\texttt{StateElements} are split into \texttt{States} and \texttt{PseudoStates}. \texttt{PseudoStates} have one of several kinds, defined by the \texttt{PseudoStateKind}. Possible types are initial, final and choice
 
 
+\texttt{States} are called simple \texttt{State} if they posses no sub state machine. In the case they do encompass a sub state machine they are called compound \texttt{State}. A compound \texttt{State} can have multiple sub states, in this case they can be split apart using a dashed separator line, to create \texttt{Regions}. Each \texttt{Region} contains its own state machine.
 
 
-\comment{...}
+\begin{itemize}
+  \item talk about label positioning
+  \item orthogonal regions
+\end{itemize}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=.7\linewidth]{images/"visualization - statechart-example"}
+\caption{Concrete representation of an example Statechart}
+\label{fig:statechart-example}
+\end{figure}
+
+concepts ignored:
+\begin{itemize}
+  \item entry/ exit actions
+  \item event parsing (guards)
+\end{itemize}

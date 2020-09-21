@@ -122,8 +122,8 @@ h4:before {
  - plugins
  - display managers
 
-## example petri nets
-## example state charts
+## example Petrinets
+## example Statecharts
 
 ----
 # Evaluation

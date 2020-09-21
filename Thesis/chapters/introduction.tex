@@ -26,7 +26,7 @@ CouchEdit achieves this by building upon the architecture concept of clear separ
   \label{fig:processors}
 \end{figure}
 
-Some of these processors are needed for every type of syntax model, for example the spatial processor, that processes how nodes in the concrete syntax are positioned to each other (above, besides, etc.). Other processors are specific to the given modeling syntax, for example a state chart syntax would require a state processor, that processes if a given graphical object represents a state (usually true if the given node is a rectangle with rounded edges).
+Some of these processors are needed for every type of syntax model, for example the spatial processor, that processes how nodes in the concrete syntax are positioned to each other (above, besides, etc.). Other processors are specific to the given modeling syntax, for example a Statechart syntax would require a state processor, that processes if a given graphical object represents a state (usually true if the given node is a rectangle with rounded edges).
 
 A modeling syntax parser for CouchEdit would has to generate these syntax specific processors, while considering multiple design constraints that result from this architecture. Thus a metamodel is needed that can define the desired abstract modeling syntax and specify how a concrete graphical syntax can be mapped to this abstract syntax. While there is ongoing research in the area of relaxed conformance editing and how to link concrete and abstract syntax, it does not immediately become clear what such a metamodel can look like.
 
@@ -39,10 +39,10 @@ This extension of the CouchEdit framework is supposed to improve developer acces
 \section{Research Questions}
 \comment{rewrite to fit thesis}
 
-The primary goal of this research will be the development of a metamodel for the CouchEdit framework. This imposes multiple questions which are to be answered in order to design and evaluate the designated metamodel.
+The primary goal of this research was the development of a metamodel for the CouchEdit framework. To this end, the following questions were defined as a means to guide the research.
 
-\begin{description}
-  \item[RQ1:] Is it possible to define a concise metamodel that covers CouchEdits complete feature set?
+\begin{description} 
+  \item[RQ1:] \comment{was mach ich wegen dieser blöden frage?} Is it possible to define a concise metamodel that covers CouchEdits complete feature set?
 
         If this is not possible, the following question has to be answered.
         \begin{description}
@@ -63,10 +63,11 @@ The primary goal of this research will be the development of a metamodel for the
 
 
 \section{Limitations}
-\comment{\dots}
+Because of the tight time constraints imposed by the scope of this project, this thesis does not provide a complete solution for the given problem. Rather the developed artifact presents a cross section of the areas that are of importance. This Thesis does not:
+
 \begin{itemize}
-  \item not a complete metamodel designed. common language concepts ignored
+  \item Comprehensive metamodel, that can be 
 \end{itemize}
 
 \section{Thesis Structure}
-\comment{\dots}
+This thesis is organized in the following structure: Chapter \ref{chap:fundamentals}, lays out fundamentals required in the rest of the thesis. This includes a comprehensive summary of the CouchEdit architecture as well as modeling theory. Chapter \ref{chap:related_work} summarizes further work in the relevant field. Following that, in Chapter \ref{chap:design} the developed metamodel is described in detail. The prototypical implementation that was developed alongside the metamodel, is then laid out in \ref{chap:prototype}. Chapter \ref{chap:evaluation} provides considerations about the evaluation of the artifact, as well as the evaluation results. Finally \ref{chap:conclusion} gives perspectives on the future of this project, as well as takeaways from this research.

@@ -68,8 +68,10 @@
 - abstract syntax composition
 
 
-- abstract display manager
-
+- add abstract display manager
+- rework connection plugin
+- rename annotation chapter to pattern chapter
+- model actions (3.3.2)
 
 ## time management
 

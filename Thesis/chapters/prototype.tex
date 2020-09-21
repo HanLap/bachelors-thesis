@@ -1,4 +1,5 @@
 \chapter{Prototype}
+\label{chap:prototype}
 Along side the development of the metamodel, described in Chapter \ref{chap:design}, a prototype was developed as well, which serves as a proof of concepts for design decisions made. This prototype is realized as an extensions of CouchEdit's current existing prototype, developed bei Nachreiner and presented in \cite{nachreiner_couchedit_2020}.
 
 CouchEdit's current running prototype is completely written in Kotlin\footnote{\url{https://kotlinlang.org/}}, a programing language with the ability to compile to the Java virtual machine platform. Thus, Kotlin enables access to Java's ecosystem of libraries and Frameworks. TornadoFX\footnote{\url{https://tornadofx.io/}}, a JavaFX wrapper, is used as UI Framework. As a modeling tool, GMF\footnote{\url{https://www.eclipse.org/gmf-tooling/}} was integrated. Dependencies are handled using the Dependency Injection framework Guice\footnote{\url{https://github.com/google/guice}}, which integrates perfectly with CouchEdit's modular architecture. More information about the current prototype and its features can be found in \cite{nachreiner_couchedit_2020}.
@@ -13,7 +14,7 @@ To ease the effort of defining language configurations, it was also decided to i
 The CouchEdit DSL is composed of three distinct parts, each representing one of the sub metamodels defined by the \texttt{CouchEditConfiguration}. Each CouchEdit configuration consists of three files, \texttt{RenderMM}, \texttt{ConcreteMM} and \texttt{AbstractMM}, describing each of the three sub metamodels, the CouchEdit configuration is composed of.
 
 \subsection{Render DSL}
-Given the simplicity of the \texttt{RenderMetamodel} defined in this work, the corresponding DSL does not encompass much grammar. The RenderMM DSL provides a set of constants, each representing a shape supported by the framework. A Configuration takes a set of these constants. Future work would have to look at how graphical attributes work with the system as well as integration of complex graphic objects. An example of such a \texttt{RenderMM} instance for a Petri nets configuration, is shown in Listing \ref{lst:petri-rendermm}.
+Given the simplicity of the \texttt{RenderMetamodel} defined in this work, the corresponding DSL does not encompass much grammar. The RenderMM DSL provides a set of constants, each representing a shape supported by the framework. A Configuration takes a set of these constants. Future work would have to look at how graphical attributes work with the system as well as integration of complex graphic objects. An example of such a \texttt{RenderMM} instance for a Petrinets configuration, is shown in Listing \ref{lst:petri-rendermm}.
 
 \subsection{Abstract DSL}
 It was noted in Section \ref{sec:abstract-syntax} that the \texttt{AbstractSyntaxMetamodel} can be defined using existing tools such as Ecore. As developing a functioning Ecore parser was deemed to complex, the prototype instead implements a barebones grammar that allows for the definition of a subset of the Ecore metamodel. Notably the DSL allows for the definition of enums and classes. While interface definitions are worthwhile as well, they are not yet supported.
@@ -26,7 +27,7 @@ It was noted in Section \ref{sec:abstract-syntax} that the \texttt{AbstractSynta
 
 % \lstinputlisting[captionpos=b,caption={PseudoStateKind \texttt{Enum} definition},linerange={15-19}]{code/configs/statechartsnew/AbstractMM.kts}
 
-\textbf{Structural Features:} \texttt{StructuralFeatures} allow for the definition of attributes a class possesses. Most Notably they allow for the definition of attributes and references to other classes. A \texttt{StructuralFeature} holds a name, as well as upper and lower bound definitions. Furthermore a Structural Feature can hold a default value. The DSL allows for the definition of \texttt{StructuralFeatures} in form of three symbols, \texttt{attr}, \texttt{ref} and \texttt{comp}. \texttt{attr} are used to define simple attributes, a class definition can hold. Currently supported \texttt{AttributeTypes} are: boolean, string, integer, double, unspecified Java classes and objects, as well as any enums defined. \texttt{ref} and \texttt{comp} can be used to define references to other classes. Because of limitations imposed by the Kotlin DSL, enum as well as class reference names have to be wrapped into string literals. While \texttt{ref} defines standard references, \texttt{comp} defines compositions. This plays an important role When generating source code from this configuration. References define connections to objects, that can exist by themselves. In the CouchEdit architecture that means, they have to exist in the applications hypergraph. Thus they can only be referenced, using \texttt{ElementReferences}. On the other hand, composition objects do not exist as separate entities in the graph und therefore do not have to be referenced using \texttt{ElementReferences}. the \texttt{AbstractMM} definition for Petri nets is shown in Listing \ref{lst:petri-abstractmm}.
+\textbf{Structural Features:} \texttt{StructuralFeatures} allow for the definition of attributes a class possesses. Most Notably they allow for the definition of attributes and references to other classes. A \texttt{StructuralFeature} holds a name, as well as upper and lower bound definitions, where an upper bound of "-1" indicates that it is unbound. Furthermore a Structural Feature can hold a default value. The DSL allows for the definition of \texttt{StructuralFeatures} in form of three symbols, \texttt{attr}, \texttt{ref} and \texttt{comp}. \texttt{attr} are used to define simple attributes, a class definition can hold. Currently supported \texttt{AttributeTypes} are: boolean, string, integer, double, unspecified Java classes and objects, as well as any enums defined. \texttt{ref} and \texttt{comp} can be used to define references to other classes. Because of limitations imposed by the Kotlin DSL, enum as well as class reference names have to be wrapped into string literals. While \texttt{ref} defines standard references, \texttt{comp} defines compositions. This plays an important role When generating source code from this configuration. References define connections to objects, that can exist by themselves. In the CouchEdit architecture that means, they have to exist in the applications hypergraph. Thus they can only be referenced, using \texttt{ElementReferences}. On the other hand, composition objects do not exist as separate entities in the graph und therefore do not have to be referenced using \texttt{ElementReferences}. the \texttt{AbstractMM} definition for Petrinets is shown in Listing \ref{lst:petri-abstractmm}.
 
 \subsection{Concrete DSL}
 The \texttt{ConcreteMM} definition is the centerpiece of the developed artifact, thus defining this part was main focus during the development process. Similarly to the metamodel defined in Chapter \ref{chap:design}, the \texttt{ConcreteMM} DSL is composed of three distinct concepts, with an additional possibility of defining helper functions. Each of the concepts is defined in its own scope.
@@ -38,38 +39,39 @@ The \texttt{ConcreteMM} definition is the centerpiece of the developed artifact,
 
 \textbf{Patterns:} The \texttt{patterns} scope allows for the definition of new pattern matchers. Each new pattern matcher is marked by a \texttt{def} block which contains the patterns name, followed by a new scope. The scope contains all constraints that a graphic object has to satisfy, to be marked with this pattern. A constraint is added by inserting a "+" followed by a string literal. The string literal represents a complete statement block and thus can contain any amount of statements, where the last statement represents the return value. These constraint blocks must return a boolean value und thus, have to always end in a boolean expression. Furthermore the constraints are completely isolated from each other. This means, casting the graphic object in one constraint will have no effect on following constraints. On the other hand, these constraints are executed in the order they are defined in. If one constraint fails, following constraints will not be checked. this offers the possibility to safely cast a graphic object in all constraints, when a previous constraint has verified the objects type.
 
-\textbf{DisplayManagers:} The \texttt{displayManagers} scope allows for the definition of new \texttt{DisplayManagers}. Each new manager definition is marked by a \texttt{def} block, that contains a string literal specifying the abstract model element and possibly one literal specifying the corresponding pattern. If no pattern name is given, the definition represents an \texttt{AbstractDisplayManager}. Rules are defined in the same way as pattern constraints are. A rules statement block on the other hand has no specific return type. Instead they directly act on a given \texttt{DisplayManager} and manipulate the corresponding model element. Should two different rules manipulate the same attribute, the rule defined last will overwrite changes done by the first one. Rules can be defined in a way as to not change any values of the model element. An Example definition for a Petri nets \texttt{ConcreteMM} configuration is shown in Listing \ref{lst:petri-concretemm}.
+\textbf{DisplayManagers:} The \texttt{displayManagers} scope allows for the definition of new \texttt{DisplayManagers}. Each new manager definition is marked by a \texttt{def} block, that contains a string literal specifying the abstract model element and possibly one literal specifying the corresponding pattern. If no pattern name is given, the definition represents an \texttt{AbstractDisplayManager}. Rules are defined in the same way as pattern constraints are. A rules statement block on the other hand has no specific return type. Instead they directly act on a given \texttt{DisplayManager} and manipulate the corresponding model element. Should two different rules manipulate the same attribute, the rule defined last will overwrite changes done by the first one. Rules can be defined in a way as to not change any values of the model element. An Example definition for a Petrinets \texttt{ConcreteMM} configuration is shown in Listing \ref{lst:petri-concretemm}.
 
-\section{Petri Nets}
-As a first example a Petri nets configuration was implemented. This configuration follows the model defined in \ref{sec:petrinets}. The complete implementation is shown in Appendix \ref{app:petri}.
+\section{Petrinets}
+As a first example a Petrinets configuration was implemented. This configuration follows the model defined in Section \ref{sec:petrinets}, while the complete implementation is shown in Appendix \ref{app:petri}. The complete configuration script, composed of \texttt{RenderMM}, \texttt{AbstractMM} and \texttt{ConcreteMM}, is \petriLoC lines long. The Kotlin code generated by this configuration encompasses 797 lines. 
 
-\ref{app:petri}
+Shapes configured in the \texttt{RenderMM} (Listing \ref{lst:petri-rendermm}) are, circle, rectangle, line and label. With future development of a more sophisticated \texttt{RenderMM} configuration, the circle shape could be defined separately, once as a small black circle and once as a bigger circle without fill color. 
 
-plugins:
+The \texttt{AbstractMM} (Listing \ref{lst:petri-abstractmm}) definition has two \texttt{Class} definitions. The \texttt{Place Class} has one attribute \texttt{name} of type string, another attribute \texttt{tokens}, with type integer, a fixed bound to "1" and a default value "0". Furthermore the \texttt{Place Class} has two references, \texttt{incoming} and \texttt{outgoing}, with the type \texttt{Transition} and an unlimited upper bound, indicated by "-1". The \texttt{Transition Class} is defined in the same fashion.
+
+The \texttt{ConcreteMM} (Listing \ref{lst:petri-concretemm}) definition has the connection and label  plugin, mentioned in Section \ref{sec:plugins} enabled. The connection plugin in its current iteration does not take a configuration. The label plugin on the other hand is configured to detect labels that surround a graphic object with the pattern \texttt{Place} or \texttt{Transition}. If this results in more than one possible LabelFor relation, the result is discarded as noted by "\texttt{ifAmbiguous nothing}". One \texttt{helper} was defined, which finds the the text, a place or transition is labeled with. The \texttt{patterns} scope has three patterns defined, \texttt{PLace}, \texttt{Token} and \texttt{Transition}. \texttt{Place} and \texttt{Transition} constraints are defined similar to the examples given in Section \ref{sec:recognition}, but the \texttt{Transition} pattern contains an additional constraint that checks if a rectangle has one side at least double the length of the other side. The \texttt{Token} pattern is used to detect elements that actually represent a token, to ease the process of syncing the token count. The \texttt{DisplayManagers} scope has two definitions, one \texttt{PlaceDM} and one \texttt{TransitionDM}. The \texttt{PlaceDM} connects \texttt{Place} pattern and \texttt{Place} model element.
+
+The Petrinets configuration provides an example on how to use the developed prototype to define CouchEdit configurations. 
+
+% plugins:
+% \begin{itemize}
+%   \item connection
+%   \item label
+% \end{itemize}
+
+% \begin{itemize}
+%   \item config 128 lines
+%   \item generated 787 lines
+% \end{itemize}
+
+\section{Statecharts}
+As a second example, a subset of the Statecharts language was implemented. This implementation realizes the syntax defined in Section \ref{sec:statecharts} and is shown in Appendix \ref{app:state}. The configuration is \comment{<insert lines of code here>} lines long while the generated source code encompasses \comment{<insert lines of code here>} lines.
+
+Enabled plugins for this configuration are the connection and label plugin, as well as the \texttt{CompartmentDetector} plugin. The \texttt{CompartmentDetector} adds \texttt{CompartmentHotSpotDefinitions}, a relation that defines sub regions of a graphic object, if it is split by lines. Implementation details of compartmentalization and its implementation was explored in detail by Nachreiner \cite{nachreiner_couchedit_2020}.
+
 \begin{itemize}
-  \item connection
-  \item label
-\end{itemize}
-
-\begin{itemize}
-  \item config 148 lines
-  \item generated 791 lines
-\end{itemize}
-
-
-
-\section{State Charts}
-
-\ref{app:state}
-
-plugins:
-\begin{itemize}
-  \item compartmentDetector
-  \item label
-\end{itemize}
-
-\begin{itemize}
-  \item problematic plugin design
+  \item shows applicability of pattern system
+  \item Shows weakness of label plugin
+  \item sameParent helper
   \item config 196 lines
   \item generated 1331 lines
 \end{itemize}
