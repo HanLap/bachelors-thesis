@@ -17,13 +17,9 @@ With a clear definition of the problem, objectives can be proposed which have to
 The primary goal of a design science research is the development of artifacts.
 The first artifact to be developed in this research will be a metamodel, that can be used to define new modeling syntaxes for a relaxed conformance editor and is applicable to CouchEdit's architecture. The second artifact that is to be developed, is a prototypical code generator that can translate the developed metamodel into a CouchEdit implementation which will be able to process the defined modeling syntax. Furthermore it was decided to implement a simple DSL that eases the process of defining an instance of the given metamodel.
 
-To this end, the first sub step of the development stage is a comprehensive analysis of CouchEdit's architecture. In his work L. Nachreiner describes in detail, which modeling features the framework covers and how they are implemented \cite{nachreiner_couchedit_2020}. The goal is to develop an approach that can streamline the process of defining modeling syntaxes while adhering to CouchEdit's specification. 
+To this end, the first sub step of the development stage is a comprehensive analysis of CouchEdit's architecture. In his work L. Nachreiner describes in detail, which modeling features the framework covers and how they are implemented \cite{nachreiner_couchedit_2020}. The goal is to develop an approach that can streamline the process of defining modeling syntaxes while adhering to CouchEdit's specification. Related work defined in Chapter \ref{chap:related_work} serves as a basis from which an initial suitable metamodel can be derived.
 
-\comment{ich hab mich echt kein bischen an meinen definierten prozess gehalten. todo}
-
-For each of these features, a sub metamodel has to be designed that can be used to define the given feature (RQ1). The approaches of \cite{minas_specifying_2001} and \cite{fondement_making_2005} provide a DSL implementation from which concepts for potential metamodels could be derived. If for one of the features, a suitable metamodel cannot be found, it would have to be evaluated if the feature could be simplified or even dropped (R1.1). After designing sub metamodels for all features, they then have to be composed together, which results in a first version of an applicable metamodel. 
-
-in the next sub step, the code generator will be implemented, this is an iterative step. first, an implementation will be developed on the basis of the designed metamodel, this should reveal further requirements imposed by CouchEdits architecture (RQ2). The metamodel then has to be adjusted to account for these requirements, which in turn requires changes of the implementation until no further requirements can be deduced. Because of time constraints it will not be possible to implement all of the metamodel's features, instead the prototype will cover a minimal feature set that still suffices to demonstrate the metamodel's applicability for selected modeling syntaxes.
+in the next sub step, the code generator will be implemented, this is an iterative step. first, an implementation will be developed on the basis of the designed metamodel, this should reveal further requirements imposed by CouchEdit's architecture (RQ2). The metamodel then has to be adjusted to account for these requirements, which in turn requires changes of the implementation until no further requirements can be deduced. Because of time constraints it is not possible to implement all of the metamodel's features, instead the prototype covers a minimal feature set that still suffices to demonstrate the metamodel's applicability for selected modeling syntaxes.
 
 \subsection{Evaluation}
 Now that the desired artifacts are fully developed it has to be evaluated how well they do their designated task. The metamodel as the primary artifact of this research has to be evaluated in terms of its applicability to its designated domain. To this end, the metamodel will be demonstrated on the basis of different modeling syntaxes, this should highlight areas in which the metamodel's design excels, as well as design flaws and limitations (RQ3). If time allows, potential flaws can be addressed by returning back to the development phase and revising the artifacts, otherwise flaws are to be highlighted so that future works can address them.
@@ -73,6 +69,7 @@ CouchEdit uses a hypergraph of Elements and Relations to represent its data. Eac
 
 \subsubsection{Graphic Objects}
 \comment{this chapter still is a mess}
+
 graphic objects (GO) represent atomic elements, that the user interacts with, via the Frontend. An important decision, when designing an Editor is the question on how granular singular graphic objects should be. 
 
 On a basic level, GOs can consist of either pixels or vectors. a pixel based Approach would require a visual recognition preprocessor, that composes the state of pixels in to comprehensible graphic primitives. While such form of image recognition is outside the scope of the CouchEdit project, similar projects such as FlexiSketch \cite{wuest_flexisketch_2015} show the application of this approach.
@@ -92,6 +89,7 @@ In his work, The “Physics” of Notations: Toward a Scientific Basis for Const
 \end{itemize}
 
 \subsubsection{HotSpotDefinitions}
+\comment{todo}
 
 
 \subsection{Application Structure}
@@ -104,7 +102,10 @@ CouchEdit builds around independent components, called \texttt{Processors} that 
 % \label{fig:bus}
 % \end{figure}
 
+\comment{mention diffs}
+
 \subsubsection{Core Processors}
+\label{sec:core-processors}
 CouchEdit implements a set of \texttt{Processors} that are integral to most modeling syntaxes. These so called core \texttt{Processors} currently are: 
 \begin{description}
   \item[SpatialAbstractor] This \texttt{Processor} has the responsibility to calculate how \texttt{GOs} are positioned to each other. Possible position \texttt{Relations} include: \texttt{RightOf}, \texttt{BottomOf}, \texttt{Intersect}, etc..
@@ -196,26 +197,35 @@ as a second example, Statecharts were chosen. Statecharts describe a state machi
 \label{fig:statechartmm}
 \end{figure}
 
-Statecharts are primarily composed of \texttt{stateElements} and \texttt{Transitions}.
-
-\texttt{StateElements} are split into \texttt{States} and \texttt{PseudoStates}. \texttt{PseudoStates} have one of several kinds, defined by the \texttt{PseudoStateKind}. Possible types are initial, final and choice
-
-
-\texttt{States} are called simple \texttt{State} if they posses no sub state machine. In the case they do encompass a sub state machine they are called compound \texttt{State}. A compound \texttt{State} can have multiple sub states, in this case they can be split apart using a dashed separator line, to create \texttt{Regions}. Each \texttt{Region} contains its own state machine.
-
-
-\begin{itemize}
-  \item talk about label positioning
-  \item orthogonal regions
-\end{itemize}
+Statecharts are primarily composed of \texttt{StateElements} and \texttt{Transitions}.\texttt{Transitions} possess an event. 
+\texttt{StateElements} are split into \texttt{States} and \texttt{PseudoStates}. \texttt{PseudoStates} have one of several kinds, defined by the \texttt{PseudoStateKind}. \texttt{States} are called simple \texttt{State} if they posses no sub state machine. In the case they do encompass a sub state machine they are called compound \texttt{State}. A compound \texttt{State} can have multiple sub states, in this case they can be split apart using a dashed separator line, to create \texttt{Regions}. Each \texttt{Region} contains its own state machine (Table \ref{tab:state-states}).
 
 
 \begin{figure}
 \centering
-\includegraphics[width=.7\linewidth]{images/"visualization - statechart-example"}
+\includegraphics[width=\linewidth]{images/"visualization - statechart-example"}
 \caption{Concrete representation of an example Statechart}
 \label{fig:statechart-example}
 \end{figure}
+
+\begin{table}[ht]
+  \centering
+\begin{tabular}[width=.1\linewidth]{| Sc | Sc | Sc |}
+  \hline
+  Simple State & Compound State & Compound State w/ Regions
+  \\
+  \hline
+  \includegraphics[width=.2\linewidth]{images/"visualization - simpleState"} 
+  & 
+  \includegraphics[width=.3\linewidth]{images/"visualization - compoundState"} 
+  & 
+  \includegraphics[width=.35\linewidth]{images/"visualization - region-compound-state"}
+  \\
+  \hline
+\end{tabular}
+\caption{Possible representations for states}
+\label{tab:state-states}
+\end{table}
 
 concepts ignored:
 \begin{itemize}
