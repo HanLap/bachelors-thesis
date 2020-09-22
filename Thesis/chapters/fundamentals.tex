@@ -95,14 +95,14 @@ In his work, The “Physics” of Notations: Toward a Scientific Basis for Const
 
 
 \subsection{Application Structure}
-CouchEdit builds around independent components, called \texttt{Processors} that can be enabled or disabled as needed in a given use case. To this end, the center piece of CouchEdit's architecture is the \texttt{ModificationBusManager}. Every \texttt{Processor} (including the frontend) can be connected to this bus manager (Figure \ref{fig:bus}). if one \texttt{Processor} publishes a change of the hypergraph, the \texttt{ModificationBusManager} propagates this change to all \texttt{Processors} connected. Each \texttt{Processor} can specify which \texttt{Element} types it is interested and will only receive updates for \texttt{Elements} that match one of those types. 
+CouchEdit builds around independent components, called \texttt{Processors} that can be enabled or disabled as needed in a given use case. To this end, the center piece of CouchEdit's architecture is the \texttt{ModificationBusManager}. Every \texttt{Processor} (including the frontend) can be connected to this bus manager (Figure \ref{fig:processors}). if one \texttt{Processor} publishes a change of the hypergraph, the \texttt{ModificationBusManager} propagates this change to all \texttt{Processors} connected. Each \texttt{Processor} can specify which \texttt{Element} types it is interested and will only receive updates for \texttt{Elements} that match one of those types. 
 
-\begin{figure}
-\centering
-\includegraphics[width=.7\linewidth]{images/"component - bus"}
-\caption{Component diagram describing the underlying \texttt{ModificationBusManager} that connects all processors in the system.}
-\label{fig:bus}
-\end{figure}
+% \begin{figure}
+% \centering
+% \includegraphics[width=.7\linewidth]{images/"component - bus"}
+% \caption{Component diagram describing the underlying \texttt{ModificationBusManager} that connects all processors in the system.}
+% \label{fig:bus}
+% \end{figure}
 
 \subsubsection{Core Processors}
 CouchEdit implements a set of \texttt{Processors} that are integral to most modeling syntaxes. These so called core \texttt{Processors} currently are: 
@@ -113,6 +113,7 @@ CouchEdit implements a set of \texttt{Processors} that are integral to most mode
 \end{description}
 
 \subsection{Services}
+\label{sec:services}
 \texttt{Processors} may sometimes require to gather additional information, such as. For example it is often needed to find all \texttt{Elements} that are connected to a given \texttt{Element} by a certain \texttt{Relation} type.
 To this End, CouchEdit provides \texttt{Services}. \texttt{Services} are separate objects that provide a set of functions. A \texttt{Service} can be required by multiple different \texttt{Processors} and thus must be effectively stateless.
 
@@ -126,6 +127,7 @@ To this End, CouchEdit provides \texttt{Services}. \texttt{Services} are separat
 \end{itemize}
 
 \section{Modeling Languages}
+\label{sec:modeling-languages}
 This thesis discusses modeling syntaxes and how they can be handled in the CouchEdit architecture. The following chapters will demonstrate the developed artifact with the help of modeling syntax examples. thus the two syntaxes that will be used in this thesis are defined here.
 
 % \subsection{Graphical Language Theory}

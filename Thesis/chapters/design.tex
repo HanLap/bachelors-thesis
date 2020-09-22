@@ -1,14 +1,7 @@
 \chapter{Design Concept}
 % \raggedbottom
 \label{chap:design}
-In Section \ref{sec:CouchEdit} it was established that CouchEdit is composed of three distinct metamodels as depicted in Figure \ref{fig:transmm}. Thus is seems apparent that the proposed concept should also be composed of these three metamodels. The definition of abstract syntax metamodels has already standardized approaches (e.g. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a render metamodel definition composed of graphic primitives. Complex graphic structures would have to be explored in follow up works. This work focuses on the concrete syntax metamodel, that connects render and abstract syntax and proposes an approach to formalize this connection.
-
-The primary goal of the proposed design is to hide CouchEdit's complexity behind more accessible metamodel definitions. To this end, multiple concepts are employed, that either abstract away from CouchEdit's implementation details, or introduce ways to streamline the translation from concrete to abstract representation. Most of these concepts introduce performance overhead, but as this work focuses on the design aspect, performance analysis and optimization is subsidiary and subject to further research.
-
-
-
-\comment{how}
-A triple graph grammar is composed of three distinct metamodels, thus the root definition of the CouchEdit configuration is composed of tree distinct areas, as can be seen in figure \ref{fig:metamodel-base}. throughout the chapter, this root model is gradually being extended with new concepts, until finally all utilized concepts have been introduced (complete metamodel is depicted in \ref{fig:complete-metamodel}).
+In Section \ref{sec:CouchEdit} it was established that CouchEdit is composed of three distinct metamodels as depicted in Figure \ref{fig:transmm}. Thus is seems apparent that the proposed concept should also be composed of these three metamodels. The definition of abstract syntax metamodels has already standardized approaches (e.g. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a render metamodel definition composed of graphic primitives. Complex graphic structures would have to be explored in follow up works. This work focuses on the concrete syntax metamodel, that connects render and abstract syntax and proposes an approach to formalize this connection. The root definition of the CouchEdit configuration metamodel is shown in Figure \ref{fig:metamodel-base}. throughout the chapter, this root model is gradually being extended with new concepts, until finally all utilized concepts have been introduced (complete metamodel is depicted in \ref{fig:complete-metamodel}).
 
 \begin{figure}
   \centering
@@ -16,6 +9,8 @@ A triple graph grammar is composed of three distinct metamodels, thus the root d
   \caption{Composition of the CouchEditConfiguration metamodel}
   \label{fig:metamodel-base}
 \end{figure}
+
+The primary goal of the proposed design is to hide CouchEdit's complexity behind more accessible metamodel definitions. To this end, multiple concepts are employed, that either abstract away from CouchEdit's implementation details, or introduce ways to streamline the translation from concrete to abstract representation. Most of these concepts could introduce performance overhead, but as this work focuses on the design aspect, performance analysis and optimization is subsidiary and subject to further research.
 
 \section{Render Metamodel}
 CouchEdit's render syntax is realized as a set of graphic objects. The framework in its current form primarily focuses on primitive graphic objects, with its class structure being derived \cite[p.39]{nachreiner_couchedit_2020} from Bottoni and Grau's work, "A Suite of Metamodels as a Basis for a Classification of Visual Languages" \cite{bottoni_suite_2004}. While the notion of complex graphic objects has been introduced in CouchEdit's formal definition, the concept for now only exists in theory. This thesis, because of time constraints, does not explore definition of the concrete syntax all to much and instead focuses only on graphic primitives. The employed render syntax metamodel is describe in figure \ref{fig:concretesyntax}. As shown, it facilitates a basic structure to define graphic primitives needed for the described visual language. Future works would have to explore, how graphic objects could be customized, by integrating attribute bag definitions as well as complex graphic object definitions, to create custom symbols, better suited for certain modeling languages.
@@ -41,7 +36,7 @@ As noted before, the abstract syntax can be defined using existing standards. No
 
 
 \section{Language Concepts}
-the abstract syntax tree usually differs between programing languages \comment{(another statement i should maybe cite?)}. Therefore, when looking at lower level concepts, found in most programming languages (e.g.: arithmetic, branching), their metamodel representation varies, while the functionality stays the same. For this reason and because there is already enough documentation on how to specify abstract syntax trees, common language concepts will not be defined, as this depends on the actual language implementation. Instead at points where these language concepts would reside, it is only defined what the given metamodel expects from the implementation and example code snippets are given in an unspecified pseudo language. Despite this, there are certain concepts special to the CouchEdit metamodel, which a language implementation would have to realize. these concepts are presented in the following subsections.
+the abstract syntax tree usually differs between programing languages \comment{(another statement i should maybe cite?)}. Therefore, when looking at lower level concepts, found in most programming languages (e.g.: arithmetic, branching), their metamodel representation varies while the functionality stays the same. For this reason and because there is already enough documentation on how to specify abstract syntax trees, common language concepts will not be defined, as this depends on the actual language implementation. Instead at points where these language concepts would reside, it is only defined what the given metamodel expects from the implementation and example code snippets are given in an unspecified pseudo language. Despite this, there are certain concepts special to the CouchEdit metamodel, which a language implementation would have to realize. these concepts are presented in the following subsections.
 
 
 \subsection{Helper Functions}
@@ -49,22 +44,24 @@ When defining a translation metamodel, it may become useful to relocate certain 
 
 \subsection{Graph Navigation}
 \label{sec:abstraction}
-Something used a lot in the proposed architecture, is traversal through the hypergraph. It should be possible for the user, to easily get nodes that are adjacent to any given node. In CouchEdit's architecture, this is handled by separate services. This means, that the syntax for reaching a node related by a certain relation type looks something like this: 
+Something used a lot in the proposed architecture, is traversal through the hypergraph. It should be possible for the user, to easily get nodes that are adjacent to any given node. In CouchEdit's architecture, this is handled by separate services (Section \ref{sec:services}). This means, that the syntax for reaching a node related by a certain relation type looks something like this: 
 
-\begin{lstlisting}[language=customLang, caption={Example on how to get all GOs contained by a given element \texttt{go}, in the CouchEdit architecture}, captionpos=b]
+\begin{lstlisting}[language=customLang, caption={Example on how to get all \texttt{GOs} contained by a given element \texttt{go}, in the CouchEdit architecture}, captionpos=b]
 val containedGOs = relationService
       .getAllElementsRelatedFrom(go, Contains) 
 \end{lstlisting} 
 
-The \texttt{getAllElementsRelatedFrom} function, takes a GO and a relation type and returns all GOs that have a relation of the given type, that points from the given GO to themselves. This and similar helper functions are used repeatedly, thus DSL implementations of the here described architecture should provide some form of abstraction to this service call. In the following code snippets, it is assumed that these functions were masked by member function implementations similar to the following:
+The \texttt{getAllElementsRelatedFrom} function, takes a \texttt{GO} and a relation type and returns all \texttt{GOs} that have a relation of the given type, that points from the given \texttt{GO} to themselves. This and similar helper functions are used repeatedly, thus DSL implementations of the here described architecture should provide some form of abstraction to this service call. In the following code snippets, it is assumed that these functions were masked by member function implementations similar to the following:
+
 \begin{lstlisting}[caption={The \texttt{getAllElementsRelatedFrom} function, implemented as a member function eases navigation through the hypergraph}, captionpos=b]
 go.getAllElementsRelatedFrom(Contains)
 \end{lstlisting}
+
 Implementation in form of such extension functions allows for a more natural navigation trough the hypergraph, which is especially useful when traversing longer distances which will become apparent in the following sections. A list of these navigation functions can be found in Appendix \ref{app:navigationfunctions}.
 
 
 \section{Syntax Processors}
-The primary concern when defining a modeling language with clear separation between concrete and abstract syntax, is the question on how to connect these two distinct models. In this point, the designed architecture draws inspiration from Fondement and Baar \cite{fondement_making_2005}. The author's proposed idea of connecting abstract und concrete syntax, using DisplayManagers, serves as a basis that can be built upon. This approach consists of two parts, recognition and synchronization. 
+The primary concern when defining a modeling language with clear separation between concrete and abstract syntax, is the question on how to connect these two distinct models. In this point, the designed architecture draws inspiration from Fondement and Baar \cite{fondement_making_2005}. The author's proposed idea of connecting abstract und concrete syntax, using \texttt{DisplayManagers}, serves as a basis that can be built upon. This approach consists of two parts, recognition and synchronization. 
 
 \subsection{Recognition}
 \label{sec:recognition}

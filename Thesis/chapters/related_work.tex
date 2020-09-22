@@ -10,6 +10,10 @@ There are multiple projects that implement a form of relaxed conformance editing
 \end{itemize}
 
 
+
+\comment{we need some more related work. probably talk a bit about TGGs}
+
+
 \section{Making Metamodels Aware of Concrete Syntax}
 \label{sec:fondement}
 in their work, Making Metamodels Aware of Concrete Syntax \cite{fondement_making_2005}, F. Fondement and T. Baar argue that, while abstract syntax definitions are standardized, most language specifications keep the concrete syntax informal. To solve this problem, they propose an approach to defining the concrete syntax and how to link it to the abstract representation.
@@ -32,11 +36,10 @@ inv: self.me.name->exists() implies
         self.me.name = self.vo.name.text
 \end{lstlisting}
 
-The Authors keep open, how the mapping from graphical primitives to a display object could be implemented. while the metamodel proposed in this thesis does not introduce an extra layer of abstraction in form of these \texttt{DisplayClasses}, it still is inspired heavily by Fondement's and Baar's work. Especially the constraining part that utilizes DisplayManagers to sync abstract and concrete syntax, served as primary inspiration for the proposed architecture.
+The Authors keep open, how the mapping from graphical primitives to a display object could be implemented. while the metamodel proposed in this thesis does not introduce an extra layer of abstraction in form of these \texttt{DisplayClasses}, it still is inspired heavily by Fondement's and Baar's work. Especially the constraining part that utilizes \texttt{DisplayManagers} to sync abstract and concrete syntax, served as primary inspiration for the proposed architecture.
+
+In the work "Correctly defined concrete syntax" \cite{baar_correctly_2008}, Baar furthermore provides an algorithm to check syntactic correctness of the concrete representation. While checking the concrete syntax for correctness is out of scope of this work, a future implementation would have to provide the user with syntax checking capabilities, to make sure that the model, designed in the editor is syntactically correct.
 
 
 \subsection{DiaGen/DiaMeta}
 DiaGen is 
-
-
-\comment{we need some more related work.}
