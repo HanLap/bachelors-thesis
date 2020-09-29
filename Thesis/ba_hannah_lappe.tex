@@ -21,7 +21,7 @@ leqno					% equation numbers to the left
 % be able to include real vector graphics in thesis. You need inkscape installed and your pdflatex command must be called with --shell-escape for this to work.
 % TeXstudio: Options → Configure → Commands → pdflatex = pdflatex -synctex=1 -interaction=nonstopmode --shell-escape %.tex
 % inkscape=newer to avoid re-export if nothing has changed in the svg. inkscapelatex=false for not using latex to render text (which in turn messes up all text in image). inkscapearea = page so that the SVG size is respected and borders in the SVG are not cut off
-%\usepackage[inkscape=newer, inkscapelatex=false, inkscapearea=page]{svg} 
+\usepackage[inkscape=newer, inkscapelatex=false, inkscapearea=page]{svg} 
 
 \usepackage{silence}
 \WarningFilter{hyphenat}{***}
@@ -43,8 +43,6 @@ leqno					% equation numbers to the left
 % enable HERE positioning %
 \usepackage{float}
 
-\usepackage{scrhack}
-
 % Helvetica als Standard-Dokumentschrift
 \usepackage[scaled]{helvet}
 \renewcommand{\familydefault}{\sfdefault} 
@@ -56,17 +54,6 @@ leqno					% equation numbers to the left
 \usepackage{url}
 \usepackage{hyperref}
 
-% Literaturverzeichnis mit BibLaTeX // use Biber as Backend; dashed = false to repeat author names
-\usepackage[babel]{csquotes}
-\usepackage[
-  backend=biber,
-  style=ieee,
-  dashed=false,
-  hyperref,
-  natbib,
-  % block=ragged
-  ]{biblatex}
-\addbibresource{BA.bib}
 
 % Für Tabellen mit fester Gesamtbreite und variabler Spaltenbreite
 \usepackage{tabularx} 
@@ -75,9 +62,9 @@ leqno					% equation numbers to the left
 \usepackage{multirow}
  
 % arrows in normal text, not only math
-\newcommand*{\textrightarrow}{$ \rightarrow $}
+% \newcommand*{\textrightarrow}{$ \rightarrow $}
 
-\newcommand*{\textdownarrow}{$ \downarrow $}
+% \newcommand*{\textdownarrow}{$ \downarrow $}
 
 
 % Besondere Schriftauszeichnungen
@@ -185,8 +172,8 @@ leqno					% equation numbers to the left
 \usepackage[scale=0.70, marginratio={4:5, 3:4}, ignoreall, headsep=8mm]{geometry}
 \setlength{\parskip}{1.4ex plus 0.35ex minus 0.3ex}
 \renewcommand\arraystretch{1.3} % höhere Zeilen in Tabellen
-\clubpenalty10000  % keine Schusterjungen
-\widowpenalty10000 % keine Hurenkinder
+\clubpenalty10000
+\widowpenalty10000
 \setcounter{tocdepth}{3} % Tiefe, bis zu der Überschriften in das Inhaltsverzeichnis kommen
 
 
@@ -203,6 +190,24 @@ leqno					% equation numbers to the left
 
 % Beispiele für Quellcode
 \usepackage{listings}
+\usepackage{minted}
+
+
+
+\usepackage{scrhack}
+
+
+% Literaturverzeichnis mit BibLaTeX // use Biber as Backend; dashed = false to repeat author names
+\usepackage[babel]{csquotes}
+\usepackage[
+  backend=biber,
+  style=ieee,
+  dashed=false,
+  hyperref,
+  natbib,
+  % block=ragged
+  ]{biblatex}
+\addbibresource{BA.bib}
 
 % \lstdefinelanguage{Kotlin}{
 %   comment=[l]{//},
@@ -254,7 +259,7 @@ leqno					% equation numbers to the left
 \newcommand{\fullname}{Florian Lappe}
 \newcommand{\email}{florian.lappe@uni-ulm.de}
 \newcommand{\titel}{}
-\newcommand{\untertitel}{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for CouchEdit}
+\newcommand{\untertitel}{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for \textsc{CouchEdit}}
 \newcommand{\jahr}{2020}
 \newcommand{\abgabedatum}{September 2020}
 %\newcommand{\abschlussarbeit}{Bachelorarbeit}

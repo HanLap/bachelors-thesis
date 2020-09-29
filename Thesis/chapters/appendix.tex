@@ -10,7 +10,7 @@
 \chapter{Navigation functions}
 \label{app:navigationfunctions}
 
-To ease traversal of the hypergraph, a DSL implementation of the CouchEdit configuration should provide abstractions for the following Service methods:
+To ease traversal of the hypergraph, a DSL implementation of the \textsc{CouchEdit} configuration should provide abstractions for the following Service methods:
 
 \begin{itemize}
   \item \comment{tbd}
@@ -22,18 +22,24 @@ To ease traversal of the hypergraph, a DSL implementation of the CouchEdit confi
 \label{app:petri}
 \subsection*{Render Metamodel}
 \lstinputlisting[breaklines=true,label={lst:petri-rendermm},captionpos=b,caption={\texttt{RenderMM} definition for Petrinets}]{code/configs/petrinets/RenderMM.kts}
+% \inputminted{kotlin}{code/configs/petrinets/RenderMM.kts}
+
 \subsection*{Abstract Metamodel}
 \lstinputlisting[breaklines=true,label={lst:petri-abstractmm},captionpos=b,caption={\texttt{AbstractMM} definition for Petrinets}]{code/configs/petrinets/AbstractMM.kts}
+
 \subsection*{Concrete Metamodel}
 \raggedbottom
 \lstinputlisting[breaklines=true,label={lst:petri-concretemm},captionpos=b,caption={\texttt{ConcreteMM} definition for Petrinets}]{code/configs/petrinets/ConcreteMM.kts}
+% \inputminted[breaklines=true,label={lst:petri-concretemm}]{kotlin}{code/configs/petrinets/ConcreteMM.kts}
 
 
 \section{Statecharts Configuration}
 \label{app:state}
 \subsection*{Render Metamodel}
 \lstinputlisting[breaklines=true,label={lst:state-rendermm},captionpos=b,caption={\texttt{RenderMM} definition for Statecharts}]{code/configs/statechartsnew/RenderMM.kts}
+
 \subsection*{Abstract Metamodel}
 \lstinputlisting[breaklines=true,label={lst:state-abstractmm},captionpos=b,caption={\texttt{AbstractMM} definition for Statecharts}]{code/configs/statechartsnew/AbstractMM.kts}
+
 \subsection*{Concrete Metamodel}
 \lstinputlisting[breaklines=true,label={lst:state-concretemm},captionpos=b,caption={\texttt{ConcreteMM} definition for Statecharts}]{code/configs/statechartsnew/ConcreteMM.kts}

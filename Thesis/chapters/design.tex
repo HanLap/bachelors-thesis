@@ -1,23 +1,23 @@
 \chapter{Design Concept}
 % \raggedbottom
 \label{chap:design}
-In Section \ref{sec:CouchEdit} it was established that CouchEdit is composed of three distinct metamodels as depicted in Figure \ref{fig:transmm}. Thus is seems apparent that the proposed concept should also be composed of these three metamodels. The definition of abstract syntax metamodels has already standardized approaches (e.g. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a render metamodel definition composed of graphic primitives. Complex graphic structures would have to be explored in follow up works. This work focuses on the concrete syntax metamodel, that connects render and abstract syntax and proposes an approach to formalize this connection. The root definition of the CouchEdit configuration metamodel is shown in Figure \ref{fig:metamodel-base}. throughout the chapter, this root model is gradually being extended with new concepts, until finally all utilized concepts have been introduced (complete metamodel is depicted in \ref{fig:complete-metamodel}).
+In Section \ref{sec:CouchEdit} it was established that \textsc{CouchEdit} is composed of three distinct metamodels as depicted in Figure \ref{fig:transmm}. Thus is seems apparent that the proposed concept should also be composed of these three metamodels. The definition of abstract syntax metamodels has already standardized approaches (e.g. Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a render metamodel definition composed of graphic primitives. Complex graphic structures would have to be explored in follow up works. This work focuses on the concrete syntax metamodel, that connects render and abstract syntax and proposes an approach to formalize this connection. The root definition of the \textsc{CouchEdit} configuration metamodel is shown in Figure \ref{fig:metamodel-base}. throughout the chapter, this root model is gradually being extended with new concepts, until finally all utilized concepts have been introduced (complete metamodel is depicted in \ref{fig:complete-metamodel}).
 
 \begin{figure}
   \centering
-  \includegraphics[width=.7\linewidth]{images/"csd - metamodel-base"}
-  \caption{Composition of the CouchEditConfiguration metamodel}
+  \includesvg[width=.7\linewidth]{images/"csd - metamodel-base"}
+  \caption{Composition of the \textsc{CouchEdit}Configuration metamodel}
   \label{fig:metamodel-base}
 \end{figure}
 
-The primary goal of the proposed design is to hide CouchEdit's complexity behind more accessible metamodel definitions. To this end, multiple concepts are employed, that either abstract away from CouchEdit's implementation details, or introduce ways to streamline the translation from concrete to abstract representation. Most of these concepts could introduce performance overhead, but as this work focuses on the design aspect, performance analysis and optimization is subsidiary and subject to further research.
+The primary goal of the proposed design is to hide \textsc{CouchEdit}'s complexity behind more accessible metamodel definitions. To this end, multiple concepts are employed, that either abstract away from \textsc{CouchEdit}'s implementation details, or introduce ways to streamline the translation from concrete to abstract representation. Most of these concepts could introduce performance overhead, but as this work focuses on the design aspect, performance analysis and optimization is subsidiary and subject to further research.
 
 \section{Render Metamodel}
-CouchEdit's render syntax is realized as a set of graphic objects. The framework in its current form primarily focuses on primitive graphic objects, with its class structure being derived \cite[p.39]{nachreiner_couchedit_2020} from Bottoni and Grau's work, "A Suite of Metamodels as a Basis for a Classification of Visual Languages" \cite{bottoni_suite_2004}. While the notion of complex graphic objects has been introduced in CouchEdit's formal definition, the concept for now only exists in theory. This thesis, because of time constraints, does not explore definition of the concrete syntax all to much and instead focuses only on graphic primitives. The employed render syntax metamodel is describe in figure \ref{fig:concretesyntax}. As shown, it facilitates a basic structure to define graphic primitives needed for the described visual language. Future works would have to explore, how graphic objects could be customized, by integrating attribute bag definitions as well as complex graphic object definitions, to create custom symbols, better suited for certain modeling languages.
+\textsc{CouchEdit}'s render syntax is realized as a set of graphic objects. The framework in its current form primarily focuses on primitive graphic objects, with its class structure being derived \cite[p.39]{nachreiner_couchedit_2020} from Bottoni and Grau's work, "A Suite of Metamodels as a Basis for a Classification of Visual Languages" \cite{bottoni_suite_2004}. While the notion of complex graphic objects has been introduced in \textsc{CouchEdit}'s formal definition, the concept for now only exists in theory. This thesis, because of time constraints, does not explore definition of the concrete syntax all to much and instead focuses only on graphic primitives. The employed render syntax metamodel is describe in figure \ref{fig:concretesyntax}. As shown, it facilitates a basic structure to define graphic primitives needed for the described visual language. Future works would have to explore, how graphic objects could be customized, by integrating attribute bag definitions as well as complex graphic object definitions, to create custom symbols, better suited for certain modeling languages.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.5\linewidth]{images/"csd - rendersyntax"}
+  \includesvg[width=.5\linewidth]{images/"csd - rendersyntax"}
   \caption{Concrete syntax metamodel used in this thesis}
   \label{fig:concretesyntax}
 \end{figure}
@@ -29,7 +29,7 @@ As noted before, the abstract syntax can be defined using existing standards. No
 
 \begin{figure}
   \centering
-  \includegraphics[width=.7\linewidth]{images/"csd - abstractsyntax"}
+  \includesvg[width=.7\linewidth]{images/"csd - abstractsyntax"}
   \caption{Used subset implementation of Ecore}
   \label{fig:csd-abstractsyntax}
 \end{figure}
@@ -37,7 +37,7 @@ As noted before, the abstract syntax can be defined using existing standards. No
 
 \section{Language Concepts}
 \label{sec:language-concepts}
-the abstract syntax tree usually differs between programing languages \comment{(another statement i should maybe cite?)}. Therefore, when looking at lower level concepts, found in most programming languages (e.g.: arithmetic, branching), their metamodel representation varies while the functionality stays the same. For this reason and because there is already enough documentation on how to specify abstract syntax trees, common language concepts will not be defined, as this depends on the actual language implementation. Instead at points where these language concepts would reside, it is only defined what the given metamodel expects from the implementation and example code snippets are given in an unspecified pseudo language. Despite this, there are certain concepts special to the CouchEdit metamodel, which a language implementation would have to realize. these concepts are presented in the following subsections.
+the abstract syntax tree usually differs between programing languages \comment{(another statement i should maybe cite?)}. Therefore, when looking at lower level concepts, found in most programming languages (e.g.: arithmetic, branching), their metamodel representation varies while the functionality stays the same. For this reason and because there is already enough documentation on how to specify abstract syntax trees, common language concepts will not be defined, as this depends on the actual language implementation. Instead at points where these language concepts would reside, it is only defined what the given metamodel expects from the implementation and example code snippets are given in an unspecified pseudo language. Despite this, there are certain concepts special to the \textsc{CouchEdit} metamodel, which a language implementation would have to realize. these concepts are presented in the following subsections.
 
 
 \subsection{Helper Functions}
@@ -45,9 +45,9 @@ When defining a translation metamodel, it may become useful to relocate certain 
 
 \subsection{Graph Navigation}
 \label{sec:abstraction}
-Something used a lot in the proposed architecture, is traversal through the hypergraph. It should be possible for the user, to easily get nodes that are adjacent to any given node. In CouchEdit's architecture, this is handled by separate services (Section \ref{sec:services}). This means, that the syntax for reaching a node related by a certain relation type looks something like this:
+Something used a lot in the proposed architecture, is traversal through the hypergraph. It should be possible for the user, to easily get nodes that are adjacent to any given node. In \textsc{CouchEdit}'s architecture, this is handled by separate services (Section \ref{sec:services}). This means, that the syntax for reaching a node related by a certain relation type looks something like this:
 
-\begin{lstlisting}[language=customLang, caption={Example on how to get all \texttt{GOs} contained by a given element \texttt{go}, in the CouchEdit architecture}, captionpos=b]
+\begin{lstlisting}[language=customLang, caption={Example on how to get all \texttt{GOs} contained by a given element \texttt{go}, in the \textsc{CouchEdit} architecture}, captionpos=b]
 val containedGOs = relationService
       .getAllElementsRelatedFrom(go, Contains) 
 \end{lstlisting}
@@ -66,13 +66,13 @@ The primary concern when defining a modeling language with clear separation betw
 
 \subsection{Recognition}
 \label{sec:recognition}
-The recognition part is concerned with detecting patterns in the graphical syntax that have an abstract syntax representation. For this, Fondement and Baar proposed the introduction of a further abstraction layer. This layer composes the graphic primitives and attributes, which represent a model element, into display classes. But the authors keep possible implementation of this abstraction layer open. Furthermore it did not seem suitable to introduce a further abstraction layer, as most processing in the CouchEdit architecture is applied directly to the concrete syntax hypergraph, thus mapping graphic objects to a new layer would introduce a set of new problems to be solved. Instead the architecture proposed here, arrived at a different approach. For each type of display manager, a set of constraints can be defined on the hypergraph's graphic objects. Whenever a graphic object satisfies all constraints of a given display manager type it is deemed to be the base element of a concrete representation of this display manager type and an instances of this display manager and corresponding model element are created and connected to the graphic object (Figure \ref{fig:place-recognition}).
+The recognition part is concerned with detecting patterns in the graphical syntax that have an abstract syntax representation. For this, Fondement and Baar proposed the introduction of a further abstraction layer. This layer composes the graphic primitives and attributes, which represent a model element, into display classes. But the authors keep possible implementation of this abstraction layer open. Furthermore it did not seem suitable to introduce a further abstraction layer, as most processing in the \textsc{CouchEdit} architecture is applied directly to the concrete syntax hypergraph, thus mapping graphic objects to a new layer would introduce a set of new problems to be solved. Instead the architecture proposed here, arrived at a different approach. For each type of display manager, a set of constraints can be defined on the hypergraph's graphic objects. Whenever a graphic object satisfies all constraints of a given display manager type it is deemed to be the base element of a concrete representation of this display manager type and an instances of this display manager and corresponding model element are created and connected to the graphic object (Figure \ref{fig:place-recognition}).
 
 % arrived at a different approach. The Metamodel allows for the definition of \texttt{Patterns}. a \texttt{Pattern} possesses a name, as well as a set of constraints. A \texttt{Constraint} checks if a given \texttt{GO} satisfies a certain condition. Each \texttt{GO} in the hypergraph is checked against all constraints of a given pattern. If a GO satisfies all constraints, a given \texttt{Pattern}
 
 \begin{figure}
   \centering
-  \includegraphics[height=8cm]{images/"visualization - place-recognition"}
+  \includesvg[height=8cm]{images/"visualization - place-recognition"}
   \caption{PlaceRecognitionProcessor, adding PlaceDM to a GraphicObject that satisfies constraints}
   \label{fig:place-recognition}
 \end{figure}
@@ -130,7 +130,7 @@ This statement ensures that all transitions, connected to the given DM's GO, by 
 
 \begin{figure}
   \centering
-  \includegraphics[height=7.5cm]{images/"visualization - incoming-sync"}
+  \includesvg[height=7.5cm]{images/"visualization - incoming-sync"}
   \caption{A connection line is added to the graph and the PlaceSyncProcessor updates the Place model element}
   \label{fig:incoming-sync}
 \end{figure}
@@ -140,7 +140,7 @@ The resulting sub model for this area of the configuration would look as describ
 
 \begin{figure}
   \centering
-  \includegraphics[width=.7\linewidth]{images/"csd - initial-syntaxprocess-model"}
+  \includesvg[width=.7\linewidth]{images/"csd - initial-syntaxprocess-model"}
   \caption{First Design of the \texttt{DisplayManager} metamodel}
   \label{fig:initial-syntax-model}
 \end{figure}
@@ -153,7 +153,7 @@ To alleviate this problem, the proposed architecture introduces a Pattern system
 
 \begin{figure}
   \centering
-  \includegraphics[height=7.5cm]{images/"visualization - kind-recognition"}
+  \includesvg[height=7.5cm]{images/"visualization - kind-recognition"}
   \caption{\texttt{TransitionPatternProcessor} detects a \texttt{GO} that satisfies constraints and adds \texttt{PatternType}}
   \label{fig:kind-recognition}
 \end{figure}
@@ -162,7 +162,7 @@ The similarity to the \texttt{DisplayManager} recognition part means that it can
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[height=11cm]{images/"visualization - Transition-Kind-Recognition"}
+  \includesvg[height=11cm]{images/"visualization - Transition-Kind-Recognition"}
   \caption{\texttt{TransitionRecognitionProcessor} adds DM after the \texttt{TransitionPatternProcessor} has added a transition \texttt{Pattern}}
   \label{fig:Transition-Kind-Recognition}
 \end{figure}
@@ -187,7 +187,7 @@ As mentioned in the last section, because of the introduction of the pattern sys
 
 \begin{figure}
   \centering
-  \includegraphics[width=.75\linewidth]{images/"csd - revised-syntaxprocess-model"}
+  \includesvg[width=.75\linewidth]{images/"csd - revised-syntaxprocess-model"}
   \caption{Revised SyntaxProcessor metamodel that now includes the Pattern system}
   \label{fig:revised-syntax-model}
 \end{figure}
@@ -209,7 +209,7 @@ dm.me.incoming =
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[height=7.5cm]{images/"visualization - transition-plugin"}
+  \includesvg[height=7.5cm]{images/"visualization - transition-plugin"}
   \caption{\texttt{ConnectionProcessor} adds \texttt{ConnectionTo} relation on detecting a directed line}
   \label{fig:transition-plugin}
 \end{figure}
@@ -248,7 +248,7 @@ This causes the \texttt{LabelProcessor} to calculate outer proximity \texttt{Lab
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=\linewidth]{images/"csd - labelprocessor"}
+  \includesvg[width=\linewidth]{images/"csd - labelprocessor"}
   \caption{Class diagram describing the LabelProcessor's configuration metamodel}
   \label{fig:labelprocessor-config}
 \end{figure}
@@ -258,4 +258,4 @@ This \texttt{LabelProcessor} plugin is by no means a perfect implementation for 
 
 \comment{still gotta find better closure for this chapter}
 
-In this chapter, the developed metamodel was introduced step by step. The base idea for this metamodel was derived from Fondement and Baar \cite{fondement_making_2005}, but was partially modified and extended to serve requirements posed by the CouchEdit architecture. The complete metamodel is depicted in Figure \ref{fig:complete-metamodel}.
+In this chapter, the developed metamodel was introduced step by step. The base idea for this metamodel was derived from Fondement and Baar \cite{fondement_making_2005}, but was partially modified and extended to serve requirements posed by the \textsc{CouchEdit} architecture. The complete metamodel is depicted in Figure \ref{fig:complete-metamodel}.
