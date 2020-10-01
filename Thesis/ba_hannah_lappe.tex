@@ -158,6 +158,7 @@ leqno					% equation numbers to the left
 \crefname{figure}{figure}{figures}
 \crefname{equation}{formula}{formulas}
 \crefname{algorithm}{algorithm listing}{algorithm listings}
+\crefname{lstlisting}{listing}{listings}
 
 \creflabelformat{equation}{#2#1#3}
 
@@ -357,15 +358,11 @@ pdfborder=0 0 0	% keine Box um die Links!
 
 % !/ignore-section
 
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
+Modeling has become an important factor in many of today's development workflows. Especially recent developments in the area of Model Driven Engineering (MDE) as well as Business Process Modeling, have increased the need for syntactically correct models. Therefore graphical modeling editors with syntax parsing capabilities are integral. But most modern model editors provide sub par user experience, resulting from tight coupling between graphical and abstract notations. 
 
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract,
-Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract.
+\textsc{CouchEdit} is a novel modeling language agnostic framework that strives to improve editor usability. To this end it introduces an architecture that decouples graphical and abstract representations. However, in its current implementation, configuring \textsc{CouchEdit} for different modeling languages is a laborious and error prone task.
+
+This thesis proposes an architecture that can be used to define modeling language configurations for \textsc{CouchEdit}. The aim of this architecture is to increase developer accessibility by reducing the amount of code as well as framework knowledge needed to define new configurations. 
 
   % !ignore-section
   {

@@ -1,5 +1,5 @@
 \chapter{Introduction}
-\label{chap:introduction}
+\label{ch:introduction}
 
 
 Modeling languages have long played an important role in software engineering. Well designed models can abstract complex systems and provide visual aid in understanding them. Furthermore in form of the Business Process Model Notation (BPMN) they are used to define and automate processes. Today, with research in the area of Model Driven Engineering (MDE), a paradigm centered around models, with the intent to generate code bases and whole systems from them, the importance of models is rising even more.
@@ -17,11 +17,11 @@ A general purpose framework should be configurable for multiple use cases in its
 
 As a relaxed conformance editing framework, \textsc{CouchEdit} poses special architectural requirements. It has to allow for temporary inconsistencies between concrete syntax (what the user draws) and abstract syntax (what the underlying Model actually looks like). As the concrete representation does not always have to map to a syntactic correct abstract model, the user has more freedom during the modeling process (e.g. dangling transitions).
 
-\textsc{CouchEdit} achieves this by building upon the architecture concept of clear separation between concrete and abstract syntax, proposed by Y. Van Tendeloo et al. \cite{van_tendeloo_concrete_2017}. Internally, \textsc{CouchEdit} builds a hypergraph, that maps the given concrete syntax to all possible abstract syntaxes (interpretation of a concrete syntax can be ambiguous and thus multiple abstract syntaxes can be possible). To build this Hypergraph, a set of processors is employed, which are connected in a reactive publish and subscribe pattern. All processors (and the user interface) are subscribed to a bus (fig. \ref{fig:processors}). If a change (diff) is published to the bus (e.g. the user adds a node to the concrete syntax), all processors that are subscribed to this type of diff are notified and calculate new resulting diffs, these new diffs are then also published to the bus and all processors interested in them are invoked as well.
+\textsc{CouchEdit} achieves this by building upon the architecture concept of clear separation between concrete and abstract syntax, proposed by Y. Van Tendeloo et al. \cite{van_tendeloo_concrete_2017}. Internally, \textsc{CouchEdit} builds a hypergraph, that maps the given concrete syntax to all possible abstract syntaxes (interpretation of a concrete syntax can be ambiguous and thus multiple abstract syntaxes can be possible). To build this Hypergraph, a set of processors is employed, which are connected in a reactive publish and subscribe pattern. All processors (and the user interface) are subscribed to a bus (\Cref{fig:processors}). If a change (diff) is published to the bus (e.g. the user adds a node to the concrete syntax), all processors that are subscribed to this type of diff are notified and calculate new resulting diffs, these new diffs are then also published to the bus and all processors interested in them are invoked as well.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.7\linewidth]{images/"component - bus"}
+  \includesvg[width=.7\linewidth]{images/"component - bus"}
   \caption{Publish Subscribe architecture of \textsc{CouchEdit}}
   \label{fig:processors}
 \end{figure}
@@ -65,4 +65,4 @@ The primary goal of this research was the development of a metamodel for the \te
 % \comment{todo}
 
 \section{Thesis Structure}
-This thesis is organized in the following structure: Chapter \ref{chap:fundamentals}, lays out fundamentals required in the rest of the thesis. This includes a comprehensive summary of the \textsc{CouchEdit} architecture as well as modeling theory. Furthermore this Chapter summarizes related work in the relevant fields. Following that, in Chapter \ref{chap:design} the developed metamodel is described in detail. The prototypical implementation that was developed alongside the metamodel, is then laid out in \ref{chap:prototype}. Chapter \ref{chap:evaluation} provides considerations about the evaluation of the artifact, as well as the evaluation results. Finally \ref{chap:conclusion} gives perspectives on the future of this project, as well as takeaways from this research.
+This thesis is organized in the following structure: \Cref{ch:fundamentals}, lays out fundamentals required in the rest of the thesis. This includes a comprehensive summary of the \textsc{CouchEdit} architecture as well as modeling theory. Furthermore this Chapter summarizes related work in the relevant fields. Following that, in \Cref{ch:design} the developed metamodel is described in detail. The prototypical implementation that was developed alongside the metamodel, is then laid out in \Cref{ch:prototype}. Chapter \Cref{ch:evaluation} provides considerations about the evaluation of the artifact, as well as the evaluation results. Finally \Cref{ch:conclusion} gives perspectives on the future of this project, as well as takeaways from this research.

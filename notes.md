@@ -12,14 +12,22 @@
 
 ### ToDo
 
-- abstract syntax composition
-
 
 - add abstract display manager
-- rework connection plugin
 - model actions (3.3.2)
 
 - fondement & baar go through related work
 
+- complex go vs grouping
 
-## time management
+- bottoni and grau
+
+
+### whatever
+- tdds
+- performance
+- deadlines
+
+
+
+- tggs future besser liefern könnte
