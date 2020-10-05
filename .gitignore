@@ -21,6 +21,7 @@
 Proposal/**/*.pdf
 Thesis/**/*.pdf
 Thesis/code/configs
+Thesis/output
 
 .vscode/settings.json
 zwischen_presentation/.vscode/settings.json

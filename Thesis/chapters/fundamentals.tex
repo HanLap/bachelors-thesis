@@ -28,9 +28,9 @@ Now that the desired artifacts are fully developed it has to be evaluated how we
 The conclusion stage marks the end of a DSR and the results are written up. This works written part is composed of this thesis as well as all written source code and documentation.
 
 
-\section{Modeling Language Fundamentals}
+\section{Modeling Languages}
 \label{sec:modeling-languages}
-This thesis discusses modeling syntaxes and how they can be handled in the \textsc{CouchEdit} architecture. The following chapters will demonstrate the developed artifact with the help of modeling syntax examples. thus the two syntaxes that will be used in this thesis are defined here.
+This thesis discusses modeling syntaxes and how they can be handled in the \textsc{CouchEdit} architecture. To this end the Petrinets and Statecharts syntaxes are introduced here. They will serve as examples to demonstrate problems and applicability of the developed artifact. 
 
 % \subsection{Graphical Language Theory}
 \subsection{Petrinets Syntax}
@@ -98,18 +98,14 @@ as a second example, Statecharts were chosen. The term Statecharts was first coi
 \label{fig:statechartmm}
 \end{figure}
 
-At its core Statecharts are composed of \emph{States} and \emph{Transitions}.
-Each state can have its own sub state 
 
-Statecharts are primarily composed of StateElements and Transitions. Transitions possess an event. 
-StateElements are split into \emph{States} and \emph{PseudoStates}. PseudoStates have one of several kinds, defined by the PseudoStateKind. States are called simple State if they posses no sub state machine. In the case they do encompass a sub state machine they are called compound State. A compound State can have multiple sub states, in this case they can be split apart using a dashed separator line, to create \emph{Regions}. Each Region contains its own state machine.
-
+A Statechart is composed of \emph{StateElements} and \emph{Transitions}. StateElements might be connected by Transitions. Each Transition has exactly one source StateElement and one target StateElement. StateElements can either be \emph{PseudoStates} (e.g. initial state, choice, etc.) or normal \emph{States}. A State can either possess a name, a name and a sub state machine, or multiple \emph{Regions}. Each Region contains one state machine. Regions are marked by splitting up States using dashed lines. 
 
 \begin{figure}
 \centering
-\includesvg[width=\linewidth]{images/"visualization - statechart-example"}
-\caption{Concrete representation of an example Statechart}
-\label{fig:statechart-example}
+\includesvg[width=.7\linewidth]{images/"visualization - statechart-example"}
+\caption{Example Statechart}
+\label{fig:state-example}
 \end{figure}
 
 % \begin{table}[ht]
@@ -130,11 +126,6 @@ StateElements are split into \emph{States} and \emph{PseudoStates}. PseudoStates
 % \caption{Possible representations for states}
 % \label{tab:state-states}
 % \end{table}
-concepts ignored:
-\begin{itemize}
-  \item entry/ exit actions
-  \item event parsing (guards)
-\end{itemize}
 
 
 
@@ -162,10 +153,10 @@ This architecture, has the advantage of being very detangled. this allows for co
 
 
 \subsubsection{Elements}
-\texttt{Elements} are the base type of \textsc{CouchEdit}'s hypergraph. Every type of node in this graph inherits from the \texttt{Element} type. As all hypergraph instances should be independent from each other, it is not possible to access \texttt{Elements} via their object reference. Thus every \texttt{Element} has an unique id that kann be used to reliably identify it across multiple graphs. \texttt{Elements} also have a \texttt{probability} attribute that denotes how probable it is that this \texttt{Element} is the result of a correct interpretation of the given hypergraph. This \texttt{probability} object can be set to \texttt{Explicit}, which means that, either this \texttt{Element} describes a factual truth or it was marked by the user as not to be changed. Furthermore, \texttt{Element} subtypes can introduce further attributes that contain important information for the given type.
+\texttt{Elements} are the base type of \textsc{CouchEdit}'s hypergraph. Every type of node in this graph inherits from the \emph{Element} type. As all hypergraph instances should be independent from each other, it is not possible to access Elements via their object reference. Thus every Element has a unique id that can be used to reliably identify it across multiple graphs. Elements also have a \emph{probability} attribute that denotes how probable it is that this Element is the result of a correct interpretation of the given hypergraph. This probability object can be set to \emph{Explicit}, which means that, either this Element describes a factual truth or it was marked by the user as not to be changed. Furthermore, Element subtypes can introduce further attributes that contain important information for the given type.
 
 \subsubsection{Relations}
-\texttt{Relations} represent edges of the hypergraph. Each \texttt{Relation} connects a set of source \texttt{Elements} to a set of target \texttt{Elements}. They also inherit from the \texttt{Element} type and thus can recursively be connected with relations themselves. The connected vertices are referenced using the \texttt{ElementReference} class. This class holds an \texttt{Elements} unique id as well as its type, which then can be used to find a referenced \texttt{Element} in the hypergraph. \Cref{fig:relations} shows the implementation of \texttt{Relations}. 
+\emph{Relations} represent edges of the hypergraph. Each Relation connects a set of source Elements to a set of target Elements. They also inherit from the Element type and thus can recursively be connected with relations themselves. The connected vertices are referenced using the \emph{ElementReference} class. This class holds an Elements unique id as well as its type, which then can be used to find a referenced Element in the hypergraph. \Cref{fig:relations} shows the implementation of Relations. 
 
 \begin{figure}[ht]
   \centering
@@ -174,7 +165,7 @@ This architecture, has the advantage of being very detangled. this allows for co
   \label{fig:relations}
 \end{figure}
 
- While \texttt{Relations} can connect multiple source and target vertices, the most common \texttt{Relation} type is the \texttt{OneToOneRelation}, it describes a connection between exactly one source and one target \texttt{Element}. A common example, for such a \texttt{OneToOneRelation}, is the \texttt{Contains} relations, which defines that one \texttt{Element} encloses another.  
+ While Relations can connect multiple source and target vertices, the most common Relation type is the \emph{OneToOneRelation}, it describes a connection between exactly one source and one target Element. A common example, for such a OneToOneRelation, is the \emph{Contains} relations, which defines that one Element encloses another.  
 
 
 \subsubsection{Graphic Objects}
@@ -185,13 +176,10 @@ This architecture, has the advantage of being very detangled. this allows for co
 In his work, The “Physics” of Notations: Toward a Scientific Basis for Constructing Visual Notations in Software Engineering \cite{moody_physics_2009}, Moody specifies eight variables that can be applied to a single graphic primitive. These attributes are separated into factors that have direct influence on the relations between GOs: Position (horizontal and vertical), shape, size, orientation. And attributes that only serve as visual hints and influence a single GO at a time: color, brightness, texture. \textsc{CouchEdit} realizes this separation as well. Factors with spatial influence are contained in the direct info of the shape. While purely visual attributes are externalized into \emph{AttributeBags}. An AttributeBag is a separate element that can be attached to GraphicObjects and contains secondary information about the given Object.
 
 \subsubsection{HotSpotDefinitions}
+\label{sec:hotspotdefinitions}
 Some Modeling Notations define relevant zones in a graphical notation, which are not directly modeled by a GraphicObject and thus are not directly visible to the user but exist as a result of the graphical composition. For example in \cite{bottoni_suite_2004}, attachment points have been identified as such a relevant zone. An attachment point defines an area around a GraphicObject where a connection line can be "attached". This concept is implemented in a more general form through \emph{HotSpotDefinitions}. A HotSpotDefinition is a relation that, similar to GraphicObjects, has a shape and thus can be a target as well as a source of spatial relations.
 
-\subsubsection*{Compartments}
-\label{sec:compartments}
-One of the more primary applications of HotSpotDefinitions is in the form of \emph{CompartmentHotSpotDefinitions}. Compartments define logical areas of a 
-\comment{todo}
-
+One of the more primary applications of HotSpotDefinitions is in the form of \emph{CompartmentHotSpotDefinitions}. Compartments split a GraphicObject into multiple logical sub areas. This is used in multiple advanced notations. For example the Statechart syntax discussed in \Cref{sec:statecharts} where a State can have multiple Regions marked by dashed lines. 
 
 \subsection{Application Structure}
 \textsc{CouchEdit} builds around independent components, called \emph{Processors} that can be enabled or disabled as needed in a given use case. To this end, the center piece of \textsc{CouchEdit}'s architecture is the \emph{ModificationBusManager}. Every Processor (including the frontend) can be connected to this bus manager (\Cref{fig:processors}). if one Processor publishes a change of the hypergraph, the ModificationBusManager propagates this change to all Processors connected. Each Processor can specify which Element types it is interested and will only receive updates for Elements that match one of those types. 
@@ -214,5 +202,4 @@ To this End, \textsc{CouchEdit} provides \texttt{Services}. \texttt{Services} ar
 
 
 
-\subsection{Suggestions}
-\comment{todo}
+

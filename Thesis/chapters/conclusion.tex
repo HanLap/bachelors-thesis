@@ -1,22 +1,37 @@
 \chapter{Conclusion}
 \label{ch:conclusion}
 
-This work presented an experimental architecture that can be used to define modeling syntax configurations for \textsc{CouchEdit}. To this end, the approach of Fondement and Baar \cite{fondement_making_2005} was adapted and extended to fit the needs of the \textsc{CouchEdit} architecture. 
+This work presented an experimental architecture that can be used to define modeling syntax configurations for \textsc{CouchEdit}. To this end, the approach of Fondement and Baar \cite{fondement_making_2005} was adapted and extended to fit the needs of the \textsc{CouchEdit} architecture. Their approach is composed of two parts, recognition and synchronization. These two mechanisms where integrated into the developed artifact as the core concept. This concept was then extended by a plugin system, which allows for the addition of modular components which can be configured to satisfy requirements of different modeling syntaxes.
+
+It was shown, that the developed artifact seems applicable for the task of specifying modeling syntaxes for \textsc{CouchEdit}. But while it is possible to define modeling syntaxes, especially the definition of well designed Plugins is key to general applicability and developer experience. Furthermore, performance test results indicate that the developed artifact in its current iteration produces configurations that increase processing overhead tenfold compared to a diff based implementation on application level.  
+
+\section{Future Work}
+This research poses a set of new questions that have to be answered. First and foremost it has to be evaluated if the systems performance can be improved to reach acceptable levels. Towards this goal there are multiple mechanisms that could be researched. 
+
+One of the next major iterations of this artifact would be to develop a complete DSL implementation. This would for multiple optimizations. First, the hypergraph each processor requires could be pruned to only contain the elements that are relevant to a given processor. in its current iteration the code generator has no information about the defined constraints and rules, this means that each processor has to be configured to potentially use all possible elements of the hypergraph. therefore processors are triggered even when changes are published that have no importance for them. Furthermore it could be researched if the extra information given by a complete metamodel definition can be utilized to generate processors using ModelDiffs. The results provided in \Cref{sec:performance} indicate that evaluation of the complete hypergraph does not scale well. If it is possible to reevaluate only parts of the hypergraph that are actually affected by incoming changes, this could improve performance greatly.
+
+The plugin system proved to be a critical mechanism for the applicability of the developed metamodel. They can take up many tasks from the user and bring further performance improvements as they are implemented on application level an can make use of the available optimization schemes. But \Cref{sec:state-impl} showed that the design of a plugin is crucial to ensure applicability a wide range of modeling syntaxes. Thus it has to be evaluated which plugins are needed and how they could be implemented. The LabelPlugin was shown of as a Plugin that is integral to many Modeling languages and thus has to receive further attention to reach its full potential. Moreover, the CompartmentPlugin as well as the ConnectionPlugin could receive further improvements by introducing configuration possibilities for them. Besides the existing Plugins it also seems worthwhile to further investigate mechanisms that could be implemented in the form Plugins. To this end the Works of \cite{van_tendeloo_concrete_2017} and \cite{costagliola_classification_2002} could provide a basis to build upon. 
+
+It is also important to investigate the artifacts applicability towards correctness checking. It is critical for editor usability to convey to the user if the designed concrete model can be mapped to a correct abstract representation. To this end if was evaluated that the introduction of DisplayClasses could result in a clearer connection between abstract an concrete syntax and thus make it easy to decide which graphic objects art part of an abstract representation. Additionally the work of Baar \cite{baar_correctly_2008} could be used as a foundation to introduce correctness checking into the framework.
+
+Distributed modeling is one of the potential application of \text{CouchEdit}. Meaning development using multiple frontends with only a shared abstract representation. For this to be possible the architecture has to be able to translate from abstract to concrete syntax. in its current iteration the architecture is not able to do this. The artifact generates processors that strictly translate from concrete to abstract representation. Therefore it has to be evaluated if it is possible to introduce this bidirectionality into the prototype. if turns out to be problematic reevaluations using a TGG approach could help to amend these Problems. 
 
 
-\section{System Improvements}
+An important part theorized for the \textsc{CouchEdit} framework is the general model action mechanism. In the form of Suggestions they can provide the user with options that can be used to disambiguate the hypergraph or provide quick fixes that give the user fast actions to transform a malformed graph into something correct. The developed artifact currently does not support any functionality for model actions. To this end further research is needed to find out how this functionality could integrate with the system.
+
+In the early stages of this research it was decided to use the approach proposed by Fondement and Baar \cite{fondement_making_2005}. Developing an alternative architecture that builds upon TGGs could bring multiple benefits. Especially the bidirectionality would bring advantages in regards to the future of this project While the incremental 
 
 
-\begin{description}
-  \item[Plugin System]
-  \item[Suggestions] 
-  \item[Perceptualization]  
-\end{description}
+% \begin{description}
+%   \item[Plugin System]
+%   \item[Suggestions] 
+%   \item[Perceptualization]  
+% \end{description}
 
-\begin{itemize}
-  \item develop functional DSL
-  \item check performance loss
-  \item usability test especially in terms of complex graphic objects
-  \item abstract syntax correctness and feedback to user
-\end{itemize}
+% \begin{itemize}
+%   \item develop functional DSL
+%   \item check performance loss
+%   \item usability test especially in terms of complex graphic objects
+%   \item abstract syntax correctness and feedback to user
+% \end{itemize}
 

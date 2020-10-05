@@ -43,3 +43,30 @@ To ease traversal of the hypergraph, a DSL implementation of the \textsc{CouchEd
 
 \subsection*{Concrete Metamodel}
 \lstinputlisting[breaklines=true,label={lst:state-concretemm},captionpos=b,caption={\texttt{ConcreteMM} definition for Statecharts}]{code/configs/statechartsnew/ConcreteMM.kts}
+
+
+\chapter{Test Setup}
+\label{app:testsetup}
+The test setup in this section is an exact replica of the StateGridTest described in \cite{nachreiner_couchedit_2020}. This test serves as common ground to compare \textsc{CouchEdit}'s reference implementation if the implementation produced in this Thesis.
+
+\section{StateGridTest}
+\subsection{Scenario Parameters}
+
+\begin{itemize}
+  \item \texttt{gridSizeX} and \texttt{gridSizeY}: Number of rows and columns in the generated state representation grid, respectively.
+  \item \texttt{numberOfStatesToMove}: Amount of state representations in the concrete syntax that will be selected in step 3 and moved to the right of all other state representations.
+  \item \texttt{additionalGridSizeX and additionalGridSizeY}: Size of the grid of additional states that will be inserted in step 5.
+  \item \texttt{toRemoveGridSizeX} and \texttt{ToRemoveGridSizeY}: Number of columns respectively rows of the grid that should be deleted in its top left corner in step 7.
+\end{itemize}
+\subsection{Test Steps}
+\begin{enumerate}
+  \item \textbf{Process}: Generate a grid of \texttt{gridSizeX} x \texttt{gridSizeY} concrete syntax state representations (rounded rectangle + label) and insert them as one DiffCollection.
+  \item \textbf{Assert} that for every concrete syntax representation, a State abstract syntax Element has been created and that the State name property is equal to the concrete
+  syntax representation’s label’s content text.
+  \item \textbf{Process}: Move a set of \texttt{numberOfStatesToMove} concrete syntax state representations out of the middle of the grid so that they now are to the right of the previously right border of the state representation grid.
+  \item \textbf{Assert} that all moved Elements still represent the same state, as such purely graphical changes should not change the abstract syntax representation of the statechart.
+  \item \textbf{Process}: Insert a new grid of \texttt{additionalGridSizeX} x \texttt{additionalGridSizeY} state representations to the bottom right of the existing grid.
+  \item \textbf{Assert} that for all of the new grid elements of step 5, an abstract syntax State Element has also been inserted.
+  \item \textbf{Process}:  Remove \texttt{toRemoveGridSizeX} x \texttt{toRemoveGridSizeY} state representations from the top left of the grid.
+  \item \textbf{Assert} that for all of the removed state representations, the corresponding State abstract syntax Element has also been deleted.
+\end{enumerate}

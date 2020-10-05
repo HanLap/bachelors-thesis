@@ -22,11 +22,7 @@
 
 - bottoni and grau
 
-
-### whatever
-- tdds
-- performance
-- deadlines
+- modeling language fundamentals
 
 
 

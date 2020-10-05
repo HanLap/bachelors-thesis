@@ -1,20 +1,22 @@
 \chapter{Related Work}
 \label{ch:related_work}
-
-There are multiple projects that implement a form of relaxed conformance editing. But only few of these projects actually define languages that can be utilized to configure different modeling syntaxes. 
+this chapter provides information about work in the area of graph translation and concrete to abstract syntax mapping. This primarily encompasses Triple Graph Grammars, as well as work in the area of relaxed conformance modeling.
 
 
 
 
 \section{Triple Graph Grammars}
-Triple Graph Grammars were first introduced by Schürr in 1994 \cite{schurr_specification_1994}.
+\label{sec:tggs}
+Triple Graph Grammars (TGGs) were first introduced by Schürr in 1994 \cite{schurr_specification_1994}. They formalize a specification that can be used to define bidirectional translations between different graph languages \cite{schurr_15_2008}. As the name implies, TGGs consist of three graphs, often called source, target and correspondence graph. The source and target graphs are distinct graphs that then are connected by the correspondence graph. The correspondence graph is responsible for realizing correspondence relationships between source and target graphs. Production rules are defined for a given graph triple. By applying these rules to a given instance of the source graph, it can be mapped to a corresponding target graph representation.
+
+This triple graph structure is similar to the architecture employed by \textsc{CouchEdit}, explained in \Cref{sec:CouchEdit}. Thus TGGs are a possible mechanism to specify configurations for \textsc{CouchEdit}. Furthermore, well defined TGGs can generate \emph{forward and backward graph translations}. As \textsc{CouchEdit} strives to provide functionality that requires translation from RenderMM to AbstractMM as well as the other direction, the bidirectionality TGGs provide could be beneficial for future implementations. Nonetheless the approach described in the following thesis does not make use of TGGs. TGG production rules are usually defined as a form of graph grammar rules \cite{schurr_15_2008}. In the early development stages of this research it was evaluated that the most taxing aspect of translating concrete to abstract syntax is the recognition of correct concrete representations in the graphical representation. This means that realizing the translation from RenderMM to AbstractMM using graph grammar rules is especially verbose on the left hand side of the production rule. the right hand side seemed to always be rather simple. Furthermore \cite{schurr_15_2008} notes that most TGG implementations use inefficient graph grammar parser algorithms. As \textsc{CouchEdit} has to provide user feedback during the editing process, performance represents an important aspect in production ready implementations of \textsc{CouchEdit}. Nonetheless, TGGs could provide benefits for \textsc{CouchEdit} and it may be worthwhile to investigate their applicability in future works. 
 
 
 \section{Making Metamodels Aware of Concrete Syntax}
 \label{sec:fondement}
 in their work, Making Metamodels Aware of Concrete Syntax \cite{fondement_making_2005}, F. Fondement and T. Baar argue that, while abstract syntax definitions are standardized, most language specifications keep the concrete syntax informal. To solve this problem, they propose an approach to defining the concrete syntax and how to link it to the abstract representation.
 
-For this, the authors complement every class of the abstract syntax with a corresponding display scheme. This display scheme is compose of two parts, an iconic and a constraining part. The iconic part defines a set of \texttt{DisplayClasses}, these \texttt{DisplayClasses} group Graphical Objects together into visual representation object. On the other hand, the constraining part links these \texttt{DisplayClasses} to an abstract syntax element. This link is realized using \texttt{DisplayManagers}. A \texttt{DisplayManager} serves as connection between exactly one model element of the abstract syntax and one display object and has the task of syncing the abstract to the concrete representation. An example of this architecture is depicted in \Cref{fig:fondement_dm}, for a Petrinet place element. The graphical primitives, a place is composed of, are mapped to a place \texttt{DisplayClass}, to build a places iconic part. This iconic representation is then attached to a place model element, using a place \texttt{DisplayManager}.
+For this, the authors complement every class of the abstract syntax with a corresponding display scheme. This display scheme is compose of two parts, an iconic and a constraining part. The iconic part defines a set of \emph{DisplayClasses}, these DisplayClasses group Graphical Objects together into visual representation object. On the other hand, the constraining part links these DisplayClasses to an abstract syntax element. This link is realized using \emph{DisplayManagers}. A DisplayManager serves as connection between exactly one model element of the abstract syntax and one display object and has the task of syncing the abstract to the concrete representation. An example of this architecture is depicted in \Cref{fig:fondement_dm}, for a Petrinet place element. The graphical primitives, a place is composed of, are mapped to a place DisplayClass, to build a places iconic part. This iconic representation is then attached to a place model element, using a place DisplayManager.
 
 
 \begin{figure}[H]
@@ -26,22 +28,22 @@ For this, the authors complement every class of the abstract syntax with a corre
 
 A DisplayManager has to keep abstract and concrete representation in sync, for this Fondement and Baar utilize OCL invariants, which are defined on the DisplayerManager. For example, an invariant to sync the name of place display schemes could look as following:
 
-\begin{lstlisting}[language=OCL,captionpos=b,caption={OCL Invariant that syncs the name attribute of \texttt{DisplayClass} and model element.}]
+\begin{lstlisting}[language=OCL,captionpos=b,caption={OCL Invariant that syncs the name attribute of Place DisplayClasss and model elements.},label={lst:ocl-inv}]
 context PlaceDM
 inv: self.me.name->exists() implies
         self.me.name = self.vo.name.text
 \end{lstlisting}
 
-The Authors keep open, how the mapping from graphical primitives to a display object could be implemented. while the metamodel proposed in this thesis does not introduce an extra layer of abstraction in form of these \texttt{DisplayClasses}, it still is inspired heavily by Fondement's and Baar's work. Especially the constraining part that utilizes \texttt{DisplayManagers} to sync abstract and concrete syntax, served as primary inspiration for the proposed architecture.
+The Authors keep open, how the mapping from graphical primitives to a display object could be implemented. while the metamodel proposed in this thesis does not introduce an extra layer of abstraction in form of these DisplayClasses, it still is inspired heavily by Fondement's and Baar's work. Especially the constraining part that utilizes DisplayManagers to sync abstract and concrete syntax, served as primary inspiration for the proposed architecture.
 
 In the work "Correctly defined concrete syntax" \cite{baar_correctly_2008}, Baar furthermore provides an algorithm to check syntactic correctness of the concrete representation. While checking the concrete syntax for correctness is out of scope of this work, a future implementation would have to provide the user with syntax checking capabilities, to make sure that the model, designed in the editor is syntactically correct.
 
 
 \section{DiaGen}
-\label{diagen}
-\textsc{DiaGen} is a project first introduced by Minas and Viehstaedt \cite{minas_diagen_1995}. It is a system that allows for the specification and generation of modeling editors. \textsc{DiaGen} supports \emph{free-hand editing}, where the user can manipulate the graphical representation directly. This is the same editing mode that \textsc{CouchEdit} supports \cite{nachreiner_couchedit_2020}. In \textsc{DiaGen}, a diagram consists of a finite set of diagram components \cite{minas_concepts_2002}. Each component is defined by its attributes. Furthermore, each component has a set of \emph{attachment points}. Attachment points define areas at which different diagram components can be connected. \textsc{DiaGen}'s architecture generates a hypergraph from the visual diagram consisting of these diagram components. This hypergraph is furthermore reduced using a context-free grammar to receive the abstract representation. \textsc{DiaGen} also supports automatic layouting and user feedback on diagram parts that are not correct under the defined diagram language \cite{minas_concepts_2002}.
+\label{sec:diagen}
+\textsc{DiaGen} is a project first introduced by Minas and Viehstaedt \cite{minas_diagen_1995}. It is a system that allows for the specification and generation of modeling editors. \textsc{DiaGen} supports \emph{free-hand editing}, where the user can manipulate the graphical representation directly. This is the same editing mode that \textsc{CouchEdit} supports \cite{nachreiner_couchedit_2020}. In \textsc{DiaGen}, a diagram consists of a finite set of diagram components \cite{minas_concepts_2002}. Each component is defined by its attributes. Furthermore, each component has a set of \emph{attachment points}. Attachment points define areas at which different diagram components can be connected. \textsc{DiaGen}'s architecture generates a hypergraph from the visual diagram consisting of these diagram components. This hypergraph is furthermore reduced using a context-free grammar to receive the abstract representation. \textsc{DiaGen} also supports automatic layouting and user feedback on diagram parts that are not correct under the defined diagram language \cite{minas_concepts_2002}. \textsc{DiaGen} provides a textual language as well as a GUI tool, which can be used to specify diagram languages. 
 
-\textsc{DiaGen} provides a textual language as well as a GUI tool, which can be used to specify diagram languages. 
+While \textsc{DiaGen} serves as an interesting example for a textual language to define modeling syntaxes, it does not seem applicable to \textsc{CouchEdit}. \textsc{DiaGen} does not create a hypergraph that contains concrete and abstract syntax, instead it parses the concrete syntax to a intermediate hypergraph which is then reduced to the abstract syntax. Furthermore as a code generator, \textsc{DiaGen} relies on the possibility to implement certain parts of the definition in source code. While the artifact proposed in this thesis does also include a code generator that makes use of this advantage, ultimately it is intended to evolve this work into a runtime interpreter that can not rely on source code implementations. 
 
 
-\comment{kinda short at the moment}
+
