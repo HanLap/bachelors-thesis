@@ -1,19 +1,98 @@
 % \chapter*{Appendix}
 \chapter{CouchEdit Configuration Metamodel}
-\begin{sidewaysfigure}
-\centering
-\includesvg[width=\linewidth]{images/"csd - metamodel"}
-\caption{Overview of the complete designed metamodel}
-\label{fig:complete-metamodel}
-\end{sidewaysfigure}
+% \begin{sidewaysfigure}
+%   \centering
+%   \includesvg[width=.2\linewidth]{images/"csd - metamodel"}
+%   \caption{Overview of the complete designed metamodel}
+%   \label{fig:complete-metamodel}
+% \end{sidewaysfigure}
 
+\hvFloat[rotAngle=270]%
+   {figure}%
+   {\includesvg[width=\linewidth]{images/"csd - metamodel"}}%
+   [short caption]{Overview of the complete designed metamodel}%
+   {fig:complete-metamodel}
+   
 \chapter{Navigation functions}
 \label{app:navigationfunctions}
 
 To ease traversal of the hypergraph, a DSL implementation of the \textsc{CouchEdit} configuration should provide abstractions for the following Service methods:
 
+\begin{description}
+  \item[relatedTo] For the given Element B, returns an Element A that has a OneToOneRelation of the given type pointing from A to B.
+
+        \begin{tabularx}{\linewidth}{ l X }
+          \textbf{Receiver}: & Element B
+          \\
+          \textbf{Params}:   & \texttt{clazz}: Relation type that connects A and B.
+          \\
+                             & \texttt{includeSubTypes}: Whether to include relations that subtype the given type.
+          \\
+          \textbf{Returns}:  & Element A where A has a relation Pointing towards B or null if no such element exists.
+          \\
+          \textbf{Throws}:   & \texttt{IllegalStateException}: If there are more than one Possible solutions for A.
+        \end{tabularx}
+
+  \item[relatedFrom] For the Given Element A, returns an Element B that has a OneToOneRelation of the given type pointing from A to B.
+
+        \begin{tabularx}{\linewidth}{ l X }
+          \textbf{Receiver}: & Element A
+          \\
+          \textbf{Params}:   & \texttt{clazz}: Relation type that connects A and B.
+          \\
+                             & \texttt{includeSubTypes}: Whether to include relations that subtype the given type.
+          \\
+          \textbf{Returns}:  & Element B where B has a relation Pointing from A or null if no such element exists.
+          \\
+          \textbf{Throws}:   & \texttt{IllegalStateException}: If there are more than one Possible solutions for B.
+        \end{tabularx}
+
+  \item[allRelatedTo] For the given Element B, returns all Elements A that have a OneToOneRelation of the given type pointing from A to B.
+
+        \begin{tabularx}{\linewidth}{ l X }
+          \textbf{Receiver}: & Element B
+          \\
+          \textbf{Params}:   & \texttt{clazz}: Relation type that connects A and B.
+          \\
+                             & \texttt{includeSubTypes}: Whether to include relations that subtype the given type.
+          \\
+                             & \texttt{predicate}: Predicate used to filter Relations
+          \\
+          \textbf{Returns}:  & Set of Elements A where each A has a relation Pointing from A towards B.
+        \end{tabularx}
+
+  \item[allRelatedFrom] For the given Element A, returns all Elements B that have a OneToOneRelation of the given type pointing from A to B.
+
+        \begin{tabularx}{\linewidth}{ l X }
+          \textbf{Receiver}: & Element A
+          \\
+          \textbf{Params}:   & \texttt{clazz}: Relation type that connects A and B.
+          \\
+                             & \texttt{includeSubTypes}: Whether to include relations that subtype the given type.
+          \\
+                             & \texttt{predicate}: Predicate used to filter Relations
+          \\
+          \textbf{Returns}:  & Set of Elements B where each A has a relation Pointing from A towards B.
+        \end{tabularx}
+  
+  \item[dm] For a given ShapedElement, returns the corresponding DisplayManager if it exists.
+  \begin{tabularx}{\linewidth}{ l X }
+    \textbf{Receiver}: & ShapedElement
+    \\
+    \textbf{Returns}:  & DisplayManager attached to the given Element or null if none exists
+  \end{tabularx}
+\end{description}
+
+\section*{Further Extension Functions}
+
+relations getA/getB
+
+
+pattern:
 \begin{itemize}
-  \item \comment{tbd}
+  \item hasPattern
+  \item notHasPattern
+  \item filterPattern
 \end{itemize}
 
 
@@ -62,7 +141,7 @@ The test setup in this section is an exact replica of the StateGridTest describe
 \begin{enumerate}
   \item \textbf{Process}: Generate a grid of \texttt{gridSizeX} x \texttt{gridSizeY} concrete syntax state representations (rounded rectangle + label) and insert them as one DiffCollection.
   \item \textbf{Assert} that for every concrete syntax representation, a State abstract syntax Element has been created and that the State name property is equal to the concrete
-  syntax representation’s label’s content text.
+        syntax representation’s label’s content text.
   \item \textbf{Process}: Move a set of \texttt{numberOfStatesToMove} concrete syntax state representations out of the middle of the grid so that they now are to the right of the previously right border of the state representation grid.
   \item \textbf{Assert} that all moved Elements still represent the same state, as such purely graphical changes should not change the abstract syntax representation of the statechart.
   \item \textbf{Process}: Insert a new grid of \texttt{additionalGridSizeX} x \texttt{additionalGridSizeY} state representations to the bottom right of the existing grid.
