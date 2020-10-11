@@ -9,14 +9,11 @@
 - ist CouchEdit momentan Bidirectional?
 
 
-
 ### ToDo
 
 
 - add abstract display manager
 - model actions (3.3.2)
-
-- fondement & baar go through related work
 
 - complex go vs grouping
 
@@ -27,3 +24,6 @@
 
 
 - tggs future besser liefern könnte
+
+
+- methodology, dsl is not mentioned

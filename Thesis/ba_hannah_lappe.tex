@@ -6,6 +6,7 @@
 \documentclass[
 a4paper,
 % 10pt,
+% 12pt,
 headsepline,           % Linie zw. Kopfzeile und Text
 % doubleside,            % doppelseitig
 numbers=noenddot,      % keine Punkte nach den letzten Ziffern in Überschriften
@@ -257,18 +258,18 @@ leqno,					% equation numbers to the left
 \makeatother
 
 % hier Namen etc. einsetzen
-\newcommand{\fullname}{Florian Lappe}
-\newcommand{\email}{florian.lappe@uni-ulm.de}
+\newcommand{\fullname}{Hannah Lappe}
+\newcommand{\email}{hannah.lappe@uni-ulm.de}
 \newcommand{\titel}{}
-\newcommand{\untertitel}{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for \textsc{CouchEdit}}
+\newcommand{\untertitel}{Development and Evaluation of a Metamodel to Define Modeling Syntaxes for CouchEdit}
 \newcommand{\jahr}{2020}
-\newcommand{\abgabedatum}{September 2020}
-%\newcommand{\abschlussarbeit}{Bachelorarbeit}
+\newcommand{\abgabedatum}{Oktober 2020}
 \newcommand{\abschlussarbeit}{Bachelorarbeit}
 \newcommand{\matrikelnummer}{922114}
 \newcommand{\gutachterA}{Prof.\ Dr.\ Matthias\ Tichy}
 \newcommand{\gutachterB}{}
-\newcommand{\betreuer}{Dr.\ Alexander\ Raschke}
+\newcommand{\betreuer}{Dr.\ Alexander\ Raschke \\
+                       & Michael\ Stegmaier}
 
 % hier die Fakultät auswählen
 %\newcommand{\fakultaet}{---  Im Quellcode anpassen nicht vergessen! ---}
@@ -287,7 +288,7 @@ leqno,					% equation numbers to the left
 \pdfinfo{
   /Author (\fullname)
   /Title (\titel)
-  /Producer     (pdfeTex 3.14159-1.30.6-2.2)
+  /Producer (pdfeTex 3.14159-1.30.6-2.2)
   /Keywords ()
 }
 
@@ -339,12 +340,13 @@ pdfborder=0 0 0	% keine Box um die Links!
   Universität Ulm\\
   \\
   Fakultät für\\
-  Ingenieurwissenschaften\\
-  und Informatik\\
+  Ingenieurwissenschaften,\\
+  Informatik und\\
+  Psychologie\\
   \\
   Institut für\\
-  Programmiermethodik\\
-  und Compilerbau\\
+  Softwaretechnik und\\
+  Programmiersprachen\\
   \\
   \abgabedatum\\
   \\
@@ -362,11 +364,13 @@ pdfborder=0 0 0	% keine Box um die Links!
 
 % !/ignore-section
 
-Modeling has become an important factor in many of today's development workflows. Especially recent developments in the area of Model Driven Engineering (MDE) as well as Business Process Modeling, have increased the need for syntactically correct models. Therefore graphical modeling editors with syntax parsing capabilities are integral. But most modern model editors provide sub par user experience, resulting from tight coupling between graphical and abstract notations. 
+Modeling has become an essential factor in many of today's development workflows. Especially recent developments in the area of Model-Driven Engineering (MDE), as well as Business Process Modeling, have increased the need for syntactically correct models. Therefore, graphical modeling editors with syntax parsing capabilities are integral. However, most modern model editors do not provide optimal user experience, resulting from the tight coupling between graphical and abstract notations. 
 
-\textsc{CouchEdit} is a novel modeling language agnostic framework that strives to improve editor usability. To this end it introduces an architecture that decouples graphical and abstract representations. However, in its current implementation, configuring \textsc{CouchEdit} for different modeling languages is a laborious and error prone task.
+\textsc{CouchEdit} is a novel modeling language-agnostic framework that strives to improve editor usability. To this end, it introduces an architecture that decouples graphical and abstract representations. However, in its current implementation, configuring \textsc{CouchEdit} for different modeling languages is a laborious and error-prone task.
 
-This thesis proposes an architecture that can be used to define modeling language configurations for \textsc{CouchEdit}. The aim of this architecture is to increase developer accessibility by reducing the amount of code as well as framework knowledge needed to define new configurations. 
+This thesis proposes an architecture that can create modeling language configurations for \textsc{CouchEdit}. This architecture aims to increase developer accessibility by reducing the amount of code and framework knowledge needed to specify new configurations. 
+
+\comment{results}
 
   % !ignore-section
   {

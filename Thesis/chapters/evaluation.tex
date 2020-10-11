@@ -35,8 +35,8 @@ While the exact culprit responsible for this rapid growth of processing time is 
 
 \begin{figure}
   \centering
-  \includesvg[width=\linewidth]{images/"component - sub-groups"}
-  \caption{\texttt{Processors} split into subgroups, where one group is only activated if the previous group has finished processing.}
+  \includesvg[width=.8\linewidth]{images/"component - sub-groups"}
+  \caption{Processors split into subgroups, where one group is only activated if the previous group has finished processing.}
   \label{fig:sub-groups}
 \end{figure}
 
@@ -49,7 +49,7 @@ To further reinforce claims of conciseness, the Statecharts example (\Cref{sec:s
 
 While the artifact abstracts away from the implementation details of \texttt{Processors}, the developer still requires certain knowledge about the framework. Most prominently a developer has to understand the hypergraph. Constraints and rules usually require querying of the hypergraph, therefore it is inevitable to know the existing element types as well as possible Relations and their meaning. Furthermore, it has to be understood which changes, different plugins apply to the graph, as well as what functions are available. Nonetheless, the amount of knowledge required, is still reduced.
 
-\subsection{plugins}
+\subsection{Plugins}
 The plugin system proved as a worthwhile addition to the architecture. The example language configurations, described in \Cref{sec:example-configs} show of how complex tasks can be trivialized if the correct plugin is provided. With the plugin system, new \texttt{Processors} can be added to the library of existing processors, should problems arise that are difficult to solve within the generalized metamodel architecture. Plugins are developed on the application level an thus have access to \textsc{CouchEdit}'s complete architecture. On the other hand, this means that developing plugins requires knowledge over the complete \textsc{CouchEdit} framework, which the developed artifact is trying to abstract. Therefore plugins should be implemented as general as possible, so that they can be reused as much as possible. Therein lies the challenge of the plugin system. The usefulness of a plugin depends on how well it can be adapted to different modeling syntaxes. This means that plugins have to be developed with great care. In the example Statecharts implementation (\Cref{sec:state-impl}), the \texttt{LabelProcessor} prototype failed to solve all labeling requirements imposed by the syntax. This demonstrates the volatility of hastily developed plugin. On the other hand, the ConnectionPlugin, thanks to its simplicity was able to provide a concise solution for the given problem.
 
 \section{Discussion of DisplayClasses}
