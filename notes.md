@@ -22,7 +22,6 @@
 - modeling language fundamentals
 
 
-
 - tggs future besser liefern könnte
 
 
