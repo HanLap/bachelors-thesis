@@ -26,3 +26,10 @@
 
 
 - methodology, dsl is not mentioned
+
+
+### HEUTE
+- rework pattern
+- grammarly finish
+- TTG visualization
+

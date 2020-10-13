@@ -29,7 +29,7 @@ In the next sub-step, the code generator will be implemented. This is an iterati
 % todo: maybe define selected modeling syntaxes here already
 
 \subsection{Evaluation}
-Now that the desired artifacts are fully developed, it has to be evaluated how well they do their designated tasks. As the primary artifact of this research, the metamodel has to be evaluated in terms of its applicability to its designated domain. To this end, different modeling syntaxes will be implemented using the developed code generator. This will serve as a demonstration of the developed artifacts and should highlight areas in which the metamodel's design excels, as well as design flaws and limitations (RQ3). If time allows, potential flaws can be addressed by returning to the development phase and revising the artifacts. Otherwise, flaws are to be highlighted so that future works can address them.
+Now that the desired artifacts are fully developed, it has to be evaluated how well they do their designated tasks. As the primary artifact of this research, the metamodel has to be evaluated in terms of its applicability to its designated domain. To this end, different modeling syntaxes will be implemented using the developed code generator. This will serve as a demonstration of the developed artifacts and should highlight areas in which the metamodel's design excels, as well as design flaws and limitations (RQ3). If time allows, potential flaws can be addressed by returning to the development phase and revising the artifacts. Otherwise, flaws are to be highlighted so that future work can address them.
 
 \subsection{Conclusion}
 The conclusion stage marks the end of a DSR, and the results have to be communicated. This written thesis as well as all source code and documentation will serve as means to communicate the results of this research.
@@ -37,21 +37,21 @@ The conclusion stage marks the end of a DSR, and the results have to be communic
 
 \section{Modeling Languages}
 \label{sec:modeling-languages}
-This thesis discusses modeling syntaxes and how \textsc{CouchEdit}'s architecture handles them. To this end, this section introduces the Petrinets and Statecharts syntaxes. They will serve as examples to demonstrate various problems and applicability of the developed artifacts. 
+This thesis discusses modeling syntaxes and how \textsc{CouchEdit}'s architecture handles them. To this end, this section introduces the Petri nets and Statecharts syntaxes. They will serve as examples to demonstrate various problems and applicability of the developed artifacts. 
 
 % \subsection{Graphical Language Theory}
-\subsection{Petrinets Syntax}
+\subsection{Petri nets Syntax}
 \label{sec:petrinets}
-Petrinets are easy to understand and provide simple abstract and concrete syntax. Thus they serve as a suitable tool for explaining concepts in the following chapters. \Cref{fig:petrinets_metamodel} shows the abstract syntax metamodel of the used Petrinets syntax. A Petrinets conceptual representation consists of \emph{places} and \emph{transitions}. While Both possess a name, places furthermore have a token count. Each place can have a variable amount of incoming and outgoing transitions, while transitions can have any amount of incoming and outgoing places. 
+Petri nets are easy to understand and provide simple abstract and concrete syntax. Thus they serve as a suitable tool for explaining concepts in the following chapters. \Cref{fig:petrinets_metamodel} shows the abstract syntax metamodel of the used Petri nets syntax. A Petri nets conceptual representation consists of \emph{places} and \emph{transitions}. While Both possess a name, places furthermore have a token count. Each place can have a variable amount of incoming and outgoing transitions, while transitions can have any amount of incoming and outgoing places. 
 
 \begin{figure}[H]
   \centering
   \includesvg[width=.5\linewidth]{images/"csd - petrinet-metamodel"}
-  \caption{Metamodel for a simple Petrinets abstract syntax}
+  \caption{Metamodel for a simple Petri nets abstract syntax}
   \label{fig:petrinets_metamodel}
 \end{figure}
 
-The graphic primitives, a concrete representation of Petrinets is composed of, are listed in \Cref{tab:petri-primitives}. Usually, circles without fill color represent places, while slender rectangles represent transitions. The number of small black circles inside a place represents this place's token count. Furthermore, places and transitions possess a label close to their bounding box, that determines their name. Lastly, places and transitions have directed connection lines between them. Each connection points from a place towards a transition or from a transition towards a place. A connection marks the target element as an outgoing reference for the source element and vice versa. \Cref{fig:petrinets_example} shows a simple concrete instance and the corresponding abstract representation.
+The graphic primitives, a concrete representation of Petri nets is composed of, are listed in \Cref{tab:petri-primitives}. Usually, circles without fill color represent places, while slender rectangles represent transitions. The number of small black circles inside a place represents this place's token count. Furthermore, places and transitions possess a label close to their bounding box, that determines their name. Lastly, places and transitions have directed connection lines between them. Each connection points from a place towards a transition or from a transition towards a place. A connection marks the target element as an outgoing reference for the source element and vice versa. \Cref{fig:petrinets_example} shows a simple concrete instance and the corresponding abstract representation.
 
 
 % Each connection points from a place or transition towards an element of the opposite type and represents an outgoing connection for the source element and an incoming connection for the target element. A simple concrete instantiation and its corresponding abstract representation is shown in \Cref{fig:petrinets_example}.
@@ -75,7 +75,7 @@ The graphic primitives, a concrete representation of Petrinets is composed of, a
   \\
   \hline
 \end{tabular}
-\caption{graphic primitives used to describe Petrinets}
+\caption{graphic primitives used to describe Petri nets}
 \label{tab:petri-primitives}
 \end{table}
 
@@ -93,13 +93,13 @@ The graphic primitives, a concrete representation of Petrinets is composed of, a
     \caption{abstract syntax}
     \label{subfig:petriabstract}    
   \end{subfigure}
-  \caption{concrete and abstract representation for a simple Petrinets example}
+  \caption{concrete and abstract representation for a simple Petri nets example}
   \label{fig:petrinets_example}
 \end{figure} 
 
 \subsection{Statechart Syntax}
 \label{sec:statecharts}
-As a second example, Statecharts are introduced here. The term Statecharts was first coined in 1987 by D. Harel \cite{harel_statecharts_1987}. Statecharts are an extension of state machines. Their primary feature is that each state can have itself sub-state machines. \Cref{fig:statechartmm} describes the abstract syntax metamodel used in this thesis. This abstract syntax does not represent a complete specification of the Statecharts syntax, rather a subset than can highlight specific areas of the implementation. Statecharts define a more complex syntax than Petrinets mentioned above and thus will show the developed artifacts applicability towards more complex modeling languages.
+As a second example, Statecharts are introduced here. The term Statecharts was first coined in 1987 by D. Harel \cite{harel_statecharts_1987}. Statecharts are an extension of state machines. Their primary feature is that each state can have itself sub-state machines. \Cref{fig:statechartmm} describes the abstract syntax metamodel used in this thesis. This abstract syntax does not represent a complete specification of the Statecharts syntax, rather a subset than can highlight specific areas of the implementation. Statecharts define a more complex syntax than Petri nets mentioned above and thus will show the developed artifacts applicability towards more complex modeling languages.
 
 \begin{figure}
 \centering
@@ -145,7 +145,7 @@ A Statechart is composed of \emph{StateElements} and \emph{Transitions}. Transit
 \label{sec:CouchEdit}
 
 
-\comment{write basics about CouchEdit and introduce views}
+% \comment{write basics about CouchEdit and introduce views}
 
 % \begin{figure}
 % \centering
@@ -177,7 +177,7 @@ The authors propose to solve this by defining two metamodels, one describing the
   \label{fig:transmm}
   \end{figure}
 
-Following this architecture, \textsc{CouchEdit} separates the frontend from the abstract abstract syntax model. At its core, the frontend is a simple vector drawing application that implements further functionality for diagrams. A Backend then has the responsibility to analyze these vector graphics and map them onto a corresponding abstract syntax representation. For this, the backend utilizes a set of independent components, that each is responsible for detecting different aspects of the diagram. Each Component contains a separate state. When a component makes changes to its state, it also publishes these changes so that other components, interested in these changes, can use them to calculate follow-up changes.  
+Following this architecture, \textsc{CouchEdit} separates the frontend from the  abstract syntax model. At its core, the frontend is a simple vector drawing application that implements further functionality for diagrams. A Backend then has the responsibility to analyze these vector graphics and map them onto a corresponding abstract syntax representation. For this, the backend utilizes a set of independent components, that each is responsible for detecting different aspects of the diagram. Each Component contains a separate state. When a component makes changes to its state, it also publishes these changes so that other components, interested in these changes, can use them to calculate follow-up changes.  
 
 This architecture has the advantage of being very detangled. Therefore, it is possible to improve components in isolation from the rest of the system. The clear separation of concerns also makes it easier to understand which component is responsible for what task. Furthermore, components can be swapped out depending on the tasks the configured modeling syntax requires.
 % what tasks are needed for the configured modeling syntax.
@@ -195,6 +195,7 @@ This architecture has the advantage of being very detangled. Therefore, it is po
 % This probability object can be set to \emph{Explicit}, which means that either this Element describes a factual truth, or it was marked by the user as not to be changed. 
 
 \subsubsection{Relations}
+\label{sec:relations}
 \emph{Relations} represent edges in the hypergraph. Each Relation connects a set of source Elements to a set of target Elements. They also inherit from the Element type and thus can recursively be connected with relations themselves. The connected vertices are referenced using the \emph{ElementReference} class. This class holds an Element's unique id and its type, which then can be used to find a referenced Element in the hypergraph. \Cref{fig:relations} shows the implementation of Relations. 
 
 \begin{figure}[ht]
@@ -220,12 +221,12 @@ In his work, The “Physics” of Notations: Toward a Scientific Basis for Const
 \label{sec:hotspotdefinitions}
 Some Modeling Notations define relevant zones in a graphical notation, which are not directly modeled by a GraphicObject and thus are not directly visible to the user but exist due to the visual composition. For example, in \cite{bottoni_suite_2004}, attachment points have been identified as such a relevant zone. An attachment point defines an area around a GraphicObject where a connection line can be "attached". \textsc{CouchEdit} implements this in a more general form through \emph{HotSpotDefinitions}. A HotSpotDefinition is a relation that, similar to GraphicObjects, has a shape and can thus be a target and a source of spatial relations.
 
-One of the primary applications of HotSpotDefinitions is in the form of \emph{CompartmentHotSpotDefinitions}. Compartments split a GraphicObject into multiple logical sub-areas. This is used in multiple advanced notations. For example, the Statechart syntax discussed in \Cref{sec:statecharts}, where a State can have multiple Regions marked by dashed lines. 
+One of the primary applications of HotSpotDefinitions is in the form of \emph{CompartmentHotSpotDefinitions} (CompHSDs). Compartments split a GraphicObject into multiple logical sub-areas. This is used in multiple advanced notations. For example, the Statechart syntax discussed in \Cref{sec:statecharts}, where a State can have multiple Regions marked by dashed lines. 
 
 \subsection{Application Structure}
 \textsc{CouchEdit} builds around independent components, called \emph{Processors} that can be enabled or disabled as needed in a given use case. To this end, the centerpiece of \textsc{CouchEdit}'s architecture is the \emph{ModificationBusManager}. Every Processor (including the frontend) can be connected to this bus manager (\Cref{fig:processors}). If one Processor publishes a hypergraph change, the ModificationBusManager propagates this change to all connected Processors. Each Processor can specify which Element types it is interested in and will only receive updates for Elements that match one of those types. 
 
-To communicate these changes in the system, \textsc{CouchEdit} uses \emph{ModelDiffs}. Each Diff represents an add, change, or delete action of an Element in the Hypergraph. This allows Processors to calculate correct graph changes based on the incoming changes instead of reevaluating the complete graph. This was added to the system because because Nachreiner suspected that reevaluating the complete state would cause much overhead \cite{nachreiner_couchedit_2020}. It turned out that Processors which have to calculate spatial relations significantly profited from diff based calculations  \cite{nachreiner_couchedit_2020}. However, calculating the correct follow-up state based on a set of Diffs turned out to be highly error-prone. Thus it was suspected that it could be beneficial to reevaluate the complete graph when processing lighter tasks, such as Abstract syntax processing \cite{nachreiner_couchedit_2020}.
+To communicate these changes in the system, \textsc{CouchEdit} uses \emph{ModelDiffs}. Each Diff represents an add, change, or delete action of an Element in the Hypergraph. This allows Processors to calculate correct graph changes based on the incoming changes instead of reevaluating the complete graph. This was added to the system because Nachreiner suspected that reevaluating the complete state would cause much overhead \cite{nachreiner_couchedit_2020}. It turned out that Processors which have to calculate spatial relations significantly profited from diff based calculations  \cite{nachreiner_couchedit_2020}. However, calculating the correct follow-up state based on a set of Diffs turned out to be highly error-prone. Thus it was suspected that it could be beneficial to reevaluate the complete graph when processing lighter tasks, such as Abstract syntax processing \cite{nachreiner_couchedit_2020}.
 
 \subsubsection{Core Processors}
 \label{sec:core-processors}
