@@ -1,0 +1,70 @@
+\documentclass{beamer}
+\mode<presentation>
+{
+  \usetheme{myulm}
+  \setbeamercovered{transparent}
+  \setbeamertemplate{navigation symbols}{} % no navigation bar
+  \setbeamersize{sidebar width left=1.17cm}
+}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{array}
+\usepackage{colortbl} % ING INF PSY
+\usepackage{arydshln}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{hyperref}
+
+% Literaturverzeichnis mit BibLaTeX // use Biber as Backend; dashed = false to repeat author names
+\usepackage[babel]{csquotes}
+\usepackage[backend=biber,style=ieee,dashed=false,hyperref,natbib]{biblatex}
+\addbibresource{BA.bib}
+
+% Anfang der Titelfolie
+% Anpassung von: Titel, Untertitel, Autor, Datum und Institut
+
+\title{BA Zwischenvortrag}
+\subtitle{Development and Evaluation of a\\ Metamodel to Define Modeling \\ Syntaxes for CouchEdit}
+\author{Hannah Lappe}
+\newcommand{\presdatum}{September 10, 2020} % alternativ zu \today: Eingabe eines festen Datums
+\institute
+{\\Institut für Softwaretechnik und \\ Programmiersprachen}
+%Ende der Titelfolie
+
+
+% Anfang der Kopfzeile der Folien
+% Anpassung von: Zwischentitel, Leitthema oder Name
+% Das Datum wird oben geändert: unter \presdatum{}!
+
+\newcommand{\zwischentitel}{\insertsection}
+\newcommand{\leitthema}{CouchEdit Metamodel}
+% Ende der Kopfzeile
+
+\newcommand{\red}[1]{\textcolor{farbwert-inwiin}{#1}}
+
+% Anfang der Folien
+\begin{document}
+
+\hspace*{-1.49cm}
+\frame[plain]{\titlepage}
+
+% Das Inhaltsverzeichnis
+\hspace*{-0.7cm}
+\section*{Contents} % diese Section erscheint nicht im Inhaltsverzeichnis
+\begin{frame}
+  \frametitle{Table of Contents}
+  \tableofcontents
+\end{frame}
+
+\input{sections/what.tex}
+\input{sections/problem.tex}
+\input{sections/architecture.tex}
+\input{sections/design.tex}
+\input{sections/perspectives.tex}
+
+\end{document}

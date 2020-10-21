@@ -1,0 +1,337 @@
+\section*{Petri Nets}
+\begin{frame}
+  \frametitle{Petri Nets}
+  \centering
+  \hspace{-2cm}
+  \includegraphics[width=10cm]{images/"petrinet - petri-complete"}
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Petri Nets}
+%   \hspace*{-.5cm}\makebox1[\linewidth][c]{%
+%   \begin{columns}
+%     \begin{column}{0.6\linewidth}
+%       \includegraphics[width=5cm]{images/"petrinet - graphic-primitives"}
+%     \end{column}
+%     \begin{column}{0.6\linewidth}
+%       \includegraphics[width=6cm]{images/"csd - petrinet-metamodel"}
+%     \end{column}
+%   \end{columns}
+%   }
+% \end{frame}
+
+
+\section{Approach}
+\begin{frame}
+  \centering
+  \hspace{-1cm}
+  \huge
+  \red{Approach}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Metamodel}
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=7cm]{images/"csd - metamodel-base"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Concrete Syntax Metamodel}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"csd - concretesyntax"}
+\end{frame}
+
+\section*{DisplayManagers}
+\begin{frame}
+  \hspace{-1cm}
+  \large
+  \red{\textbf{Making Metamodels Aware of Concrete Syntax}} \\
+  \hspace{-1cm}
+  \small
+  F. Fondement, T. Baar \cite{fondement_making_2005}
+\end{frame}
+
+\begin{frame}
+  \frametitle{DisplayManagers}
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - dm-sync"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Annotation System}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - concrete-blur-1"}
+\end{frame}
+
+
+% \begin{frame}
+%   \frametitle{DisplayManagers}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"csd - fondement-dm"}
+% \end{frame}
+
+
+% \begin{frame}
+%   \frametitle{Place DisplayManager}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"csd - fondement-example"}
+% \end{frame}
+
+
+% \begin{frame}
+%   \frametitle{Place DisplayManager in CouchEdit}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - my-fondement"}
+% \end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Place Annotation}
+  \vspace{-1cm}
+  % \begin{lstlisting}
+%   go.shape is Circle
+
+% go.allRelatedTo(Contains).isEmpty()
+  % \end{lstlisting}
+  \begin{itemize}
+    \setlength\itemsep{1cm}
+    \item GO has shape Circle
+    \item GO fillColor is not black
+    \item GO is not Contained by another GO
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Recognition of Place}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - kind-0"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Recognition of Place}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - kind-1"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{DisplayManager System}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - concrete-blur-2"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{PlaceDM is Added}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - kind-2"}
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Syncing Token Count}
+%   \centering
+%   \hspace{-1cm}  
+%   \includegraphics[width=3cm]{images/"petrinet - token-check"}
+% \end{frame}
+
+% \begin{frame}[fragile]
+%   \frametitle{Syncing Token count}
+% %   \vspace*{-2cm}
+% %   \begin{lstlisting}
+% % dm.me.tokens = 
+% %   dm.go
+% %     .allRelatedFrom(Contains)
+% %     .count()
+% %   \end{lstlisting}
+
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Place Syncing}
+  \begin{itemize}
+    \item tokens of ME equal Elements contained by GO
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Syncing Token count}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - syncing-1"}
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Syncing Token count}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - syncing-2"}
+% \end{frame}
+
+
+% \begin{frame}
+%   \frametitle{Syncing outgoing Transitions}
+
+%   \centering
+%   \hspace{-1cm}
+%   \includegraphics[width=3cm]{images/"petrinet - outgoing-example-1"}
+% \end{frame}
+
+
+% \begin{frame}
+%   \frametitle{Syncing outgoing Transitions}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - syncing-3"}
+% \end{frame}
+
+
+% \begin{frame}[fragile]
+%   \frametitle{Syncing outgoing Transitions}
+%   \vspace*{-1cm}
+%   \begin{lstlisting}
+% dm.me.outgoing = 
+%   dm.go
+%     .allToRelations(ConnectionEnd)
+%     .filter { rel -> !rel.isEndConnection }
+%     .map { rel -> rel.getA() }
+%     .flatMap { line -> line
+%       .allFromRelations(ConnectionEnd) }
+%     .filter { rel -> rel.isEndConnection }
+%     .map { rel -> rel.getB() } 
+%     .map { go -> go.dm.me }
+%   \end{lstlisting}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{Syncing outgoing Transitions}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - syncing-4"}
+% \end{frame}
+
+
+% \begin{frame}
+%   \frametitle{DisplayManager Metamodel}
+%   \centering
+%   \hspace{-1cm}
+%   \includegraphics[width=7cm]{images/"csd - page 15"}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{DisplayManager Metamodel}
+%   \centering
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - concrete-blur-1"}
+% \end{frame}
+
+% \section*{Annotation System}
+% \begin{frame}
+%   \centering
+%   \hspace{-1cm}
+%   \huge
+%   \red{Annotation System}
+% \end{frame}
+
+% \begin{frame}[fragile]
+%   \frametitle{Token Annotation}
+%   \vspace*{-1cm}
+%   \begin{lstlisting}
+%     go.shape is Circle
+
+%     go.attributes.fillColor = black
+%   \end{lstlisting}
+% \end{frame}
+
+
+% \begin{frame}
+%   \frametitle{Annotation Processor}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - kind-0"}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{Transition Recognition Processor}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - kind-1"}
+% \end{frame}
+
+
+\section*{Plugins}
+% \begin{frame}[fragile]
+%   \frametitle{Syncing outgoing Transitions}
+%   \vspace*{-1cm}
+%   \begin{lstlisting}
+% dm.me.tokens = 
+%   dm.go
+%     .allRelatedFrom(Contains)
+%     .filterAnnotation(Token)
+%     .count()
+%   \end{lstlisting}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{Syncing outgoing Transitions}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - syncing-3"}
+% \end{frame}
+
+\begin{frame}
+  \frametitle{}
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=5cm]{images/"petrinet - label-check"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Plugin System}
+  \hspace{-1cm}
+  \includegraphics[width=10cm]{images/"presentation - concrete-blur-3"}
+\end{frame}
+
+% \begin{frame}
+%   \centering
+%   \hspace{-1cm}
+%   \huge
+%   \red{Plugins}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{Connection Plugin}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - plugin-1"}
+% \end{frame}
+
+% \begin{frame}[fragile]
+%   \frametitle{Syncing outgoing Transitions}
+% \vspace*{-1cm}
+%   \begin{lstlisting}
+% dm.me.outgoing = 
+%   dm.go
+%     .allFromRelations(ConnectionTo)
+%     .map { go -> go.dm.me }
+%   \end{lstlisting}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{}
+%   \hspace{-1cm}
+%   \includegraphics[width=10cm]{images/"presentation - my-fondement"}
+% \end{frame}
+
+% \begin{frame}[fragile]
+%   \frametitle{Label Plugin}
+%   \vspace*{-1cm}
+%   \begin{lstlisting}[escapechar=\%]
+% LabelPlugin {
+%   (surroundingLabel(Place)
+%     %\textbf{and}% surroundingLabel(Transition)) 
+%     %\textbf{ifAmbiguous}% nothing
+% }
+%   \end{lstlisting}  
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Label Plugin Configuration}
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=9cm]{images/"csd - labelprocessor"}
+  
+
+\end{frame}
