@@ -1,43 +1,43 @@
 \chapter{Design Concept}
 % \raggedbottom
 \label{ch:design}
-\Cref{sec:CouchEdit} established that \textsc{CouchEdit} is composed of three distinct metamodels, as depicted in \Cref{fig:transmm}. Thus, it seems apparent that the proposed concept should also be composed of these three metamodels. The definition of abstract syntax metamodels has already standardized approaches (e.g., Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a render metamodel definition composed of graphic primitives. Follow up works would have to explore complex graphic structures in detail.  This work focuses on the concrete syntax metamodel that connects render and abstract syntax and proposes an approach to formalize this connection. \Cref{fig:metamodel-base} shows the root definition of the \textsc{CouchEdit} configuration metamodel. Throughout the chapter, this root model is gradually being extended with new concepts, until finally, all utilized concepts have been introduced (the complete metamodel is depicted in \Cref{fig:complete-metamodel}).
+\Cref{sec:CouchEdit} established that \textsc{CouchEdit} is composed of three distinct metamodels, as depicted in \Cref{fig:transmm}. Thus, it seems apparent that the proposed concept should also be composed of these three metamodels. The definition of abstract syntax metamodels has already standardized approaches (e.g., Ecore\footnote{\url{https://www.eclipse.org/modeling/emf/}}) and thus is mostly ignored. Furthermore, the proposed design currently only supports a render metamodel definition composed of graphic primitives. Follow up work would have to explore how ComplexGraphicObjects integrate.  This work focuses on the concrete syntax metamodel that connects render and abstract syntax and proposes an approach to formalize this connection. \Cref{fig:metamodel-base} shows the root definition of the \textsc{CouchEdit} configuration metamodel. Throughout the chapter, this root model is gradually being extended with new concepts, until finally, all utilized concepts have been introduced (the complete metamodel is depicted in \Cref{app:complete-mm}).
 
 \begin{figure}[ht]
   \centering
-  \includesvg[width=.7\linewidth]{images/"csd - metamodel-base"}
-  \caption{Composition of the \textsc{CouchEdit}Configuration metamodel}
+  \includesvg[width=.8\linewidth]{images/"csd - metamodel-base"}
+  \caption{Root of the \textsc{CouchEdit} configuration metamodel}
   \label{fig:metamodel-base}
 \end{figure}
 
 The primary goal of the proposed design is to hide \textsc{CouchEdit}'s complexity behind more accessible metamodel definitions. To this end, multiple concepts are employed that either abstract away from \textsc{CouchEdit}'s implementation details or introduce ways to streamline the translation from concrete to abstract representation. Most of these concepts could introduce performance overhead, but as this work focuses on the design aspect, performance analysis and optimization is subsidiary and subject to further research.
 
 \section{Render Metamodel}
-\textsc{CouchEdit}'s render syntax is realized as a set of graphic objects. The framework in its current form primarily focuses on primitive graphic objects, with its class structure being derived from Bottoni and Grau's work, "A Suite of Metamodels as a Basis for a Classification of Visual Languages" \cite{nachreiner_couchedit_2020, bottoni_suite_2004}. While the notion of complex graphic objects has been introduced in \textsc{CouchEdit}'s formal definition, the concept for now only exists in theory. Because of time constraints, this thesis does not explore the definition of the concrete syntax all too much and instead focuses only on graphic primitives. \Cref{fig:concretesyntax} describes the employed render syntax metamodel. As shown, it facilitates a basic structure to define graphic primitives needed for the described visual language. Future works would have to explore how graphic objects could be customized, by integrating AttributeBag definitions and complex graphic object definitions, to create custom symbols better suited for specific modeling languages.
+\textsc{CouchEdit}'s render syntax is realized as a set of GraphicObjects. The framework in its current form primarily focuses on primitive GraphicObjects, with its class structure being derived from Bottoni and Grau's work, "A Suite of Metamodels as a Basis for a Classification of Visual Languages" \cite{nachreiner_couchedit_2020, bottoni_suite_2004}. While the notion of ComplexGraphicObjects has been introduced in \textsc{CouchEdit}'s formal definition, the concept for now only exists in theory. Because of time constraints, this thesis does not explore the definition of the concrete syntax all too much and instead focuses only on graphic primitives. \Cref{fig:concretesyntax} describes the employed render syntax metamodel. As shown, it facilitates a basic structure to define graphic primitives needed for the described visual language. Future work would have to explore how graphic objects could be customized, by integrating AttributeBag definitions and complex graphic object definitions, to create custom symbols better suited for specific modeling languages.
 
 \begin{figure}[h]
   \centering
-  \includesvg[width=.5\linewidth]{images/"csd - rendersyntax"}
-  \caption{Concrete syntax metamodel used in this thesis}
+  \includesvg[width=.55\linewidth]{images/"csd - rendersyntax"}
+  \caption{Render syntax part of the \textsc{CouchEdit} configuration metamodel}
   \label{fig:concretesyntax}
 \end{figure}
 
 
 \section{Abstract Syntax}
 \label{sec:abstract-syntax}
-As noted before, the abstract syntax can be defined using existing standards. Nonetheless, the translation metamodel needs to reference the abstract syntax at multiple points in this chapter. Therefore, a barebones specification that is derived from Ecore's metamodel\footnote{\url{https://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/package-summary.html}} definition is given here (\Cref{fig:csd-abstractsyntax}). Notable concepts needed in the definition of an abstract syntax, are foremost, the definition of classes. This includes, definition of class attributes and concepts such as inheritance and references to other classes. Furthermore, definitions of simple data types, as well as enums, are required.
+As noted before, the abstract syntax can be defined using existing standards. Nonetheless, the translation metamodel needs to reference the abstract syntax at multiple points in this chapter. Therefore, a barebones specification that is derived from Ecore's metamodel\footnote{\url{https://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/package-summary.html}} definition is given here (\Cref{fig:csd-abstractsyntax}). Notable concepts needed in the definition of an abstract syntax, are foremost, the definition of classes. This includes the definition of class attributes and concepts such as inheritance and references to other classes. Furthermore, definitions of simple data types, as well as enums, are required.
 
 \begin{figure}
   \centering
-  \includesvg[width=.7\linewidth]{images/"csd - abstractsyntax"}
-  \caption{Used subset implementation of Ecore}
+  \includesvg[width=\linewidth]{images/"csd - abstractsyntax"}
+  \caption{Abstract syntax part of the \textsc{CouchEdit} configuration metamodel}
   \label{fig:csd-abstractsyntax}
 \end{figure}
 
 
 \section{Language Concepts}
 \label{sec:language-concepts}
-The abstract syntax tree usually differs between programing languages. Therefore, when looking at lower-level concepts, found in most programming languages (e.g., arithmetic, branching), their metamodel representation varies while the functionality stays the same \comment{what am i even doing here}. For this reason and because there is already enough documentation on how to specify abstract syntax trees, common language concepts will not be defined, as this depends on the actual language implementation. Instead, at points where these language concepts would reside, it is only defined what the given metamodel expects from the implementation, and example code snippets are given in an unspecified pseudo language. Despite this, certain concepts are unique to the \textsc{CouchEdit} metamodel, which a language implementation would have to realize. These concepts are presented in the following subsections.
+The abstract syntax tree usually differs between programming languages. Therefore, when looking at lower-level concepts found in most programming languages (e.g., arithmetic, branching), their metamodel representation varies. For this reason, and because there is already enough documentation on how to specify abstract syntax trees, common language concepts will not be defined, as this depends on the actual language implementation. Instead, at points where these language concepts would reside, it is only defined what the given metamodel expects from the implementation, and example code snippets are given in an unspecified pseudo-language. Despite this, certain concepts are unique to the \textsc{CouchEdit} metamodel, which a language implementation would have to realize. These concepts are presented in the following subsections.
 
 
 \subsection{Helper Functions}
@@ -45,62 +45,60 @@ When defining a translation metamodel, it may become useful to relocate specific
 
 \subsection{Graph Navigation}
 \label{sec:abstraction}
-Something used a lot in the proposed architecture is traversal through the hypergraph. It should be possible to get nodes that are adjacent to any given node easily. In \textsc{CouchEdit}'s architecture, this is handled by services (\Cref{sec:services}). This means that the syntax for reaching a node related by a certain relation type looks something like this:
+Something used a lot in the proposed architecture is traversal through the hypergraph. It should be possible to get nodes that are adjacent to any given node easily. In \textsc{CouchEdit}'s architecture, this is handled by services (\Cref{sec:services}). This means that the syntax for reaching a node related by a given relation type looks something like this:
 
-\begin{lstlisting}[language=customLang, caption={Example of how to get all \texttt{GOs} contained by a given element \texttt{go} in the \textsc{CouchEdit} architecture}, captionpos=b]
+\begin{lstlisting}[language=customLang, caption={Example of how to get all GOs contained by a given element \texttt{go} in the \textsc{CouchEdit} architecture}, captionpos=b]
 val containedGOs = relationService
       .getAllElementsRelatedFrom(go, Contains) 
 \end{lstlisting}
 
-The \texttt{getAllElementsRelatedFrom} function takes a GO and a relation type and returns all GOs that have a relation of the given type, that points from the given  GO to themselves \comment{wut}. This and similar helper functions are used repeatedly. Thus DSL implementations of the here described architecture should provide some form of abstraction to this service call. In the following code snippets, it is assumed that these functions are masked by member function implementations similar to the following:
+The \texttt{getAllElementsRelatedFrom} function takes a GraphicObject \texttt{go} and a relation type and returns all GOs that have a relation of the given type, pointing from \texttt{go} to themselves. This and similar helper functions are used repeatedly. Thus DSL implementations of the here described architecture should provide some form of abstraction to this service call. In the following code snippets, it is assumed that these functions are masked by member function implementations similar to the following:
 
-\begin{lstlisting}[caption={The \texttt{getAllElementsRelatedFrom} function, implemented as a member function, eases navigation through the hypergraph}, captionpos=b]
+\begin{lstlisting}[caption={The \texttt{getAllElementsRelatedFrom} function, implemented as a member function, eases navigation through the hypergraph.}, captionpos=b]
 go.getAllElementsRelatedFrom(Contains)
 \end{lstlisting}
 
-Implementation in the form of such extension functions allows for a more natural navigation through the hypergraph, which is especially useful when traversing longer distances, which will become apparent in the following sections. \Cref{app:navigationfunctions} contains a list of these navigation functions.
+Implementation in the form of such extension functions allows for more natural navigation through the hypergraph, which is especially useful when traversing longer distances, which will become apparent in the following sections. \Cref{app:navigationfunctions} contains a list of these navigation functions.
 
 
 \section{Syntax Processors}
-When defining a modeling language with a clear separation of concrete and abstract syntax, the primary concern is how to connect these two distinct models. In this point, the designed architecture draws inspiration from Fondement and Baar \cite{fondement_making_2005}. The author's proposed idea of connecting abstract and concrete syntax, using DisplayManagers, serves as a basis. Their approach consists of two parts, recognition and synchronization.
+When defining a modeling language with a clear separation of concrete and abstract syntax, the primary concern is how to connect these two distinct models. At this point, the designed architecture draws inspiration from Fondement and Baar \cite{fondement_making_2005}. The author's proposed idea of connecting abstract and concrete syntax using DisplayManagers serves as a basis. This approach consists of two parts, recognition and synchronization.
 
 \subsection{Recognition}
 \label{sec:recognition}
-The recognition part is concerned with detecting patterns in the graphical syntax that have an abstract syntax representation. For this, Fondement and Baar proposed the introduction of a further abstraction layer. This layer composes the graphic primitives and attributes, which represent a model element, into display classes. However, the authors keep a possible implementation of this abstraction layer open. Furthermore, it did not seem suitable to introduce a further abstraction layer, as most processing in the \textsc{CouchEdit} architecture is applied directly to the concrete syntax hypergraph. Thus mapping GraphicObjects to a new layer would introduce a set of new problems to be solved. Instead, the architecture proposed here uses a different approach. For each type of display manager, a set of \emph{Constraints} can be defined that a GraphicObject has to meet. Whenever a GO satisfies all constraints of a given display manager type, it is deemed the base element of a concrete representation of this display manager type, and an instance of this display manager and corresponding model element are created and connected to the GraphicObject (\Cref{fig:place-recognition}).
+The recognition part is concerned with detecting patterns in the graphical syntax that have an abstract syntax representation. For this, Fondement and Baar proposed the introduction of a further abstraction layer. This layer composes the graphic primitives and attributes, which represent a model element, into DisplayClasses. However, the authors keep a possible implementation of this abstraction layer open. Furthermore, it did not seem suitable to introduce a further abstraction layer, as most processing in the \textsc{CouchEdit} architecture is applied directly to the concrete syntax hypergraph. Thus mapping GraphicObjects to a new layer would introduce a set of new problems to be solved. Instead, the architecture proposed here uses a different approach. For each type of DisplayManager, a set of \emph{constraints} can be defined that a GraphicObject has to meet. Whenever a GO satisfies all constraints of a given DM type, it is deemed the base element of a concrete representation of this DM, and an instance of the DM and corresponding model element are created and connected to the GraphicObject (\Cref{fig:place-recognition}).
 
 % arrived at a different approach. The Metamodel allows for the definition of \texttt{Patterns}. a \texttt{Pattern} possesses a name, as well as a set of constraints. A \texttt{Constraint} checks if a given \texttt{GO} satisfies a certain condition. Each \texttt{GO} in the hypergraph is checked against all constraints of a given pattern. If a GO satisfies all constraints, a given \texttt{Pattern}
 
 \begin{figure}
   \centering
   \includesvg[height=8cm]{images/"visualization - place-recognition"}
-  \caption{PlaceRecognitionProcessor, adding PlaceDM to a GraphicObject that satisfies constraints}
+  \caption{PlaceRecognitionProcessor adds PlaceDM to a GraphicObject that satisfies constraints}
   \label{fig:place-recognition}
 \end{figure}
 
-These constraints can be defined as simple boolean expressions that each graphic object in the hypergraph is checked against. The constraints for a place element could be defined as follows:
+\pagebreak
+These constraints can be defined as simple boolean expressions that each GO in the hypergraph is checked against. The constraints for a place element could be defined as follows:
 
 \begin{lstlisting}[language=OCL,caption={Possible constraints to detect GOs representing a place},captionpos=b]
-go.shape is Circle
+go.shape == circle
 go.allRelatedTo(Contains).isEmpty()
 \end{lstlisting}
 
-These constraints first check if the given GO has the shape of a circle. If that is true, it is also checked if the given GO has any \texttt{Contains} relations pointing toward itself. If that is the case, the given circle is contained by another element and thus not clearly identifiable as a place, as it could also possibly represent a token. A corresponding definition for transitions could look as follows:
+These constraints first check if the given GO has the shape of a circle. If that is true, it is also checked if the given GO has any \texttt{Contains} relations pointing toward itself. If that is the case, the given circle is contained by another element and thus not clearly identifiable as a place, as it could also possibly represent a token. A corresponding definition of transitions could look as follows:
 
 \begin{lstlisting}[captionpos=b,caption={Simple constraint to check for transition representations},label={lst:transition-constraints}]
-go.shape is Rectangle
+go.shape == rectangle
 \end{lstlisting}
 
 These are barebones requirements to identify graphical representations, and they could be extended by any amount of further constraints to increase the amount of specificity required from the concrete instance.
 
 \subsection{Synchronization}
-With the recognition part in place, it is possible to detect graphical representations and attach corresponding abstract instances. Now the synchronization part is responsible for making sure abstract and concrete representation reflect the same state. To this end, the metamodel allows for the definition of rules on a DisplayManager. This step was explained in detail in \cite{fondement_making_2005}. 
-
-\comment{fix that}
-Fondement and Baar propose the usage of OCL invariants as a language for defining these rules. The here defined approach does not implement the display class abstraction layer. Therefore, the concrete representation is queried directly. Furthermore, implementing OCL invariants is unnecessary and synchronizations could also be handled by assignment statements, which is done in the following. For a place element, four aspects have to be synced:
+With the recognition part in place, it is possible to detect graphical representations and attach corresponding abstract instances. Now the synchronization part is responsible for making sure abstract and concrete representation reflect the same state. To this end, the metamodel allows for the definition of rules on a DisplayManager. This step was explained in detail in \cite{fondement_making_2005}. Fondement and Baar propose the usage of OCL invariants as a language for defining these rules. As this research does not provide a DSL implementation, simple pseudo-code assignment statements are used here. For a place element, four aspects have to be synced:
 
 \begin{enumerate}
   \item Name of the given place
-  \item Number of Tokens this place has
+  \item Token count
   \item Incoming transitions
   \item Outgoing transitions
 \end{enumerate}
@@ -110,95 +108,102 @@ Reliably determining a place's name poses some special challenges and requires f
 \begin{lstlisting}[captionpos=b,caption={Rule that syncs the token count of a place element}]
 dm.me.tokens = dm.go
                   .allRelatedFrom(Contains)
-                  .select(go -> go.shape is Circle)
+                  .select(go -> go.shape == circle)
                   .count()
 \end{lstlisting}
 
-This statement ensures that the token attribute of the model element is always equal to the number of all GOs with the shape circle that are contained by the base graphic object. Similarly, incoming and outgoing transitions can be defined:
+This statement ensures that the token attribute of the model element is always equal to the number of all GOs with the shape circle that are contained by the base GraphicObject. Similarly, incoming and outgoing transitions can be defined:
 \begin{lstlisting}[captionpos=b,caption={Rule that syncs incoming transitions of a place element},label={lst:incoming-transitions}]
 dm.me.incoming = 
       dm.go
           .allRelatedTo(ConnectionEnd,
               rel -> rel.isEndConnection)
-          .select(go -> go.shape is Line)
+          .select(go -> go.shape == line)
           .collect(go -> go.relatedFrom(ConnectionEnd))
-          .select(go -> go.shape is Rectangle)
+          .select(go -> go.shape == rectangle)
           .select(go -> go.dm != null)
           .collect(go -> go.dm.me)
 \end{lstlisting}
 
-This statement ensures that all transitions, connected to the given DM's GO, by a line, are composed into the list of incoming transitions (\Cref{fig:incoming-sync}). This exhibits the usual approach to syncing concrete and abstract representation.
+This statement ensures that all transitions connected to the given DM's GO, by a line, are composed into the list of incoming transitions (\Cref{fig:incoming-sync}). This exhibits the usual approach to syncing concrete and abstract representation.
 
 % Starting from a \texttt{DisplayManager}, the statements query along a path of relations and elements, to determine the correct state of a model element.
 
 \begin{figure}[h]
   \centering
-  \includesvg[height=7.0cm]{images/"visualization - incoming-sync"}
-  \caption{A connection line is added to the graph, and the PlaceSyncProcessor updates the Place model element}
+    \includesvg[width=\linewidth]{images/"visualization - incoming-sync"}
+  \caption{A connection line is added to the graph, and the \texttt{PlaceSyncProcessor} updates the \texttt{Place} model element}
   \label{fig:incoming-sync}
 \end{figure}
 
 \subsection{Meta-Model}
-The resulting sub-model for this area of the configuration would look as described in \Cref{fig:initial-syntax-model}. The depicted Metamodel allows for the definition of DisplayManagers. A DisplayManager definition, needs a reference model element type from the abstract syntax metamodel. The corresponding DisplayManager can then be inferred from this element \comment{??}. Furthermore, the DisplayManager definition needs Constraints and Rules. The Constraints are then used by a \emph{RecognitionProcessor}, to add instances of the inferred DisplayManager. On the other hand, Rules are then used by a \emph{SyncProcessor}, to keep model elements aligned. As stated, it would be possible to define Constraints and Rules as OCL invariants, similar to what Fondement and Baar did. Another possible implementation would be as statement blocks, where Constraints return boolean values and Rules utilize assignment statements \comment{??}, which would be similar to the here described code snippets. This is not the final iteration of this metamodel, as will be shown in the next section.
+The resulting sub-model for this area of the configuration would look as described in \Cref{fig:initial-syntax-model}. The depicted metamodel allows for the definition of DisplayManagers. A DisplayManager definition needs a reference to a model element type from the abstract syntax metamodel. The name of the DM is inferred from this model element. Furthermore, the DM definition needs constraints and rules. The constraints are then used by a \emph{RecognitionProcessor}, to add instances of the inferred DM. On the other hand, rules are used by a \emph{SyncProcessor}, to keep model elements aligned. This is not the final iteration of this part of the metamodel, as will be shown in the next section.
 
-\begin{figure}
+\begin{figure}[h]
   \centering
   \includesvg[width=.7\linewidth]{images/"csd - initial-syntaxprocess-model"}
-  \caption{First Design of the \texttt{DisplayManager} metamodel}
+  \caption{First design of the DisplayManager part of the metamodel}
   \label{fig:initial-syntax-model}
 \end{figure}
 
 
 \section{Pattern System}
-When assessing the incoming transition rule (\Cref{lst:incoming-transitions}), it becomes apparent that checking if the connected \texttt{GO} represents a transition has to be done manually. In the example given, checking if the \texttt{GO} represents a transitions is no big task as transition recognition is handled with only one constraint (\Cref{lst:transition-constraints}). However, when regarding model elements with multiple constraints, this can become a repetitive and inefficient task.
+When assessing the incoming transition rule (\Cref{lst:incoming-transitions}), it becomes apparent that checking if the connected GO represents a transition has to be done manually. In the example given, checking if the GO represents a transition is no big task as transition recognition is handled with only one constraint (\Cref{lst:transition-constraints}). However, when regarding model elements with multiple constraints, this can become a repetitive and inefficient task.
 
-The proposed architecture introduces a \emph{Pattern} system to alleviate this problem. A Pattern can mark elements of the graph as satisfying a certain set of constraints. A Pattern is, similar to AttributeBags, a separate element in the graph that is connected to the element it describes, with a relation. It has a single value attribute that indicates its name. Identical to DisplayManager definitions, described in the last section, pattern definitions take a set of constraints. Every Element in the graph is then checked against these Constraints, and if a Element satisfies all of them, the pattern is added to the given Element. This behavior is depicted in \Cref{fig:kind-recognition} for an example transition Pattern.
+The proposed architecture introduces a \emph{pattern} system to alleviate this problem. A pattern can mark elements of the graph as satisfying a certain set of constraints. A pattern is similar to AttributeBags, a separate element in the graph that is connected to the element it describes, with a relation. It has a single value attribute that indicates its name. Identical to DM definitions, described in the last section, pattern definitions take a set of constraints. Every element in the graph is then checked against these constraints, and if an element satisfies all of them, the pattern is added to the given element. 
+% This behavior is depicted in \Cref{fig:kind-recognition} for an example transition pattern that uses the constraint described in \Cref{lst:transition-constraints}. 
 
-\begin{figure}
+% \begin{figure}[h]
+%   \centering
+%   \includesvg[height=8cm]{images/"visualization - kind-recognition"}
+%   \caption{\texttt{TransitionPatternProcessor} detects a GO that satisfies constraints and adds \texttt{PatternType}}
+%   \label{fig:kind-recognition}
+% \end{figure}
+
+The DisplayManager recognition part's similarity means that it can be replaced by the Pattern system. Instead of checking constraints themselves, RecognitionProcessors just check if a given GO has a specified pattern type attached, and if this is true, the corresponding DM instance is added. As shown in \Cref{fig:Transition-Kind-Recognition}, when a GO representing a transition is added, the \texttt{TransitionPatternProcessor}, first adds a \texttt{PatternType} with the value \texttt{Transition}. The \texttt{TransitionRecognitionProcessor} then checks the GO, which now matches the \texttt{Transition} pattern and thus adds a \texttt{TransitionDM}.
+
+
+
+\begin{figure}[H]
   \centering
-  \includesvg[height=7.5cm]{images/"visualization - kind-recognition"}
-  \caption{\texttt{TransitionPatternProcessor} detects a \texttt{GO} that satisfies constraints and adds \texttt{PatternType}}
-  \label{fig:kind-recognition}
-\end{figure}
-
-The DisplayManager recognition part's similarity means that it can be replaced by the Pattern system. Instead of checking Constraints themselves, RecognitionProcessors just check if a given GO has a defined pattern type attached, and if this is true, the corresponding DisplayManager is added. As shown in \Cref{fig:Transition-Kind-Recognition}, when a GO, representing a transition is added, the \texttt{TransitionPatternProcessor}, first adds a PatternType with the value Transition. The \texttt{TransitionRecognitionProcessor} then checks the GO which now matches the Transition pattern and thus adds a \texttt{TransitionDM}.
-
-\begin{figure}[ht]
-  \centering
-  \includesvg[height=11cm]{images/"visualization - Transition-Kind-Recognition"}
-  \caption{\texttt{TransitionRecognitionProcessor} adds DM after the \texttt{TransitionPatternProcessor} has added a transition \texttt{PatternType}}
+  \includesvg[height=12cm]{images/"visualization - Transition-Kind-Recognition"}
+  \caption{\texttt{TransitionRecognitionProcessor} adds DM transition \texttt{PatternType} was added.}
   \label{fig:Transition-Kind-Recognition}
 \end{figure}
 
+
 With the definition of a convenience member function that checks if an element has a given pattern, the rule, syncing incoming transitions, can now be rewritten as follows:
+
+
 \begin{lstlisting}[captionpos=b,caption={Improved incoming transition rule, which also filters for elements that match the \texttt{Transition} pattern.}]
 dm.me.incoming = 
     dm.go
         .allRelatedTo(ConnectionEnd,
             rel -> rel.isEndConnection)
-        .select(go -> go.shape is Line)
+        .select(go -> go.shape == line)
         .collect(go -> go.relatedFrom(ConnectionEnd))
         .select(go -> go.hasPattern(Transition))
         .collect(go -> go.dm.me)
 \end{lstlisting}
 
 
-It is important to note that the Pattern system is not exclusive to GOs that have an abstract representation. For GOs with a corresponding DisplayManager, the DM type can just be checked to find out if it connects model elements of a particular type. Instead, the pattern system can also be used to recognize all sorts of patterns in the graph that would otherwise have to be checked repeatedly. For example, it could be used to define a stricter check, on what element in a Petri net Graph represents a token.
+
+It is important to note that the pattern system is not exclusive to GOs that have an abstract representation. For GOs with a corresponding DM attached, the DM type can just be checked to find out if it connects model elements of a particular type. Instead, the pattern system can also be used to recognize all sorts of patterns in the graph that would otherwise have to be checked repeatedly. For example, it could be used to define a stricter check on what element in a Petri net graph represents a token.
 
 \subsection{Meta-Model}
-As mentioned in the last section, the DisplayManager definition model has to be revised because of the introduction of the pattern system. Instead of possessing a set of constraints, \texttt{DisplayManager} definitions now have a reference to a Pattern (\Cref{fig:revised-syntax-model}).\comment{??}
+As mentioned above, because of the similarity of the constraint mechanism in the pattern and DM systems, patterns can be used to handle the recognition of DMs. This means the metamodel that was introduced in the last section has to be revised. \Cref{fig:revised-syntax-model} shows this new part of the metamodel extended by pattern definitions. In this revised version, DM definitions have a reference to a pattern definition.
 
-\begin{figure}
+\begin{figure}[H]
   \centering
-  \includesvg[width=.75\linewidth]{images/"csd - revised-syntaxprocess-model"}
+  \includesvg[width=.85\linewidth]{images/"csd - revised-syntaxprocess-model"}
   \caption{Revised SyntaxProcessor metamodel that now includes the Pattern system}
   \label{fig:revised-syntax-model}
 \end{figure}
 
-
+% \pagebreak
 \section{Plugins}
 \label{sec:plugins}
-While the invariant for incoming transitions is sufficient for an initial example, it has two significant flaws. Firstly, it is not checking if the connecting line has an arrow end. Secondly, only lines drawn from the transition towards the place are treated as incoming lines, as noted in \Cref{sec:core-processors}. Fixing these issues in the form of a rule would be too verbose for such a typical pattern.
+While the rule for incoming transitions (\Cref{lst:incoming-transitions}) is sufficient for an initial example, it has two significant flaws. Firstly, it is not checking if the connecting line has an arrow end. Secondly, only lines drawn \emph{from} the transition \emph{towards} the place are treated as incoming lines, as noted in \Cref{sec:core-processors}. Fixing these issues in the form of a rule would be too verbose for such a typical pattern.
 
 For this reason, the plugin system is introduced. Plugins are predefined processors that process specific parts of the hypergraph. These processing areas are not as integral as the ones solved by the core processors and thus are \emph{opt-in}. Furthermore, certain plugin processors can be configured, which allows them to cover a wider field of use cases. One example of such a plugin would be the \emph{ConnectionProcessor}. It looks for line GOs and checks if they connect two other GOs. If that is the case, the processor adds either a \emph{ConnectionTo} relation or a \emph{ConnectionBetween} relation (\Cref{fig:transition-plugin}), depending on if the line's arrow ends indicate a directed or undirected connection. Adding this plugin allows for a final rewrite of the rule, syncing incoming transitions:
 
@@ -212,26 +217,24 @@ dm.me.incoming =
 
 \begin{figure}[ht]
   \centering
-  \includesvg[height=7.0cm]{images/"visualization - transition-plugin"}
+  \includesvg[width=\linewidth]{images/"visualization - transition-plugin"}
   \caption{\texttt{ConnectionProcessor} adds \texttt{ConnectionTo} relation on detection of a directed line}
   \label{fig:transition-plugin}
 \end{figure}
 
-
-
 \subsection{Label Processor}
-Defining a transformation to sync a place's name has been postponed until now because it poses multiple new challenges. When determining if a label represents the name of a place object, multiple aspects are of importance:
+Defining a transformation to sync a place's name has been postponed until now because it poses multiple new challenges. When determining if a label represents the name of a place element, multiple aspects are of importance:
 \begin{enumerate}
   \item How close is the label to the place?
   \item Are different GOs in the proximity that could be associated with this label?
   \item Are there other labels that could represent the name of this place?
 \end{enumerate}
 
-While possible, checking all these conditions in a syncing statement would require several dozen lines of code. Furthermore, it would cause much overhead. For every place, whenever syncing its state, the relation possibility to all labels has to be calculated. If one label is a potential candidate, it also must be calculated if the label could be a possible candidate for another element. Thus, the idea of building a plugin that handles these calculations arises.
+While possible, checking all these conditions in a rule would require several dozen lines of code. Furthermore, it would cause much overhead. For every place, whenever syncing its state, the relation possibility to all labels has to be calculated. If one label is a potential candidate, it also must be calculated if the label could be a possible candidate for another element. Thus, the idea of building a plugin that handles these calculations arises.
 
-The basic idea of the \emph{LabelProcessor} is to add \emph{LabelFor} relations from labels to other graphic objects. Furthermore, the probability attribute is utilized to define how probable a given LabelFor relation is. For such a plugin to be applicable to multiple concrete syntaxes poses a set of new requirements:
+The basic idea of the \emph{LabelProcessor} is to add \emph{LabelFor} relations from labels to other GraphicObjects. Furthermore, the probability attribute is utilized to define how probable a given LabelFor relation is. For such a plugin to be applicable to multiple concrete syntaxes poses a set of new requirements:
 \begin{description}
-  \item[Requirement 1:] Modeling syntaxes require different spatial relations between a label and graphic object (the label can be contained, surrounding, above/below, etc.).
+  \item[Requirement 1:] Modeling syntaxes require different spatial relations between a label and GO (the label can be contained, surrounding, above/below, etc.).
   \item[Requirement 2:] Different GO shapes require different algorithms to calculate the probability (proximity to a circle cannot be calculated the same way as proximity to a rectangle)
         % \item multiple LabelFor relations from a single Label should be able to influence the probability of these relations.
   \item[Requirement 3:] Not every GO needs a label. For example, in the Petri nets syntax, only GOs representing either a place or transition require a label.
@@ -241,11 +244,11 @@ The basic idea of the \emph{LabelProcessor} is to add \emph{LabelFor} relations 
 % \comment{simple state??}
 
 \subsubsection{Label Sub Processor}
-The LabelProcessor implements a set of sub-processors. Each sub-processor is responsible for different types of calculations. For example, the \emph{CircleOuterLabel} sub-processor calculates the LabelFor relation between a circle GO, and a label GO placed somewhere around it. This means that a different sub-processor is required for every combination of primitive shape and spatial relation. Each sub-processor takes a pattern type and a label. It then finds all graphic objects with its designated shape type and filters them by the given pattern type. The resulting GOs then receive a LabelFor relation from the given label, with a probability calculated by an algorithm implemented in the sub-processor.
+The LabelProcessor implements a set of sub-processors. Each sub-processor is responsible for different types of LabelFor calculations. For example, the \emph{CircleOuterLabel} sub-processor calculates the LabelFor relation between a circle GO, and a label GO placed somewhere around it. This means that a different sub-processor is required for every combination of primitive shape and spatial relation. Each sub-processor takes a pattern type and a label. It then finds all GraphicObjects with its designated shape type and filters them by the given pattern type. The resulting GOs then receive a LabelFor relation from the given label, with a probability calculated by an algorithm implemented in the sub-processor.
 
 \subsubsection{Label ProcessingChain}
-When regarding requirement 4, it becomes clear that simply enabling the sub-processors needed for a given modeling syntax is not enough. A mechanism is needed that allows for different sub-processor configurations to influence each other. Therefore the concept of a ProcessorChain was introduced (\Cref{fig:labelprocessor-config}). A \emph{ProcessorChain} allows for the configuration of sub-processors by introducing an arithmetic-like operation system \comment{??}. ProcessorChains can either be \emph{Operations} or \emph{Terminals}. Terminals represent either a sub-processor or nothing. An operation, on the other hand, defines a link between two Processor chains. Operations possess an \emph{Operator} that defines how the left-hand processing chain results should affect the results of the right-hand one. For example, the `and` Operator defines that both processing chains are calculated normally. On the other hand, the `ifEmpty` operator only calculates the right-hand processor chain if the left-hand one has returned no values. The `ifAmbiguous` operator ignores the left-hand side if it returns more than one relation is and instead calculates the right0hand side. Using this ProcessorChain, the label processing for Petri nets could be configured as follows:
-\begin{lstlisting}
+When regarding requirement 4, it becomes clear that simply enabling the sub-processors needed for a given modeling syntax is not enough. A mechanism is needed that allows for different sub-processors to influence each other. Therefore the concept of a \emph{processor chain} is introduced (\Cref{fig:labelprocessor-config}). A processor chain allows for the configuration of sub-processors by chaining them together with different conditions. Processor chains can either be \emph{operations} or \emph{terminals}. Terminals represent either a sub-processor or nothing. An operation, on the other hand, defines a link between two processor chains. Operations possess an \emph{operator} that defines how the left-hand processor chain results should affect the results of the right-hand one. For example, the `and` operator defines that both processor chains are calculated, and their results are aggregated. On the other hand, the `ifEmpty` operator only calculates the right-hand processor chain if the left-hand one has returned no values. The `ifAmbiguous` operator ignores the left-hand side if it returns more than one relation and instead calculates the right-hand side. Using this processor chain, the label processing for Petri nets could be configured as follows:
+\begin{lstlisting}[captionpos=b,caption={LabelPlugin configuration for a Petri nets syntax.}]
 (CircleOuterLabel(Place) and 
 RectangleOuterLabel(Transition)) ifAmbiguous Nothing
 \end{lstlisting}
@@ -258,10 +261,13 @@ This causes the LabelProcessor to calculate outer proximity LabelFor relations f
   \label{fig:labelprocessor-config}
 \end{figure}
 
-This LabelProcessor plugin is by no means a perfect implementation for the given problem. Instead, it provides a general idea of the purpose and applicability for the plugin system and how specialized the definition of plugin configurations can become. The plugin configurations' requirements force DSL implementations of this metamodel to be updated every time a new plugin with custom configuration is added to the system. Alternatively, an approach for more general plugin configuration has to be explored.
+This LabelProcessor plugin is by no means a perfect implementation for the given problem. Instead, it provides a general idea of the purpose and applicability of the plugin system and how specialized the definition of plugin configurations can become. The plugin configurations' requirements force DSL implementations of this metamodel to be updated every time a new plugin with custom configuration is added to the system. Alternatively, an approach for more general plugin configuration has to be explored.
 
 
 % \comment{talk about how sub processors calc probability}
 
+
+
+
 \subsection{Summary}
-In this chapter, the developed metamodel was introduced step by step. The base idea for this metamodel was derived from Fondement and Baar \cite{fondement_making_2005}. This concept is split into two parts, recognition and synchronization. Recognition is handled by the Pattern mechanism, which is responsible for detecting objects in the graphic representation that satisfy a defined set of constraints. The synchronization part is responsible for connecting graphic patterns to a corresponding abstract representation. This system is extended by a plugin system that allows additional predefined processors to be enabled. These plugin processors can require configurations that allow a Plugin to be applicable to a broader range of modeling languages. The complete metamodel is depicted in \Cref{fig:complete-metamodel}.
+In this chapter, the developed metamodel was introduced step by step. The base idea for this metamodel was derived from Fondement and Baar \cite{fondement_making_2005}. This concept is split into two parts, recognition and synchronization. Recognition is handled by the pattern system, which is responsible for detecting elements in the graphic representation that satisfy a defined set of constraints. The synchronization part is responsible for connecting graphic representations that satisfy a given pattern to a corresponding abstract representation. This system is extended by a plugin system that allows additional predefined processors to be enabled. These plugin processors can require configurations that allow a plugin to be applicable to a broader range of modeling languages. The complete metamodel is depicted in \Cref{fig:complete-metamodel}.

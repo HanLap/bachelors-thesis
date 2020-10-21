@@ -29,7 +29,20 @@
 
 
 ### HEUTE
-- rework pattern
-- grammarly finish
-- TTG visualization
+- proof read / fix marked part
+
+- Appendix fix
+
+- lstlisting
+
+- typeset
+
+- proof read
+
+- grammarly
+
+- proof read
+
+
+- break Appendix A title 
 

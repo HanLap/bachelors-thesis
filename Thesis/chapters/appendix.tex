@@ -1,5 +1,8 @@
 % \chapter*{Appendix}
+% \clearpage
+\KOMAoptions{open=left}
 \chapter{CouchEdit Configuration Metamodel}
+\label{app:complete-mm}
 % \begin{sidewaysfigure}
 %   \centering
 %   \includesvg[width=.2\linewidth]{images/"csd - metamodel"}
@@ -7,19 +10,41 @@
 %   \label{fig:complete-metamodel}
 % \end{sidewaysfigure}
 
-\hvFloat[rotAngle=270]%
-   {figure}%
-   {\includesvg[width=\linewidth]{images/"csd - metamodel"}}%
-   [short caption]{Overview of the complete designed metamodel}%
-   {fig:complete-metamodel}
+% \hvFloat[rotAngle=270]%
+%    {figure}%
+%    {\includesvg[width=\linewidth]{images/"csd - metamodel"}}%
+%    [short caption]{Overview of the complete designed metamodel}%
+%    {fig:complete-metamodel}
    
+% \twopagepicture{t}{l}{images/"csd - metamodel"}{Overview of the complete designed metamodel}{fig:complete-metamodel}
+
+\vspace*{2.8cm}
+% \begin{figure}
+\makebox[\textwidth][l]{%
+        \let\mywidth\linewidth
+        \adjustbox{trim=0 0 {.5\width} 0,clip}
+        {\includesvg[width=2\mywidth]{images/"csd - metamodel"}}
+}
+% \end{figure}
+\label{fig:complete-metamodel}
+\newpage
+% \begin{figure}
+\vspace*{6cm}
+\makebox[\textwidth][l]{%
+        \let\mywidth\linewidth
+        \adjustbox{trim={.5\width} 0 0  0,clip}
+        {\includesvg[width=2\mywidth]{images/"csd - metamodel"}}
+}
+% \end{figure}
+\KOMAoptions{open=right}
+\clearpage
 \chapter{Navigation functions}
 \label{app:navigationfunctions}
 
-To ease traversal of the hypergraph, a DSL implementation of the \textsc{CouchEdit} configuration should provide abstractions for the following Service methods:
+To ease traversal of the hypergraph, a DSL implementation of the \textsc{CouchEdit} configuration should provide implementations
 
 \begin{description}
-  \item[relatedTo] For the given Element B, returns an Element A that has a OneToOneRelation of the given type pointing from A to B.
+  \item[relatedTo:] For the given Element B, returns an Element A that has a OneToOneRelation of the given type pointing from A to B.
 
         \begin{tabularx}{\linewidth}{ l X }
           \textbf{Receiver}: & Element B
@@ -31,9 +56,11 @@ To ease traversal of the hypergraph, a DSL implementation of the \textsc{CouchEd
           \textbf{Returns}:  & Element A where A has a relation Pointing towards B or null if no such element exists.
           \\
           \textbf{Throws}:   & \texttt{IllegalStateException}: If there are more than one Possible solutions for A.
+          \\
+          \textbf{Example}:  & \texttt{B.relatedTo(Contains)}
         \end{tabularx}
 
-  \item[relatedFrom] For the Given Element A, returns an Element B that has a OneToOneRelation of the given type pointing from A to B.
+  \item[relatedFrom:] For the Given Element A, returns an Element B that has a OneToOneRelation of the given type pointing from A to B.
 
         \begin{tabularx}{\linewidth}{ l X }
           \textbf{Receiver}: & Element A
@@ -45,9 +72,12 @@ To ease traversal of the hypergraph, a DSL implementation of the \textsc{CouchEd
           \textbf{Returns}:  & Element B where B has a relation Pointing from A or null if no such element exists.
           \\
           \textbf{Throws}:   & \texttt{IllegalStateException}: If there are more than one Possible solutions for B.
+          \\
+          \textbf{Example}:  & \texttt{A.relatedFrom(Contains)}
         \end{tabularx}
 
-  \item[allRelatedTo] For the given Element B, returns all Elements A that have a OneToOneRelation of the given type pointing from A to B.
+\clearpage
+  \item[allRelatedTo:] For the given Element B, returns all Elements A that have a OneToOneRelation of the given type pointing from A to B.
 
         \begin{tabularx}{\linewidth}{ l X }
           \textbf{Receiver}: & Element B
@@ -59,9 +89,11 @@ To ease traversal of the hypergraph, a DSL implementation of the \textsc{CouchEd
                              & \texttt{predicate}: Predicate used to filter Relations
           \\
           \textbf{Returns}:  & Set of Elements A where each A has a relation Pointing from A towards B.
+          \\
+          \textbf{Example}:  & \texttt{B.allRelatedTo(ConnectionEnd, rel -> rel.isEndConnection)}
         \end{tabularx}
 
-  \item[allRelatedFrom] For the given Element A, returns all Elements B that have a OneToOneRelation of the given type pointing from A to B.
+  \item[allRelatedFrom:] For the given Element A, returns all Elements B that have a OneToOneRelation of the given type pointing from A to B.
 
         \begin{tabularx}{\linewidth}{ l X }
           \textbf{Receiver}: & Element A
@@ -73,32 +105,38 @@ To ease traversal of the hypergraph, a DSL implementation of the \textsc{CouchEd
                              & \texttt{predicate}: Predicate used to filter Relations
           \\
           \textbf{Returns}:  & Set of Elements B where each A has a relation Pointing from A towards B.
+          \\
+          \textbf{Example}:  & \texttt{A.allRelatedFrom(ConnectionEnd, rel -> rel.isEndConnection)}
         \end{tabularx}
   
-  \item[dm] For a given ShapedElement, returns the corresponding DisplayManager if it exists.
+  \item[dm:] For a given GraphicObject, returns the corresponding DisplayManager if it exists.
   \begin{tabularx}{\linewidth}{ l X }
-    \textbf{Receiver}: & ShapedElement
+    \textbf{Receiver}: & GraphicObject
     \\
     \textbf{Returns}:  & DisplayManager attached to the given Element or null if none exists
+    \\
+    \textbf{Example}:  & \texttt{go.dm}
   \end{tabularx}
 \end{description}
 
-\section*{Further Extension Functions}
-\comment{todo}
+% \section*{Further Extension Functions}
+% \comment{todo}
 
-relations getA/getB
+% relations getA/getB
  
 
-pattern:
-\begin{itemize}
-  \item hasPattern
-  \item notHasPattern
-  \item filterPattern
-\end{itemize}
+% pattern:
+% \begin{itemize}
+%   \item hasPattern
+%   \item notHasPattern
+%   \item filterPattern
+% \end{itemize}
 
 
 \chapter{Kotlin DSL Configurations}
-\section{Petri nets Configuration}
+\section{Petri Nets Configuration}
+
+This Section contains the complete source code of the example implementations that are represented in \Cref{sec:example-configs}.
 \label{app:petri}
 \subsection*{Render Metamodel}
 \lstinputlisting[breaklines=true,label={lst:petri-rendermm},captionpos=b,caption={\texttt{RenderMM} definition for Petri nets}]{code/configs/petrinets/RenderMM.kts}
@@ -127,7 +165,7 @@ pattern:
 
 \chapter{Test Setup}
 \label{app:testsetup}
-The test setup in this section is an exact replica of the StateGridTest described in \cite{nachreiner_couchedit_2020}. This test serves as common ground to compare \textsc{CouchEdit}'s reference implementation if the implementation produced in this Thesis.
+The test setup in this section is an exact replica of the StateGridTest described in \cite{nachreiner_couchedit_2020}. This test serves as common ground to compare \textsc{CouchEdit}'s reference implementation with the implementation produced in this Thesis.
 
 \section{StateGridTest}
 \subsection{Scenario Parameters}

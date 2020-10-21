@@ -313,8 +313,8 @@ pdfborder=0 0 0	% keine Box um die Links!
 \newcommand{\petriConfigLoC}{106 }
 \newcommand{\petriGeneratedLoC}{708 }
 
-\newcommand{\stateConfigLoC}{172 }
-\newcommand{\stateGeneratedLoC}{1256 }
+\newcommand{\stateConfigLoC}{169 }
+\newcommand{\stateGeneratedLoC}{1154 }
 
 
 \begin{document}
@@ -364,13 +364,11 @@ pdfborder=0 0 0	% keine Box um die Links!
 
 % !/ignore-section
 
-Modeling has become an essential factor in many of today's development workflows. Especially recent developments in the area of Model-Driven Engineering (MDE), as well as Business Process Modeling, have increased the need for syntactically correct models. Therefore, graphical modeling editors with syntax parsing capabilities are integral. However, most modern model editors do not provide optimal user experience, resulting from the tight coupling between graphical and abstract notations. 
+Modeling has become an essential factor in many of today's development workflows. Especially recent developments in the area of Model-Driven Engineering, as well as Business Process Modeling, have increased the need for syntactically correct models. Therefore, graphical modeling editors with syntax parsing capabilities are integral. However, most modern model editors do not provide optimal user experience, resulting from the tight coupling between graphical and abstract notations. 
 
-\textsc{CouchEdit} is a novel modeling language-agnostic framework that strives to improve editor usability. To this end, it introduces an architecture that decouples graphical and abstract representations. However, in its current implementation, configuring \textsc{CouchEdit} for different modeling languages is a laborious and error-prone task.
+\textsc{CouchEdit} is a novel modeling language agnostic framework that strives to improve editor usability. To this end, it introduces an architecture that decouples graphical and abstract representations. However, in its current implementation, configuring \textsc{CouchEdit} for different modeling languages is a laborious and error-prone task.
 
-This thesis proposes an architecture that can create modeling language configurations for \textsc{CouchEdit}. This architecture aims to increase developer accessibility by reducing the amount of code and framework knowledge needed to specify new configurations. 
-
-\comment{results}
+This thesis proposes an architecture that can create modeling language configurations for \textsc{CouchEdit}. This architecture aims to improve developer accessibility by reducing the amount of code and framework knowledge needed to specify new configurations. While test results indicate that the developed artifact improves usability, the current prototype introduces much performance overhead which has to be addressed in future work.
 
   % !ignore-section
   {
@@ -385,7 +383,7 @@ This thesis proposes an architecture that can create modeling language configura
       Fassung \today\\
       \copyright~\jahr~\fullname\\[0.5em]
       % Wenn Sie Ihre Arbeit unter einer freien Lizenz bereitstellen möchten, können Sie die nächste Zeile in Ihren Code aufnehmen. Bitte beachten Sie, dass Sie hierfür an allen Inhalten, inklusive enthaltener Abbildungen, die notwendigen Rechte benötigen! Beim Veröffentlichungsexemplar Ihrer Dissertation achten Sie bitte darauf, dass der Lizenztext nicht den Angaben in den Metadaten der genutzten Publikationsplattform widerspricht. Nähere Information zu den Creative Commons Lizenzen erhalten Sie hier: https://creativecommons.org/licenses/
-      This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA. \\
+      % This work is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License. To view a copy of this license, visit \href{https://creativecommons.org/licenses/by/4.0/}{https://creativecommons.org/licenses/by/4.0/} or send a letter to Creative Commons, 543 Howard Street, 5th Floor, San Francisco, California, 94105, USA. \\
 
       Satz: PDF-\LaTeXe
     \end{center}
@@ -425,10 +423,10 @@ This thesis proposes an architecture that can create modeling language configura
 
 
 % Tabellenverzeichnis
-\cleardoublepage % sonst stimmt die seitennummer im TOC nicht
-\phantomsection
-\addcontentsline{toc}{chapter}{List of Tables}
-\listoftables
+% \cleardoublepage % sonst stimmt die seitennummer im TOC nicht
+% \phantomsection
+% \addcontentsline{toc}{chapter}{List of Tables}
+% \listoftables
 
 \renewcommand\lstlistlistingname{List of Listings}
 \cleardoublepage % sonst stimmt die seitennummer im TOC nicht
