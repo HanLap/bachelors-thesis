@@ -1,4 +1,6 @@
-\documentclass{beamer}
+\documentclass[
+  aspectratio=169
+  ]{beamer}
 \mode<presentation>
 {
   \usetheme{myulm}
@@ -14,26 +16,44 @@
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{array}
-\usepackage{colortbl} % ING INF PSY
+\usepackage{colortbl} % ING INF
 \usepackage{arydshln}
 \usepackage{listings}
 \usepackage{url}
 \usepackage{hyperref}
+\usepackage[inkscape=newer, inkscapelatex=false, inkscapearea=page]{svg} 
 
 % Literaturverzeichnis mit BibLaTeX // use Biber as Backend; dashed = false to repeat author names
 \usepackage[babel]{csquotes}
 \usepackage[backend=biber,style=ieee,dashed=false,hyperref,natbib]{biblatex}
 \addbibresource{BA.bib}
 
+
+\usepackage{pgfplots}
+
+\pgfkeys{/pgf/number format/.cd,1000 sep={}}
+\pgfplotsset{
+	compat=newest,
+	legend style={at={(0.5,-0.2)},anchor=north}, % legend to the bottom
+	legend cell align={left}, % left align legend text
+	ymajorgrids=true, 
+	grid style=dashed,
+	scaled ticks=false, % don't use 10^x notation
+	tick label style={/pgf/number format/fixed},
+	try min ticks=8,
+	tick pos=left % no ticks at the right / top borders
+}
+
+
 % Anfang der Titelfolie
 % Anpassung von: Titel, Untertitel, Autor, Datum und Institut
 
-\title{BA Zwischenvortrag}
-\subtitle{Development and Evaluation of a\\ Metamodel to Define Modeling \\ Syntaxes for CouchEdit}
+\title{BA Abschlussvortrag}
+\subtitle{Development and Evaluation of a Metamodel \\ to Define Modeling Syntaxes for CouchEdit}
 \author{Hannah Lappe}
-\newcommand{\presdatum}{September 10, 2020} % alternativ zu \today: Eingabe eines festen Datums
+\newcommand{\presdatum}{Oktober 17, 2020} % alternativ zu \today: Eingabe eines festen Datums
 \institute
-{\\Institut für Softwaretechnik und \\ Programmiersprachen}
+{\\Institut für Softwaretechnik und Programmiersprachen}
 %Ende der Titelfolie
 
 
@@ -65,6 +85,7 @@
 \input{sections/problem.tex}
 \input{sections/architecture.tex}
 \input{sections/design.tex}
+\input{sections/evaluation.tex}
 \input{sections/perspectives.tex}
 
 \end{document}

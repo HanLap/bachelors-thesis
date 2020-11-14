@@ -35,22 +35,25 @@
 {
     \vspace{-0.16em}
 %Logo der Uni:
-    \begin{tabular*}{\paperwidth}[b]{p{14em}r}
-        \vspace{0.6em}
+    \hspace*{8em}
+    \begin{tabular*}{\linewidth}[b]{p{14em}r}
+        \vspace{2.6em}
         & \includegraphics[scale=0.26]{logo_100_Pant_RGB.jpg}
     \end{tabular*}
 %grosses Bild in der Mitte der Startseite:
       \begin{beamercolorbox}[sep=8pt,left,#1]{institute}
-          \leftskip-2.58em%
+          % \leftskip-2.58em%
           \vskip-0.8em
-          \includegraphics[scale=0.705]{startbild1.jpg}
+          \centering
+          % \hspace*{1.5em}
+          \includesvg[width=14cm]{images/"csd - metamodel"}
         \end{beamercolorbox}
 
 %Bereich unter dem Bild:
         \begin{beamercolorbox}[sep=8pt,right,#1]{title}
-            \leftskip-3em%
+            \leftskip-1.5em%
             \vskip-1.0em%
-             \begin{tabular*}{\paperwidth}[b]{p{16em}p{16em}}
+             \begin{tabular*}{\paperwidth}[b]{p{21em}p{20em}}
 %Titel der Präsentation:
                   & \usebeamerfont{title}\parbox{16em}{\inserttitle}\\%
                   \\
@@ -58,7 +61,7 @@
 				  \textcolor[rgb]{0,0,0}{  \parbox[t]{15.5em}
                   {\tiny \insertauthor\ $\vert$ \presdatum\  \insertinstitute}}%
 %Untertitel der Präsentation:
-               & {\usebeamerfont{subtitle}\parbox{17em}{\insertsubtitle}}\\%
+               & {\usebeamerfont{subtitle}\parbox{23em}{\insertsubtitle}}\\%
              \end{tabular*}
         \end{beamercolorbox}%
 

@@ -1,10 +1,10 @@
 \section*{Petri Nets}
-\begin{frame}
-  \frametitle{Petri Nets}
-  \centering
-  \hspace{-2cm}
-  \includegraphics[width=10cm]{images/"petrinet - petri-complete"}
-\end{frame}
+% \begin{frame}
+%   \frametitle{Petri Nets}
+%   \centering
+%   \hspace{-2cm}
+%   \includegraphics[width=10cm]{images/"petrinet - petri-complete"}
+% \end{frame}
 
 % \begin{frame}
 %   \frametitle{Petri Nets}
@@ -26,7 +26,26 @@
   \centering
   \hspace{-1cm}
   \huge
-  \red{Approach}
+  \red{Design}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Architecture Idea}
+  \includesvg[width=12cm]{images/"component - architecture-idea"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Architecture Idea}
+  \centering
+  \includesvg[width=10cm]{images/"component - config-interpreter"}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Code Generator}
+
+  
+
 \end{frame}
 
 
@@ -38,31 +57,30 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Render Metamodel}
+  \centering
+  \hspace{-1cm}
+  \includesvg[width=5cm]{images/"csd - rendersyntax"}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Abstract Syntax Metamodel}
+  \centering
+  \hspace{-1cm}
+  \includesvg[width=6cm]{images/"csd - abstractsyntax"}
+\end{frame}
+
+\begin{frame}
   \frametitle{Concrete Syntax Metamodel}
   \hspace{-1cm}
+  \centering
   \includegraphics[width=10cm]{images/"csd - concretesyntax"}
 \end{frame}
 
-\section*{DisplayManagers}
 \begin{frame}
+  \frametitle{Patterns}
   \hspace{-1cm}
-  \large
-  \red{\textbf{Making Metamodels Aware of Concrete Syntax}} \\
-  \hspace{-1cm}
-  \small
-  F. Fondement, T. Baar \cite{fondement_making_2005}
-\end{frame}
-
-\begin{frame}
-  \frametitle{DisplayManagers}
   \centering
-  \hspace{-1cm}
-  \includegraphics[width=10cm]{images/"presentation - dm-sync"}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Annotation System}
-  \hspace{-1cm}
   \includegraphics[width=10cm]{images/"presentation - concrete-blur-1"}
 \end{frame}
 
@@ -89,7 +107,7 @@
 
 
 \begin{frame}[fragile]
-  \frametitle{Place Annotation}
+  \frametitle{Place Pattern}
   \vspace{-1cm}
   % \begin{lstlisting}
 %   go.shape is Circle
@@ -105,26 +123,30 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Recognition of Place}
+  \frametitle{Recognition of Place Pattern}
   \hspace{-1cm}
+  \centering
   \includegraphics[width=10cm]{images/"presentation - kind-0"}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Recognition of Place}
+  \frametitle{Recognition of Place Pattern}
   \hspace{-1cm}
+  \centering
   \includegraphics[width=10cm]{images/"presentation - kind-1"}
 \end{frame}
 
 \begin{frame}
   \frametitle{DisplayManager System}
   \hspace{-1cm}
+  \centering
   \includegraphics[width=10cm]{images/"presentation - concrete-blur-2"}
 \end{frame}
 
 \begin{frame}
   \frametitle{PlaceDM is Added}
   \hspace{-1cm}
+  \centering
   \includegraphics[width=10cm]{images/"presentation - kind-2"}
 \end{frame}
 
@@ -157,6 +179,7 @@
 \begin{frame}
   \frametitle{Syncing Token count}
   \hspace{-1cm}
+  \centering
   \includegraphics[width=10cm]{images/"presentation - syncing-1"}
 \end{frame}
 
@@ -282,6 +305,7 @@
 \begin{frame}
   \frametitle{Plugin System}
   \hspace{-1cm}
+  \centering
   \includegraphics[width=10cm]{images/"presentation - concrete-blur-3"}
 \end{frame}
 
@@ -331,7 +355,24 @@
   \frametitle{Label Plugin Configuration}
   \centering
   \hspace{-1cm}
+  \centering
   \includegraphics[width=9cm]{images/"csd - labelprocessor"}
-  
+\end{frame}
+
+
+% \begin{frame}
+%   \frametitle{Prototype}
+%   \begin{itemize}
+%     \item code generator
+%     \item Kotlin DSL
+%   \end{itemize}  
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Prototype}
+
+  \hspace{-1cm}
+  \centering
+  \includegraphics[width=7cm]{images/config-code}
 
 \end{frame}
