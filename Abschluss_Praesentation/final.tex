@@ -32,6 +32,7 @@
 \usepackage{pgfplots}
 
 \pgfkeys{/pgf/number format/.cd,1000 sep={}}
+% !ignore-section
 \pgfplotsset{
 	compat=newest,
 	legend style={at={(0.5,-0.2)},anchor=north}, % legend to the bottom
@@ -43,6 +44,7 @@
 	try min ticks=8,
 	tick pos=left % no ticks at the right / top borders
 }
+% !/ignore-section
 
 
 % Anfang der Titelfolie
@@ -74,12 +76,12 @@
 \frame[plain]{\titlepage}
 
 % Das Inhaltsverzeichnis
-\hspace*{-0.7cm}
-\section*{Contents} % diese Section erscheint nicht im Inhaltsverzeichnis
-\begin{frame}
-  \frametitle{Table of Contents}
-  \tableofcontents
-\end{frame}
+% \hspace*{-0.7cm}
+% \section*{Contents} % diese Section erscheint nicht im Inhaltsverzeichnis
+% \begin{frame}
+%   \frametitle{Table of Contents}
+%   \tableofcontents
+% \end{frame}
 
 \input{sections/what.tex}
 \input{sections/problem.tex}

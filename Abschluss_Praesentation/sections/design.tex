@@ -21,7 +21,7 @@
 % \end{frame}
 
 
-\section{Approach}
+\section{Design}
 \begin{frame}
   \centering
   \hspace{-1cm}
@@ -35,17 +35,10 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Architecture Idea}
+  \frametitle{Implemented Module}
   \centering
+  \hspace{-1cm}
   \includesvg[width=10cm]{images/"component - config-interpreter"}
-\end{frame}
-
-
-\begin{frame}
-  \frametitle{Code Generator}
-
-  
-
 \end{frame}
 
 
@@ -53,35 +46,111 @@
   \frametitle{Metamodel}
   \centering
   \hspace{-1cm}
-  \includegraphics[width=7cm]{images/"csd - metamodel-base"}
+  \includesvg[width=13cm]{images/"csd - metamodel"}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Render Metamodel}
-  \centering
-  \hspace{-1cm}
-  \includesvg[width=5cm]{images/"csd - rendersyntax"}
-\end{frame}
 
 \begin{frame}
-  \frametitle{Abstract Syntax Metamodel}
+  \frametitle{}
   \centering
   \hspace{-1cm}
-  \includesvg[width=6cm]{images/"csd - abstractsyntax"}
+  \includegraphics[width=8.5cm]{images/dsl-strings}
 \end{frame}
+
+% \begin{frame}
+%   \frametitle{Render Metamodel}
+%   \centering
+%   \hspace{-1cm}
+%   \includesvg[width=5cm]{images/"csd - rendersyntax"}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{Abstract Syntax Metamodel}
+%   \centering
+%   \hspace{-1cm}
+%   \includesvg[width=6cm]{images/"csd - abstractsyntax"}
+% \end{frame}
 
 \begin{frame}
   \frametitle{Concrete Syntax Metamodel}
   \hspace{-1cm}
   \centering
-  \includegraphics[width=10cm]{images/"csd - concretesyntax"}
+  \includesvg[width=10cm]{images/"csd - concretesyntax"}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Making Metamodels Aware of Concrete Syntax}
+
+  \centering
+  \hspace{-1cm}
+  \includesvg[width=10cm]{images/"presentation - dm-sync"}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Sync token count}
+  \texttt{\textbf{context} PlaceDM \\
+  \textbf{inv}: self.me.tokens = self.go.tokens->count()}
+
+  \centering
+  \hspace{-1cm}
+  \includesvg[width=10cm]{images/"presentation - dm-sync-text"}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Patterns}
+  \frametitle{Making Metamodels Aware of Concrete Syntax}
+
+  \centering
+  \hspace{-1cm}
+  \includesvg[width=10cm]{images/"presentation - dm-sync-question"}
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Place Syncing}
+%   \begin{itemize}
+%     \item token count of abstract element equals Elements\\ contained by graphic object
+%   \end{itemize}
+% \end{frame}
+
+\begin{frame}
+  \frametitle{}
+
+  \centering
+  \hspace*{-1.5cm}
+  \begin{tabular}{m{11.5cm}  m{5cm}}
+    \includesvg[width=10cm]{images/"presentation - my-fondement"}
+     &
+    % \vspace{2.5cm}
+    \includesvg[width=2cm]{images/"labeled-place"}
+  \end{tabular}
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Graph Querying in CouchEdit}
+%   \vspace{.5cm}
+%   \texttt{queryService.allRelatedFrom(\textbf{GO},\textbf{Contains}::class.java)}
+
+%   \vspace{1cm}
+%   \texttt{\textbf{GO}.allRelatedFrom(\textbf{Contains}::class.java)}
+
+%   \vspace{-2.5cm}
+%   \hspace*{-1.5cm}
+%   \begin{tabular}{m{10cm}  m{5cm}}
+%     \includesvg[width=10cm]{images/"presentation - kind-0"}
+%      &
+%     \vspace{2.5cm}
+%     \includesvg[width=2cm]{images/"petrinet - token-check"}
+%   \end{tabular}
+% \end{frame}
+
+
+
+\begin{frame}
+  \frametitle{DisplayManagers}
   \hspace{-1cm}
   \centering
-  \includegraphics[width=10cm]{images/"presentation - concrete-blur-1"}
+  \includesvg[width=10cm]{images/"presentation - concrete-blur-1"}
 \end{frame}
 
 
@@ -108,46 +177,66 @@
 
 \begin{frame}[fragile]
   \frametitle{Place Pattern}
-  \vspace{-1cm}
+  % \vspace{-1cm}
   % \begin{lstlisting}
-%   go.shape is Circle
+  %   go.shape is Circle
 
-% go.allRelatedTo(Contains).isEmpty()
+  % go.allRelatedTo(Contains).isEmpty()
   % \end{lstlisting}
-  \begin{itemize}
-    \setlength\itemsep{1cm}
-    \item GO has shape Circle
-    \item GO fillColor is not black
-    \item GO is not Contained by another GO
-  \end{itemize}
+
+  \hspace*{-1.5cm}
+  \begin{tabular}{m{7cm}  m{5cm}}
+    \begin{itemize}
+      \setlength\itemsep{.6cm}
+      \item GO has shape Circle
+      % \item GO fillColor is not black
+      \item GO is not Contained by another GO
+    \end{itemize}
+     &
+    \vspace{-.5cm}
+    \includegraphics[width=7cm]{images/place-pattern}
+  \end{tabular}
 \end{frame}
 
 \begin{frame}
   \frametitle{Recognition of Place Pattern}
-  \hspace{-1cm}
-  \centering
-  \includegraphics[width=10cm]{images/"presentation - kind-0"}
+  % \vspace{-2.5cm}
+  \hspace*{-1.5cm}
+  \begin{tabular}{m{10cm}  m{5cm}}
+    \includesvg[width=10cm]{images/"presentation - kind-0"}
+     &
+    \vspace{2.5cm}
+    \includesvg[width=2cm]{images/"petrinet - token-check"}
+  \end{tabular}
 \end{frame}
 
 \begin{frame}
   \frametitle{Recognition of Place Pattern}
-  \hspace{-1cm}
-  \centering
-  \includegraphics[width=10cm]{images/"presentation - kind-1"}
+  \hspace*{-1.5cm}
+  \begin{tabular}{m{10cm}  m{5cm}}
+    \includesvg[width=10cm]{images/"presentation - kind-1"}
+     &
+    \vspace{2.5cm}
+    \includesvg[width=2cm]{images/"petrinet - token-check"}
+  \end{tabular}
 \end{frame}
 
 \begin{frame}
   \frametitle{DisplayManager System}
   \hspace{-1cm}
   \centering
-  \includegraphics[width=10cm]{images/"presentation - concrete-blur-2"}
+  \includesvg[width=10cm]{images/"presentation - concrete-blur-2"}
 \end{frame}
 
 \begin{frame}
   \frametitle{PlaceDM is Added}
-  \hspace{-1cm}
-  \centering
-  \includegraphics[width=10cm]{images/"presentation - kind-2"}
+  \hspace*{-1.5cm}
+  \begin{tabular}{m{10cm}  m{5cm}}
+    \includesvg[width=10cm]{images/"presentation - kind-2"}
+     &
+    \vspace{2.5cm}
+    \includesvg[width=2cm]{images/"petrinet - token-check"}
+  \end{tabular}
 \end{frame}
 
 % \begin{frame}
@@ -170,17 +259,27 @@
 % \end{frame}
 
 \begin{frame}
-  \frametitle{Place Syncing}
-  \begin{itemize}
-    \item tokens of ME equal Elements contained by GO
-  \end{itemize}
+  \frametitle{Syncing Token count}
+
+  Tokens of model element == \\number graphic objects contained by graphic representative
+
+  \vspace{1cm}
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=8cm]{images/token-sync}
+
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Syncing Token count}
-  \hspace{-1cm}
-  \centering
-  \includegraphics[width=10cm]{images/"presentation - syncing-1"}
+  \hspace*{-1.5cm}
+  \begin{tabular}{m{10cm}  m{5cm}}
+    \includesvg[width=10cm]{images/"presentation - syncing-1"}
+     &
+    \vspace{2.5cm}
+    \includesvg[width=2cm]{images/"petrinet - token-check"}
+  \end{tabular}
 \end{frame}
 
 % \begin{frame}
@@ -302,13 +401,6 @@
   \includegraphics[width=5cm]{images/"petrinet - label-check"}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Plugin System}
-  \hspace{-1cm}
-  \centering
-  \includegraphics[width=10cm]{images/"presentation - concrete-blur-3"}
-\end{frame}
-
 % \begin{frame}
 %   \centering
 %   \hspace{-1cm}
@@ -359,20 +451,24 @@
   \includegraphics[width=9cm]{images/"csd - labelprocessor"}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Label Plugin Configuration}
+  \centering
+  \hspace{-1cm}
+  \includegraphics[width=9cm]{images/label-plugin}
+\end{frame}
 
-% \begin{frame}
-%   \frametitle{Prototype}
-%   \begin{itemize}
-%     \item code generator
-%     \item Kotlin DSL
-%   \end{itemize}  
-% \end{frame}
 
 \begin{frame}
-  \frametitle{Prototype}
-
+  \frametitle{Plugin System}
   \hspace{-1cm}
   \centering
-  \includegraphics[width=7cm]{images/config-code}
+  \includesvg[width=10cm]{images/"presentation - concrete-blur-3"}
+\end{frame}
 
+\begin{frame}
+  \frametitle{Concrete Syntax Metamodel}
+  \hspace{-1cm}
+  \centering
+  \includesvg[width=10cm]{images/"csd - concretesyntax"}
 \end{frame}

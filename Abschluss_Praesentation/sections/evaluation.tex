@@ -6,17 +6,20 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Usability}
+  \frametitle{Lines of Code}
   \centering
   \begin{tikzpicture}
     \begin{axis}[
       height=5cm,
         ybar,
-        enlargelimits=0.15,
+        enlarge x limits=0.30,
+        enlarge y limits=upper,
         legend style={at={(0.5,-.22)},
           anchor=north,legend columns=-1},
         ylabel={LoC},
         symbolic x coords={Petrinets,Statecharts},
+        ytick={500,1000,1500,2000},
+        ymajorgrids=true, 
         xtick=data,
         nodes near coords,
         nodes near coords align={vertical},
@@ -24,7 +27,7 @@
     \addplot coordinates {(Petrinets,106) (Statecharts,169)};
     \addplot coordinates {(Petrinets,708) (Statecharts,1154)};
     \addplot coordinates {(Statecharts,1942)};
-    \legend{DSL,Generated,Native}
+    \legend{DSL,Generated,Reference}
     \end{axis}
     \end{tikzpicture}
 \end{frame}
@@ -35,24 +38,32 @@
     \begin{axis}[
         width=.8\linewidth,
         height=5cm,
-        ylabel={Processing time in ms},
+        ylabel={Processing time in S},
         xlabel={Number of States},
         legend style={at={(.1,-.2)},
           anchor=north},
         xtick={1,2,3,4,5,6,7,8,9,10,11},
-        xticklabels={9,16,25,36,49,64,81,100,121,144,169}
+        xticklabels={9,16,25,36,49,64,81,100,121,144,169},
+        yticklabels={-1,0,5,10,15,20,25,30}
       ]
       \addplot table [x=a, y=b, col sep=comma] {generatedimpl.csv};
-      \addlegendentry{generated}
+      \addlegendentry{Generated}
       \addplot table [x=a, y=b, col sep=comma] {nativeimpl.csv};
-      \addlegendentry{native}
+      \addlegendentry{Reference}
     \end{axis}
   \end{tikzpicture}
 \end{frame}
 
-\begin{frame}
-  % \frametitle{Plugins}
-  \centering
-  \huge
-  \red{Plugins}
-\end{frame}
+% \begin{frame}
+%   % \frametitle{Plugins}
+%   \centering
+%   \huge
+%   \red{Plugins}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{}
+%   \centering
+%   \hspace{-1cm}
+%   \includesvg[width=8cm]{images/"visualization - close-enough"}
+% \end{frame}
